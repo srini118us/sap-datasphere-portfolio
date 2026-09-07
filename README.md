@@ -1,25 +1,40 @@
 # SAP Datasphere Portfolio
 
-CSN/JSON exports of SAP Datasphere objects across three lab spaces, extracted via the official @sap/datasphere-cli. Demonstrates the CI/CD pattern used by SAP data architects: export from source tenant, version in Git, import to target tenant.
+Object-level exports from three SAP Datasphere spaces, extracted via the official @sap/datasphere-cli. Demonstrates the CI/CD pattern SAP data architects use: export from source tenant, version in Git, import to target tenant. SaaS environments cannot be mirrored to Git wholesale, but object definitions (views, analytic models, replication flows, task chains, intelligent lookups) can and this repo is the working proof.
 
-## Spaces
+## Structure
 
-### FINCLOSE_STAGING (11 objects)
-Procurement analytics lab. SEPM demo purchase order data through Bronze, Silver, Gold layers, with intelligent lookup for product matching.
+| Folder | Type | Objects | Details |
+|---|---|---|---|
+| FINCLOSE_STAGING | Project Financial Close Copilot | 11 | Full data layer, medallion architecture, SAC dashboard. See folder README. |
+| UC4_PROC | Project Intelligent Procurement Agent | 10 | Joule agent + XGBoost via AI Core. See folder README. |
+| LB_DSP | Exploratory labs, customer + sales harmonization | 19 | Object exports only |
 
-### LB_DSP (19 objects)
-Sales analytics lab. Customer master data harmonization from CRM and ERP sources, sales silver transformation, customer match via intelligent lookup.
+## Why CSN/JSON matters
 
-### UC4_PROC (10 objects)
-Supplier risk analytics. S/4HANA purchasing replication, delayed schedule line views, XGBoost risk scoring integrated with SAP AI Core. Related article: Your AI Agent Is Not Wrong, It Is Bounded (Medium, Aug 2026).
+Every JSON file in this repo is a runnable definition. Re-import to any Datasphere tenant with one command:
+
+    datasphere objects analytic-models create -y TARGET_SPACE -F AM_PO_ANALYTICS.json
+
+This is the DevOps pattern for SaaS analytics platforms, the same idea behind Databricks Asset Bundles, dbt manifests, Terraform state.
 
 ## Extract command
-datasphere objects analytic-models read -y SPACE_ID -f OBJECT_ID > OBJECT_ID.json
 
-## Import command
-datasphere objects analytic-models create -y TARGET_SPACE -F OBJECT_ID.json
+    datasphere objects <object-type> read -y <SPACE_ID> -f <OBJECT_ID> > <OBJECT_ID>.json
+
+Object types: analytic-models, views, local-tables, replication-flows, task-chains, transformation-flows, intelligent-lookups, data-access-controls.
 
 ## Prerequisites
-- @sap/datasphere-cli
-- OAuth Client with Interactive Usage purpose in Datasphere App Integration
+
+- @sap/datasphere-cli (Node.js 18+)
+- OAuth Client in Datasphere App Integration with Purpose: Interactive Usage (browser-based authorization_code flow)
 - User with Space Administrator or DW Integrator role
+
+## Related repos
+
+- srini118us/sap-ai-journey, SAP AI Core, Joule, GenAI Hub work
+- srini118us/databricks-journey, Databricks companion work
+
+## Author
+
+Srinivasa, SAP Solution Architect transitioning toward AI Architect roles. LinkedIn article on the UC4 architecture: "Your AI Agent Isn't Wrong. It's Bounded." (Medium, Aug 2026).

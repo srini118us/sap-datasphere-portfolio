@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <defs>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="#0f172a" flood-opacity="0.10"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#334155"/>
+    </marker>
+    <marker id="arrowSoft" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#64748b"/>
+    </marker>
+    <style>
+      .title { font: 700 34px Arial, Helvetica, sans-serif; fill:#0f172a; }
+      .subtitle { font: 400 17px Arial, Helvetica, sans-serif; fill:#475569; }
+      .section { font: 700 18px Arial, Helvetica, sans-serif; fill:#0f172a; letter-spacing:.3px; }
+      .boxTitle { font: 700 18px Arial, Helvetica, sans-serif; fill:#0f172a; }
+      .boxSub { font: 400 14px Arial, Helvetica, sans-serif; fill:#334155; }
+      .chip { font: 700 12px Arial, Helvetica, sans-serif; fill:#334155; }
+      .small { font: 400 13px Arial, Helvetica, sans-serif; fill:#475569; }
+      .label { font: 700 13px Arial, Helvetica, sans-serif; fill:#475569; }
+      .whiteTitle { font:700 19px Arial, Helvetica, sans-serif; fill:#ffffff; }
+      .whiteSub { font:400 14px Arial, Helvetica, sans-serif; fill:#e2e8f0; }
+    </style>
+  </defs>
+
+  <rect width="1600" height="900" fill="#f8fafc"/>
+
+  <text x="80" y="70" class="title">Financial Close Copilot — Solution Architecture</text>
+  <text x="80" y="102" class="subtitle">SAP Datasphere medallion pipeline with production orchestration, data-quality enrichment, and live SAC consumption</text>
+
+  <!-- Source -->
+  <g>
+    <rect x="70" y="260" rx="18" ry="18" width="230" height="145" fill="#0f62fe"/>
+  </g>
+  <text x="100" y="304" class="whiteTitle">SAP S/4HANA</text>
+  <text x="100" y="335" class="whiteSub">SEPM Purchase Order</text>
+  <text x="100" y="357" class="whiteSub">Header + Item source</text>
+  <rect x="100" y="375" rx="10" ry="10" width="135" height="24" fill="#ffffff" fill-opacity="0.18"/>
+  <text x="115" y="392" class="chip" fill="#ffffff">SOURCE SYSTEM</text>
+
+  <!-- Datasphere container -->
+  <rect x="370" y="170" rx="28" ry="28" width="850" height="440" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+  <rect x="370" y="170" rx="28" ry="28" width="850" height="68" fill="#eaf2ff"/>
+  <text x="405" y="211" class="section">SAP Datasphere</text>
+  <text x="563" y="211" class="small">Space: FINCLOSE_STAGING</text>
+
+  <!-- Layer headers -->
+  <text x="430" y="274" class="label">BRONZE / INGEST</text>
+  <text x="680" y="274" class="label">SILVER / SEMANTIC</text>
+  <text x="955" y="274" class="label">GOLD / ANALYTICS</text>
+
+  <!-- Bronze -->
+  <g>
+    <rect x="420" y="300" rx="18" ry="18" width="210" height="150" fill="#fff7ed" stroke="#fb923c" stroke-width="2"/>
+  </g>
+  <circle cx="453" cy="334" r="14" fill="#fb923c"/>
+  <text x="479" y="340" class="boxTitle">Replication Flow</text>
+  <text x="445" y="375" class="boxSub">RF_SEPM_PurchaseOrder</text>
+  <text x="445" y="400" class="boxSub">Replicated landing data</text>
+  <rect x="445" y="417" rx="9" ry="9" width="110" height="23" fill="#ffedd5"/>
+  <text x="461" y="433" class="chip">2,000 rows</text>
+
+  <!-- Silver Virtual -->
+  <g>
+    <rect x="665" y="300" rx="18" ry="18" width="230" height="150" fill="#f0fdf4" stroke="#22c55e" stroke-width="2"/>
+  </g>
+  <circle cx="698" cy="334" r="14" fill="#22c55e"/>
+  <text x="724" y="340" class="boxTitle">Graphical View</text>
+  <text x="690" y="375" class="boxSub">V_PO_HEADER_ITEM</text>
+  <text x="690" y="400" class="boxSub">Virtual join at query time</text>
+  <rect x="690" y="417" rx="9" ry="9" width="118" height="23" fill="#dcfce7"/>
+  <text x="704" y="433" class="chip">5,438 rows</text>
+
+  <!-- Gold -->
+  <g>
+    <rect x="935" y="300" rx="18" ry="18" width="240" height="150" fill="#fefce8" stroke="#eab308" stroke-width="2"/>
+  </g>
+  <circle cx="968" cy="334" r="14" fill="#eab308"/>
+  <text x="994" y="340" class="boxTitle">Analytic Model</text>
+  <text x="960" y="375" class="boxSub">AM_PO_ANALYTICS</text>
+  <text x="960" y="400" class="boxSub">Business-ready semantic layer</text>
+  <rect x="960" y="417" rx="9" ry="9" width="178" height="23" fill="#fef9c3"/>
+  <text x="974" y="433" class="chip">3 measures • 13 dimensions</text>
+
+  <!-- Main flow arrows -->
+  <line x1="300" y1="332" x2="412" y2="332" stroke="#334155" stroke-width="4" marker-end="url(#arrow)"/>
+  <line x1="630" y1="375" x2="657" y2="375" stroke="#334155" stroke-width="4" marker-end="url(#arrow)"/>
+  <line x1="895" y1="375" x2="927" y2="375" stroke="#334155" stroke-width="4" marker-end="url(#arrow)"/>
+
+  <!-- SAC -->
+  <g>
+    <rect x="1300" y="260" rx="18" ry="18" width="230" height="145" fill="#7c3aed"/>
+  </g>
+  <text x="1330" y="304" class="whiteTitle">SAP Analytics Cloud</text>
+  <text x="1330" y="335" class="whiteSub">Purchase Order Close</text>
+  <text x="1330" y="357" class="whiteSub">Dashboard — live consumption</text>
+  <rect x="1330" y="375" rx="10" ry="10" width="125" height="24" fill="#ffffff" fill-opacity="0.18"/>
+  <text x="1347" y="392" class="chip" fill="#ffffff">CONSUMPTION</text>
+  <line x1="1175" y1="375" x2="1292" y2="332" stroke="#334155" stroke-width="4" marker-end="url(#arrow)"/>
+
+  <!-- Supporting capabilities -->
+  <text x="405" y="500" class="label">PRODUCTION &amp; DATA QUALITY CAPABILITIES</text>
+
+  <rect x="420" y="520" rx="14" ry="14" width="210" height="62" fill="#f5f3ff" stroke="#8b5cf6" stroke-width="1.5"/>
+  <text x="442" y="545" class="boxTitle" font-size="16">Task Chain</text>
+  <text x="442" y="568" class="boxSub">TC_PO_Pipeline • daily schedule</text>
+  <path d="M525 520 C525 485 525 470 525 456" stroke="#64748b" stroke-width="2.5" fill="none" stroke-dasharray="7 6" marker-end="url(#arrowSoft)"/>
+
+  <rect x="665" y="520" rx="14" ry="14" width="230" height="62" fill="#ecfdf5" stroke="#10b981" stroke-width="1.5"/>
+  <text x="687" y="545" class="boxTitle" font-size="16">Transformation Flow</text>
+  <text x="687" y="568" class="boxSub">TF_PO_HEADER_ITEM • persisted Silver</text>
+  <path d="M780 520 C780 490 780 476 780 456" stroke="#64748b" stroke-width="2.5" fill="none" stroke-dasharray="7 6" marker-end="url(#arrowSoft)"/>
+
+  <rect x="935" y="520" rx="14" ry="14" width="240" height="62" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="957" y="545" class="boxTitle" font-size="16">Intelligent Lookup</text>
+  <text x="957" y="568" class="boxSub">IL_PRODUCT_MATCH • exact + fuzzy</text>
+  <path d="M1055 520 C1020 485 935 472 892 440" stroke="#64748b" stroke-width="2.5" fill="none" stroke-dasharray="7 6" marker-end="url(#arrowSoft)"/>
+
+  <!-- Bottom summary -->
+  <rect x="70" y="680" rx="18" ry="18" width="1460" height="130" fill="#ffffff" stroke="#e2e8f0"/>
+  <text x="105" y="722" class="section">Architecture intent</text>
+  <text x="105" y="754" class="small">Primary path: S/4HANA → Replication Flow → Graphical View → Analytic Model → SAC.</text>
+  <text x="105" y="780" class="small">Silver is additionally materialized with a Transformation Flow; Task Chain provides scheduled orchestration; Intelligent Lookup provides reusable master-data matching.</text>
+  <text x="105" y="806" class="small">The demo uses SEPM purchase-order data as a stand-in for finance extraction, while preserving the same pipeline pattern for a real financial-close implementation.</text>
+</svg>

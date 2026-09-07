@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="520" viewBox="0 0 1400 520">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#475569"/></marker>
+    <style>
+      .t{font:700 30px Arial,sans-serif;fill:#0f172a}.s{font:400 16px Arial,sans-serif;fill:#475569}.h{font:700 18px Arial,sans-serif;fill:#0f172a}.b{font:400 14px Arial,sans-serif;fill:#334155}.c{font:700 12px Arial,sans-serif;fill:#475569}
+    </style>
+  </defs>
+  <rect width="1400" height="520" fill="#f8fafc"/>
+  <text x="60" y="62" class="t">Financial Close Copilot — Medallion Data Flow</text>
+  <text x="60" y="92" class="s">A simplified README view of how data becomes analytics-ready</text>
+
+  <rect x="70" y="160" width="230" height="180" rx="20" fill="#e0ecff" stroke="#60a5fa" stroke-width="2"/>
+  <text x="95" y="195" class="c">SOURCE</text><text x="95" y="230" class="h">SAP S/4HANA</text><text x="95" y="258" class="b">SEPM PO header/item</text><text x="95" y="282" class="b">Training stand-in for finance data</text>
+
+  <rect x="370" y="160" width="230" height="180" rx="20" fill="#fff7ed" stroke="#fb923c" stroke-width="2"/>
+  <text x="395" y="195" class="c">BRONZE</text><text x="395" y="230" class="h">Replication Flow</text><text x="395" y="258" class="b">Raw replicated landing</text><text x="395" y="282" class="b">2,000 rows</text>
+
+  <rect x="670" y="160" width="230" height="180" rx="20" fill="#f0fdf4" stroke="#22c55e" stroke-width="2"/>
+  <text x="695" y="195" class="c">SILVER</text><text x="695" y="230" class="h">Graphical View</text><text x="695" y="258" class="b">Joined / enriched data</text><text x="695" y="282" class="b">Virtual + persisted option</text>
+
+  <rect x="970" y="160" width="230" height="180" rx="20" fill="#fefce8" stroke="#eab308" stroke-width="2"/>
+  <text x="995" y="195" class="c">GOLD</text><text x="995" y="230" class="h">Analytic Model</text><text x="995" y="258" class="b">3 measures • 13 dimensions</text><text x="995" y="282" class="b">Business semantics</text>
+
+  <rect x="1240" y="185" width="120" height="130" rx="20" fill="#f3e8ff" stroke="#8b5cf6" stroke-width="2"/>
+  <text x="1263" y="220" class="c">CONSUME</text><text x="1265" y="255" class="h">SAC</text><text x="1260" y="282" class="b">Live</text><text x="1256" y="302" class="b">dashboard</text>
+
+  <line x1="300" y1="250" x2="362" y2="250" stroke="#475569" stroke-width="4" marker-end="url(#a)"/>
+  <line x1="600" y1="250" x2="662" y2="250" stroke="#475569" stroke-width="4" marker-end="url(#a)"/>
+  <line x1="900" y1="250" x2="962" y2="250" stroke="#475569" stroke-width="4" marker-end="url(#a)"/>
+  <line x1="1200" y1="250" x2="1232" y2="250" stroke="#475569" stroke-width="4" marker-end="url(#a)"/>
+
+  <text x="70" y="405" class="s">Supporting capabilities:</text>
+  <text x="250" y="405" class="b">Task Chain = orchestration</text>
+  <text x="510" y="405" class="b">Transformation Flow = persisted Silver</text>
+  <text x="835" y="405" class="b">Intelligent Lookup = data quality</text>
+</svg>

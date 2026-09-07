@@ -1,0 +1,70 @@
+{
+  "definitions": {
+    "SEPM_I_PURCHASEORDERITEM": {
+      "kind": "entity",
+      "@EndUserText.label": "Epm demo: purchase order item",
+      "@ObjectModel.modelingPattern": {
+        "#": "DATA_STRUCTURE"
+      },
+      "@ObjectModel.supportedCapabilities": [
+        {
+          "#": "DATA_STRUCTURE"
+        }
+      ],
+      "elements": {
+        "PurchaseOrderItemUUID": {
+          "@EndUserText.label": "Epm: generic node key",
+          "type": "cds.Binary",
+          "key": true,
+          "notNull": true,
+          "length": 16
+        },
+        "PurchaseOrderUUID": {
+          "@EndUserText.label": "Epm: generic node key",
+          "type": "cds.Binary",
+          "key": false,
+          "length": 16
+        },
+        "PurchaseOrderItem": {
+          "@EndUserText.label": "Epm: purchase order item position",
+          "type": "cds.String",
+          "key": false,
+          "length": 10
+        },
+        "ProductUUID": {
+          "@EndUserText.label": "Epm: generic node key",
+          "type": "cds.Binary",
+          "key": false,
+          "length": 16
+        },
+        "ShortTextGroupUUID": {
+          "@EndUserText.label": "Epm: generic node key",
+          "type": "cds.Binary",
+          "key": false,
+          "length": 16
+        },
+        "TransactionCurrency": {
+          "@EndUserText.label": "Epm: currency code",
+          "type": "cds.String",
+          "key": false,
+          "length": 5
+        },
+        "GrossAmountInTransacCurrency": {
+          "@EndUserText.label": "Epm: total gross amount",
+          "type": "cds.DecimalFloat",
+          "key": false
+        },
+        "NetAmountInTransactionCurrency": {
+          "@EndUserText.label": "Epm: total net amount",
+          "type": "cds.DecimalFloat",
+          "key": false
+        },
+        "TaxAmountInTransactionCurrency": {
+          "@EndUserText.label": "Epm: total tax amount",
+          "type": "cds.DecimalFloat",
+          "key": false
+        }
+      }
+    }
+  }
+}

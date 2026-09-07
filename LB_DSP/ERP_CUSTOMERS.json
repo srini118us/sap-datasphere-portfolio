@@ -1,0 +1,46 @@
+{
+  "definitions": {
+    "ERP_CUSTOMERS": {
+      "kind": "entity",
+      "@ObjectModel.supportedCapabilities": [
+        {
+          "#": "DATA_STRUCTURE"
+        }
+      ],
+      "elements": {
+        "ERP_ID": {
+          "@EndUserText.label": "ERP_ID",
+          "type": "cds.String",
+          "length": 5000,
+          "key": true,
+          "notNull": true
+        },
+        "BUSINESS_PARTNER": {
+          "@EndUserText.label": "BUSINESS_PARTNER",
+          "type": "cds.String",
+          "length": 5000
+        },
+        "LOCATION": {
+          "@EndUserText.label": "LOCATION",
+          "type": "cds.String",
+          "length": 5000
+        },
+        "CTRY": {
+          "@EndUserText.label": "CTRY",
+          "type": "cds.String",
+          "length": 5000
+        },
+        "REVENUE": {
+          "@EndUserText.label": "REVENUE",
+          "type": "cds.Integer64"
+        }
+      },
+      "@EndUserText.label": "ERP_CUSTOMERS",
+      "@ObjectModel.modelingPattern": {
+        "#": "DATA_STRUCTURE"
+      },
+      "@DataWarehouse.dataSource.schema": "LB_DSP#WRG_LEALHEANZDRJ3TG6",
+      "@DataWarehouse.dataSource.entity": "sap.dataset.conf_d1f393b5-d4ac-41bf-bced-966a81ea8119_view"
+    }
+  }
+}

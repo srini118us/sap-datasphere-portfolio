@@ -1,0 +1,48 @@
+{
+  "definitions": {
+    "ERP_NORMALISED_new": {
+      "kind": "entity",
+      "@EndUserText.label": "ERP_NORMALISED_new",
+      "@ObjectModel.modelingPattern": {
+        "#": "DATA_STRUCTURE"
+      },
+      "@ObjectModel.supportedCapabilities": [
+        {
+          "#": "DATA_STRUCTURE"
+        }
+      ],
+      "elements": {
+        "ERP_ID": {
+          "@EndUserText.label": "ERP_ID",
+          "type": "cds.String",
+          "key": false,
+          "length": 10
+        },
+        "BUSINESS_PARTNER": {
+          "@EndUserText.label": "BUSINESS_PARTNER",
+          "type": "cds.String",
+          "key": false,
+          "length": 10
+        },
+        "LOCATION": {
+          "@EndUserText.label": "LOCATION",
+          "type": "cds.String",
+          "key": false,
+          "length": 10
+        },
+        "CTRY": {
+          "@EndUserText.label": "CTRY",
+          "type": "cds.String",
+          "key": false,
+          "length": 10
+        },
+        "REVENUE": {
+          "@EndUserText.label": "REVENUE",
+          "type": "cds.String",
+          "key": false,
+          "length": 10
+        }
+      }
+    }
+  }
+}

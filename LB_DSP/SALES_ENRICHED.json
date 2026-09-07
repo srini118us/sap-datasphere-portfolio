@@ -1,0 +1,83 @@
+{
+  "definitions": {
+    "SALES_ENRICHED": {
+      "elements": {
+        "ORDER_ID": {
+          "@EndUserText.label": "ORDER_ID",
+          "type": "cds.String",
+          "key": true,
+          "length": 10,
+          "notNull": true
+        },
+        "ORDER_DATE": {
+          "@EndUserText.label": "ORDER_DATE",
+          "type": "cds.Date",
+          "key": false
+        },
+        "CUSTOMER_ID": {
+          "@EndUserText.label": "CUSTOMER_ID",
+          "type": "cds.String",
+          "key": false,
+          "length": 10
+        },
+        "COMPANY_CODE": {
+          "@EndUserText.label": "COMPANY_CODE",
+          "type": "cds.String",
+          "key": false,
+          "length": 4
+        },
+        "CURRENCY": {
+          "@EndUserText.label": "CURRENCY",
+          "type": "cds.String",
+          "key": false,
+          "length": 3
+        },
+        "ORDER_STATUS": {
+          "@EndUserText.label": "ORDER_STATUS",
+          "type": "cds.String",
+          "key": false,
+          "length": 10
+        },
+        "LAST_CHANGED": {
+          "@EndUserText.label": "LAST_CHANGED",
+          "type": "cds.Timestamp",
+          "key": false
+        },
+        "ITEM_NO": {
+          "@EndUserText.label": "ITEM_NO",
+          "type": "cds.Integer",
+          "key": true,
+          "notNull": true
+        },
+        "MATERIAL": {
+          "@EndUserText.label": "MATERIAL",
+          "type": "cds.String",
+          "key": false,
+          "length": 20
+        },
+        "QUANTITY": {
+          "@EndUserText.label": "QUANTITY",
+          "type": "cds.Decimal",
+          "key": false,
+          "precision": 13,
+          "scale": 3
+        },
+        "UNIT": {
+          "@EndUserText.label": "UNIT",
+          "type": "cds.String",
+          "key": false,
+          "length": 3
+        },
+        "NET_AMOUNT": {
+          "@EndUserText.label": "NET_AMOUNT",
+          "type": "cds.Decimal",
+          "key": false,
+          "precision": 15,
+          "scale": 2
+        }
+      },
+      "kind": "entity",
+      "@EndUserText.label": "SALES_ENRICHED"
+    }
+  }
+}

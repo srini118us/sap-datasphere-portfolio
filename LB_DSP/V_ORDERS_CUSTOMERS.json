@@ -1,0 +1,152 @@
+{
+  "definitions": {
+    "V_ORDERS_CUSTOMERS": {
+      "kind": "entity",
+      "elements": {
+        "ORDER_ID": {
+          "@EndUserText.label": "ORDER_ID",
+          "type": "cds.String",
+          "length": 5000
+        },
+        "CUSTOMER_ID": {
+          "@EndUserText.label": "CUSTOMER_ID",
+          "type": "cds.String",
+          "length": 5000
+        },
+        "ORDER_VALUE": {
+          "@EndUserText.label": "ORDER_VALUE",
+          "type": "cds.Integer64"
+        },
+        "CUSTOMER_NAME": {
+          "@EndUserText.label": "CUSTOMER_NAME",
+          "type": "cds.String",
+          "length": 5000
+        },
+        "REGION": {
+          "@EndUserText.label": "REGION",
+          "type": "cds.String",
+          "length": 5000
+        }
+      },
+      "query": {
+        "SELECT": {
+          "from": {
+            "SELECT": {
+              "from": {
+                "join": "left",
+                "args": [
+                  {
+                    "ref": [
+                      "ORDERS"
+                    ],
+                    "as": "ORDERS"
+                  },
+                  {
+                    "ref": [
+                      "CUSTOMERS"
+                    ],
+                    "as": "CUSTOMERS"
+                  }
+                ],
+                "on": [
+                  {
+                    "ref": [
+                      "ORDERS",
+                      "CUSTOMER_ID"
+                    ]
+                  },
+                  "=",
+                  {
+                    "ref": [
+                      "CUSTOMERS",
+                      "CUSTOMER_ID"
+                    ]
+                  }
+                ]
+              },
+              "columns": [
+                {
+                  "ref": [
+                    "ORDERS",
+                    "ORDER_ID"
+                  ]
+                },
+                {
+                  "ref": [
+                    "ORDERS",
+                    "CUSTOMER_ID"
+                  ]
+                },
+                {
+                  "ref": [
+                    "CUSTOMERS",
+                    "CUSTOMER_NAME"
+                  ]
+                },
+                {
+                  "ref": [
+                    "ORDERS",
+                    "ORDER_VALUE"
+                  ]
+                },
+                {
+                  "ref": [
+                    "CUSTOMERS",
+                    "REGION"
+                  ]
+                }
+              ]
+            },
+            "as": "Join 1"
+          },
+          "columns": [
+            {
+              "ref": [
+                "ORDER_ID"
+              ]
+            },
+            {
+              "ref": [
+                "CUSTOMER_ID"
+              ]
+            },
+            {
+              "ref": [
+                "ORDER_VALUE"
+              ]
+            },
+            {
+              "ref": [
+                "CUSTOMER_NAME"
+              ]
+            },
+            {
+              "ref": [
+                "REGION"
+              ]
+            }
+          ]
+        }
+      },
+      "@ObjectModel.supportedCapabilities": [
+        {
+          "#": "DATA_STRUCTURE"
+        }
+      ],
+      "@EndUserText.label": "V_ORDERS_CUSTOMERS",
+      "@ObjectModel.modelingPattern": {
+        "#": "DATA_STRUCTURE"
+      },
+      "@DataWarehouse.consumption.external": false
+    }
+  },
+  "editorSettings": {
+    "V_ORDERS_CUSTOMERS": {
+      "editor": {
+        "lastModifier": "GRAPHICALVIEWBUILDER",
+        "default": "GRAPHICALVIEWBUILDER"
+      },
+      "uiModel": "{\"contents\":{\"09e51bae-4aec-41fc-9977-73bdb01cfc4e\":{\"classDefinition\":\"sap.cdw.querybuilder.Model\",\"name\":\"V_ORDERS_CUSTOMERS\",\"label\":\"V_ORDERS_CUSTOMERS\",\"modificationDate\":1788236159565,\"deploymentDate\":1788235629883,\"#objectStatus\":\"2\",\"output\":\"1c5e04f3-9f67-4b5c-9cfd-f74e894fdb44\",\"nodes\":{\"1c5e04f3-9f67-4b5c-9cfd-f74e894fdb44\":{\"name\":\"View_1\"},\"37f067a0-dea6-475f-80bb-5cc82c85fedd\":{\"name\":\"ORDERS\"},\"5acfbc7d-2590-4ad6-b2c4-002b45a0f73f\":{\"name\":\"CUSTOMERS\"},\"5c7a690e-a425-4a12-9e59-e24b1b84bc14\":{\"name\":\"Join 1\"},\"7976df70-b08c-490f-affc-c8ac8932eb07\":{\"name\":\"Projection 1\"}},\"diagrams\":{\"ae20e6f5-e694-4f17-a8e3-29aeb4688e4f\":{}}},\"1c5e04f3-9f67-4b5c-9cfd-f74e894fdb44\":{\"classDefinition\":\"sap.cdw.querybuilder.Output\",\"name\":\"View_1\",\"type\":\"graphicView\",\"isDeltaOutboundOn\":false,\"isDeletionVector\":false,\"isPinToMemoryEnabled\":false,\"isAllowConsumption\":false,\"modificationDate\":1788236159565,\"deploymentDate\":1788235629883,\"#objectStatus\":\"2\",\"elements\":{\"35524daf-0a94-4122-84ce-4743edd1fa85\":{\"name\":\"ORDER_ID\"},\"0397bea6-6257-4023-a3d2-b25fb84c4518\":{\"name\":\"CUSTOMER_ID\"},\"4601b0b4-24c7-439b-ab04-a65114073233\":{\"name\":\"ORDER_VALUE\"},\"1e2e3a8d-6df3-4b26-82d3-145bf6e6af02\":{\"name\":\"CUSTOMER_NAME\"},\"37b3030c-dc23-40af-8d80-6f6c3619a1a1\":{\"name\":\"REGION\"}}},\"37f067a0-dea6-475f-80bb-5cc82c85fedd\":{\"classDefinition\":\"sap.cdw.querybuilder.Entity\",\"name\":\"ORDERS\",\"label\":\"ORDERS\",\"type\":9,\"isDeltaOutboundOn\":false,\"isDeletionVector\":false,\"isPinToMemoryEnabled\":false,\"isAllowConsumption\":false,\"isHiddenInUi\":false,\"modificationDate\":1788234268145,\"deploymentDate\":1788234278590,\"#objectStatus\":\"1\",\"elements\":{\"4b00a137-4f15-48cb-89fe-2c218ee0e549\":{\"name\":\"ORDER_ID\"},\"cecf973a-e6d5-4171-b8f3-8e04fdc9ed99\":{\"name\":\"CUSTOMER_ID\"},\"59ed0bf2-6088-4f5c-84e1-b71e8ffef853\":{\"name\":\"ORDER_VALUE\"}},\"successorNode\":\"5c7a690e-a425-4a12-9e59-e24b1b84bc14\"},\"5acfbc7d-2590-4ad6-b2c4-002b45a0f73f\":{\"classDefinition\":\"sap.cdw.querybuilder.Entity\",\"name\":\"CUSTOMERS\",\"label\":\"CUSTOMERS\",\"type\":9,\"isDeltaOutboundOn\":false,\"isDeletionVector\":false,\"isPinToMemoryEnabled\":false,\"isAllowConsumption\":false,\"isHiddenInUi\":false,\"modificationDate\":1788234217332,\"deploymentDate\":1788234229473,\"#objectStatus\":\"1\",\"elements\":{\"bccefa41-6a75-4dd9-a50e-17cb96be70e2\":{\"name\":\"CUSTOMER_ID\"},\"4b8f2d9f-2d90-4e8f-9d48-26c4c78b50d6\":{\"name\":\"CUSTOMER_NAME\"},\"322c3854-e229-410f-a497-43ba2751411a\":{\"name\":\"REGION\"}},\"successorNode\":\"5c7a690e-a425-4a12-9e59-e24b1b84bc14\"},\"5c7a690e-a425-4a12-9e59-e24b1b84bc14\":{\"classDefinition\":\"sap.cdw.querybuilder.Join\",\"type\":\"left\",\"name\":\"Join 1\",\"mappings\":{\"21ef27be-353f-46af-84ba-190299a25c28\":{}},\"leftInput\":\"37f067a0-dea6-475f-80bb-5cc82c85fedd\",\"rightInput\":\"5acfbc7d-2590-4ad6-b2c4-002b45a0f73f\",\"elements\":{\"b61a48e6-b878-49de-9fd1-0367e91a9c35\":{\"name\":\"ORDER_ID\"},\"6df2f49f-5146-496a-909f-68fadc229390\":{\"name\":\"CUSTOMER_ID\"},\"9f84a386-36dd-4406-9a56-721a8de205ef\":{\"name\":\"ORDER_VALUE\"},\"b62860dd-9923-4e19-8e86-a3690e68b284\":{\"name\":\"CUSTOMER_ID\"},\"44b4cbad-e879-4785-ac74-680b43aa5e2f\":{\"name\":\"CUSTOMER_NAME\"},\"5a8389b0-fdaa-4be0-b422-251751f32357\":{\"name\":\"REGION\"}},\"successorNode\":\"7976df70-b08c-490f-affc-c8ac8932eb07\"},\"7976df70-b08c-490f-affc-c8ac8932eb07\":{\"classDefinition\":\"sap.cdw.querybuilder.RenameElements\",\"_isProjectionNode\":false,\"name\":\"Projection 1\",\"elements\":{\"f35668b4-6b20-4bfd-8c72-015beb1ff9ee\":{\"name\":\"ORDER_ID\"},\"204cf845-69a4-4cc4-a68b-d9ae7e421325\":{\"name\":\"CUSTOMER_ID\"},\"cf642711-02ba-4007-974e-81d93b4bf60a\":{\"name\":\"ORDER_VALUE\"},\"a839afd8-fe0b-432f-ba44-a0cf2ab6a091\":{\"name\":\"CUSTOMER_ID\"},\"a6913247-7073-402d-b061-30f7bbf32e94\":{\"name\":\"CUSTOMER_NAME\"},\"355f68c9-f277-4c30-b266-785ef918d040\":{\"name\":\"REGION\"}},\"successorNode\":\"1c5e04f3-9f67-4b5c-9cfd-f74e894fdb44\"},\"ae20e6f5-e694-4f17-a8e3-29aeb4688e4f\":{\"classDefinition\":\"sap.cdw.querybuilder.ui.Diagram\",\"symbols\":{\"2549dbe4-e76a-4f11-9c70-989c4079df42\":{},\"1cf6950c-6b55-44bb-9cee-3ccda7d05bc6\":{\"name\":\"Entity Symbol 1\"},\"6868a169-320a-436a-bcad-0dcd77450503\":{\"name\":\"Entity Symbol 2\"},\"89901721-a7b1-4e35-b36f-d4da02f6d889\":{},\"0711e2f5-d5ac-4d7e-b615-6c3dc804e328\":{},\"b9325b7f-66b3-417f-9ef6-a987430acee5\":{},\"880502e4-a9eb-47b2-89b6-6dbd2eb13861\":{},\"b01156c6-b7c3-4831-bb36-790d6a641ba4\":{},\"61af8d7d-8f26-440e-a359-6e495450cc50\":{}}},\"35524daf-0a94-4122-84ce-4743edd1fa85\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"ORDER_ID\",\"label\":\"ORDER_ID\",\"newName\":\"ORDER_ID\",\"indexOrder\":0,\"length\":5000,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false},\"0397bea6-6257-4023-a3d2-b25fb84c4518\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"CUSTOMER_ID\",\"label\":\"CUSTOMER_ID\",\"newName\":\"CUSTOMER_ID\",\"indexOrder\":1,\"length\":5000,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false},\"4601b0b4-24c7-439b-ab04-a65114073233\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"ORDER_VALUE\",\"label\":\"ORDER_VALUE\",\"newName\":\"ORDER_VALUE\",\"indexOrder\":2,\"dataType\":\"cds.Integer64\",\"length\":0,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false},\"1e2e3a8d-6df3-4b26-82d3-145bf6e6af02\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"CUSTOMER_NAME\",\"label\":\"CUSTOMER_NAME\",\"newName\":\"CUSTOMER_NAME\",\"indexOrder\":4,\"length\":5000,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false},\"37b3030c-dc23-40af-8d80-6f6c3619a1a1\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"REGION\",\"label\":\"REGION\",\"newName\":\"REGION\",\"indexOrder\":5,\"length\":5000,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false},\"4b00a137-4f15-48cb-89fe-2c218ee0e549\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"ORDER_ID\",\"label\":\"ORDER_ID\",\"newName\":\"ORDER_ID\",\"indexOrder\":0,\"length\":5000,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"b61a48e6-b878-49de-9fd1-0367e91a9c35\"},\"cecf973a-e6d5-4171-b8f3-8e04fdc9ed99\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"CUSTOMER_ID\",\"label\":\"CUSTOMER_ID\",\"newName\":\"CUSTOMER_ID\",\"indexOrder\":1,\"length\":5000,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"6df2f49f-5146-496a-909f-68fadc229390\"},\"59ed0bf2-6088-4f5c-84e1-b71e8ffef853\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"ORDER_VALUE\",\"label\":\"ORDER_VALUE\",\"newName\":\"ORDER_VALUE\",\"indexOrder\":2,\"dataType\":\"cds.Integer64\",\"length\":0,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"9f84a386-36dd-4406-9a56-721a8de205ef\"},\"bccefa41-6a75-4dd9-a50e-17cb96be70e2\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"CUSTOMER_ID\",\"label\":\"CUSTOMER_ID\",\"newName\":\"CUSTOMER_ID\",\"indexOrder\":0,\"length\":5000,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"b62860dd-9923-4e19-8e86-a3690e68b284\"},\"4b8f2d9f-2d90-4e8f-9d48-26c4c78b50d6\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"CUSTOMER_NAME\",\"label\":\"CUSTOMER_NAME\",\"newName\":\"CUSTOMER_NAME\",\"indexOrder\":1,\"length\":5000,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"44b4cbad-e879-4785-ac74-680b43aa5e2f\"},\"322c3854-e229-410f-a497-43ba2751411a\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"REGION\",\"label\":\"REGION\",\"newName\":\"REGION\",\"indexOrder\":2,\"length\":5000,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"5a8389b0-fdaa-4be0-b422-251751f32357\"},\"21ef27be-353f-46af-84ba-190299a25c28\":{\"classDefinition\":\"sap.cdw.commonmodel.ElementMapping\",\"source\":\"cecf973a-e6d5-4171-b8f3-8e04fdc9ed99\",\"target\":\"bccefa41-6a75-4dd9-a50e-17cb96be70e2\"},\"b61a48e6-b878-49de-9fd1-0367e91a9c35\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"ORDER_ID\",\"label\":\"ORDER_ID\",\"newName\":\"ORDER_ID\",\"indexOrder\":0,\"length\":5000,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"f35668b4-6b20-4bfd-8c72-015beb1ff9ee\"},\"6df2f49f-5146-496a-909f-68fadc229390\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"CUSTOMER_ID\",\"label\":\"CUSTOMER_ID\",\"newName\":\"CUSTOMER_ID\",\"indexOrder\":2,\"length\":5000,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"204cf845-69a4-4cc4-a68b-d9ae7e421325\"},\"9f84a386-36dd-4406-9a56-721a8de205ef\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"ORDER_VALUE\",\"label\":\"ORDER_VALUE\",\"newName\":\"ORDER_VALUE\",\"indexOrder\":4,\"dataType\":\"cds.Integer64\",\"length\":0,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"cf642711-02ba-4007-974e-81d93b4bf60a\"},\"b62860dd-9923-4e19-8e86-a3690e68b284\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"CUSTOMER_ID\",\"label\":\"CUSTOMER_ID\",\"newName\":\"CUSTOMER_ID\",\"indexOrder\":1,\"length\":5000,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"a839afd8-fe0b-432f-ba44-a0cf2ab6a091\"},\"44b4cbad-e879-4785-ac74-680b43aa5e2f\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"CUSTOMER_NAME\",\"label\":\"CUSTOMER_NAME\",\"newName\":\"CUSTOMER_NAME\",\"indexOrder\":3,\"length\":5000,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"a6913247-7073-402d-b061-30f7bbf32e94\"},\"5a8389b0-fdaa-4be0-b422-251751f32357\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"REGION\",\"label\":\"REGION\",\"newName\":\"REGION\",\"indexOrder\":5,\"length\":5000,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"355f68c9-f277-4c30-b266-785ef918d040\"},\"f35668b4-6b20-4bfd-8c72-015beb1ff9ee\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"ORDER_ID\",\"label\":\"ORDER_ID\",\"newName\":\"ORDER_ID\",\"indexOrder\":0,\"length\":5000,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"35524daf-0a94-4122-84ce-4743edd1fa85\"},\"204cf845-69a4-4cc4-a68b-d9ae7e421325\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"CUSTOMER_ID\",\"label\":\"CUSTOMER_ID\",\"newName\":\"CUSTOMER_ID\",\"indexOrder\":2,\"length\":5000,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"0397bea6-6257-4023-a3d2-b25fb84c4518\"},\"cf642711-02ba-4007-974e-81d93b4bf60a\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"ORDER_VALUE\",\"label\":\"ORDER_VALUE\",\"newName\":\"ORDER_VALUE\",\"indexOrder\":4,\"dataType\":\"cds.Integer64\",\"length\":0,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"4601b0b4-24c7-439b-ab04-a65114073233\"},\"a839afd8-fe0b-432f-ba44-a0cf2ab6a091\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"CUSTOMER_ID\",\"label\":\"CUSTOMER_ID\",\"newName\":\"CUSTOMER_ID\",\"isRemoved\":true,\"indexOrder\":1,\"length\":5000,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false},\"a6913247-7073-402d-b061-30f7bbf32e94\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"CUSTOMER_NAME\",\"label\":\"CUSTOMER_NAME\",\"newName\":\"CUSTOMER_NAME\",\"indexOrder\":3,\"length\":5000,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"1e2e3a8d-6df3-4b26-82d3-145bf6e6af02\"},\"355f68c9-f277-4c30-b266-785ef918d040\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"REGION\",\"label\":\"REGION\",\"newName\":\"REGION\",\"indexOrder\":5,\"length\":5000,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"37b3030c-dc23-40af-8d80-6f6c3619a1a1\"},\"2549dbe4-e76a-4f11-9c70-989c4079df42\":{\"classDefinition\":\"sap.cdw.querybuilder.ui.OutputSymbol\",\"x\":154.99999940395355,\"y\":-32.40040876787516,\"width\":140,\"height\":40,\"object\":\"1c5e04f3-9f67-4b5c-9cfd-f74e894fdb44\"},\"1cf6950c-6b55-44bb-9cee-3ccda7d05bc6\":{\"classDefinition\":\"sap.cdw.querybuilder.ui.EntitySymbol\",\"name\":\"Entity Symbol 1\",\"x\":-270.99999940395355,\"y\":25,\"width\":160,\"displayName\":\"Entity Symbol 1\",\"object\":\"37f067a0-dea6-475f-80bb-5cc82c85fedd\"},\"6868a169-320a-436a-bcad-0dcd77450503\":{\"classDefinition\":\"sap.cdw.querybuilder.ui.EntitySymbol\",\"name\":\"Entity Symbol 2\",\"x\":-270.99999940395355,\"y\":-65,\"width\":160,\"displayName\":\"Entity Symbol 2\",\"object\":\"5acfbc7d-2590-4ad6-b2c4-002b45a0f73f\"},\"89901721-a7b1-4e35-b36f-d4da02f6d889\":{\"classDefinition\":\"sap.cdw.querybuilder.ui.JoinSymbol\",\"font\":\"bold 11px \\\"72\\\",\\\"72full\\\",Arial,Helvetica,sans-serif\",\"x\":-41.00000059604645,\"y\":-28.400408767875163,\"object\":\"5c7a690e-a425-4a12-9e59-e24b1b84bc14\"},\"0711e2f5-d5ac-4d7e-b615-6c3dc804e328\":{\"classDefinition\":\"sap.cdw.querybuilder.ui.AssociationSymbol\",\"points\":\"-110.99999940395355,45.000000000000014 -76,45.000000000000014 -76,-7.0670754345418345 -41.00000059604645,-7.0670754345418345\",\"contentOffsetX\":5,\"contentOffsetY\":5,\"sourceSymbol\":\"1cf6950c-6b55-44bb-9cee-3ccda7d05bc6\",\"targetSymbol\":\"89901721-a7b1-4e35-b36f-d4da02f6d889\",\"object\":\"5c7a690e-a425-4a12-9e59-e24b1b84bc14\"},\"b9325b7f-66b3-417f-9ef6-a987430acee5\":{\"classDefinition\":\"sap.cdw.querybuilder.ui.AssociationSymbol\",\"isLeftInput\":false,\"points\":\"-110.99999940395355,-45 -76,-45 -76,-17.73374210120849 -41.00000059604645,-17.73374210120849\",\"contentOffsetX\":5,\"contentOffsetY\":5,\"sourceSymbol\":\"6868a169-320a-436a-bcad-0dcd77450503\",\"targetSymbol\":\"89901721-a7b1-4e35-b36f-d4da02f6d889\",\"object\":\"5c7a690e-a425-4a12-9e59-e24b1b84bc14\"},\"880502e4-a9eb-47b2-89b6-6dbd2eb13861\":{\"classDefinition\":\"sap.cdw.querybuilder.ui.RenameSymbol\",\"font\":\"bold 11px \\\"72\\\",\\\"72full\\\",Arial,Helvetica,sans-serif\",\"x\":56.99999940395355,\"y\":-28.400408767875163,\"object\":\"7976df70-b08c-490f-affc-c8ac8932eb07\"},\"b01156c6-b7c3-4831-bb36-790d6a641ba4\":{\"classDefinition\":\"sap.cdw.querybuilder.ui.AssociationSymbol\",\"points\":\"6.999999403953552,-12.400408767875163 56.99999940395355,-12.400408767875163\",\"contentOffsetX\":5,\"contentOffsetY\":5,\"sourceSymbol\":\"89901721-a7b1-4e35-b36f-d4da02f6d889\",\"targetSymbol\":\"880502e4-a9eb-47b2-89b6-6dbd2eb13861\"},\"61af8d7d-8f26-440e-a359-6e495450cc50\":{\"classDefinition\":\"sap.cdw.querybuilder.ui.AssociationSymbol\",\"points\":\"104.99999940395355,-12.400408767875163 154.99999940395355,-12.400408767875163\",\"contentOffsetX\":5,\"contentOffsetY\":5,\"sourceSymbol\":\"880502e4-a9eb-47b2-89b6-6dbd2eb13861\",\"targetSymbol\":\"2549dbe4-e76a-4f11-9c70-989c4079df42\"}}}"
+    }
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "definitions": {
+    "LAB_TRANSACTIONS": {
+      "kind": "entity",
+      "@ObjectModel.supportedCapabilities": [
+        {
+          "#": "DATA_STRUCTURE"
+        }
+      ],
+      "elements": {
+        "TRANSACTION_ID": {
+          "@EndUserText.label": "TRANSACTION_ID",
+          "type": "cds.String",
+          "length": 5000,
+          "key": true,
+          "notNull": true
+        },
+        "TRANS_DATE": {
+          "@EndUserText.label": "TRANS_DATE",
+          "type": "cds.Date"
+        },
+        "COUNTRY": {
+          "@EndUserText.label": "COUNTRY",
+          "type": "cds.String",
+          "length": 5000
+        },
+        "CITY": {
+          "@EndUserText.label": "CITY",
+          "type": "cds.String",
+          "length": 5000
+        },
+        "AMOUNT": {
+          "@EndUserText.label": "AMOUNT",
+          "precision": 38,
+          "scale": 19,
+          "type": "cds.Decimal"
+        },
+        "CURRENCY": {
+          "@EndUserText.label": "CURRENCY",
+          "type": "cds.String",
+          "length": 5000
+        },
+        "TAX_AMOUNT": {
+          "@EndUserText.label": "TAX_AMOUNT",
+          "precision": 38,
+          "scale": 19,
+          "type": "cds.Decimal"
+        },
+        "WEIGHT": {
+          "@EndUserText.label": "WEIGHT",
+          "precision": 38,
+          "scale": 19,
+          "type": "cds.Decimal"
+        },
+        "WEIGHT_UNIT": {
+          "@EndUserText.label": "WEIGHT_UNIT",
+          "type": "cds.String",
+          "length": 5000
+        }
+      },
+      "@EndUserText.label": "LAB_TRANSACTIONS",
+      "@ObjectModel.modelingPattern": {
+        "#": "DATA_STRUCTURE"
+      },
+      "@DataWarehouse.dataSource.schema": "LB_DSP#WRG_LEALHEANZDRJ3TG6",
+      "@DataWarehouse.dataSource.entity": "sap.dataset.conf_b70f1761-c5ed-438d-aea5-36c1df61da07_view"
+    }
+  }
+}

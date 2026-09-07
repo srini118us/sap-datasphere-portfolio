@@ -1,0 +1,42 @@
+{
+  "definitions": {
+    "LAB_CITY_COORDINATES": {
+      "kind": "entity",
+      "@ObjectModel.modelingPattern": {
+        "#": "DATA_STRUCTURE"
+      },
+      "@ObjectModel.supportedCapabilities": [
+        {
+          "#": "DATA_STRUCTURE"
+        }
+      ],
+      "@DataWarehouse.dataSource.schema": "LB_DSP#WRG_LEALHEANZDRJ3TG6",
+      "@DataWarehouse.dataSource.entity": "sap.dataset.conf_1c55f7cd-e9a3-47af-8197-55a63b685968_view",
+      "@EndUserText.label": "LAB_CITY_COORDINATES",
+      "elements": {
+        "CITY": {
+          "type": "cds.String",
+          "length": 5000,
+          "@EndUserText.label": "CITY"
+        },
+        "COUNTRY": {
+          "type": "cds.String",
+          "length": 5000,
+          "@EndUserText.label": "COUNTRY"
+        },
+        "LATITUDE": {
+          "type": "cds.Decimal",
+          "precision": 38,
+          "scale": 19,
+          "@EndUserText.label": "LATITUDE"
+        },
+        "LONGITUDE": {
+          "type": "cds.Decimal",
+          "precision": 38,
+          "scale": 19,
+          "@EndUserText.label": "LONGITUDE"
+        }
+      }
+    }
+  }
+}

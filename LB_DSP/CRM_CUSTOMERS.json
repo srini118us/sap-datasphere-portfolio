@@ -1,0 +1,47 @@
+{
+  "definitions": {
+    "CRM_CUSTOMERS": {
+      "kind": "entity",
+      "@ObjectModel.supportedCapabilities": [
+        {
+          "#": "DATA_STRUCTURE"
+        }
+      ],
+      "elements": {
+        "CRM_ID": {
+          "@EndUserText.label": "CRM_ID",
+          "type": "cds.String",
+          "length": 5000,
+          "key": true,
+          "notNull": true
+        },
+        "CUSTOMER_NAME": {
+          "@EndUserText.label": "CUSTOMER_NAME",
+          "type": "cds.String",
+          "length": 5000
+        },
+        "CITY": {
+          "@EndUserText.label": "CITY",
+          "type": "cds.String",
+          "length": 5000
+        },
+        "COUNTRY": {
+          "@EndUserText.label": "COUNTRY",
+          "type": "cds.String",
+          "length": 5000
+        },
+        "EMAIL": {
+          "@EndUserText.label": "EMAIL",
+          "type": "cds.String",
+          "length": 5000
+        }
+      },
+      "@EndUserText.label": "CRM_CUSTOMERS",
+      "@ObjectModel.modelingPattern": {
+        "#": "DATA_STRUCTURE"
+      },
+      "@DataWarehouse.dataSource.schema": "LB_DSP#WRG_LEALHEANZDRJ3TG6",
+      "@DataWarehouse.dataSource.entity": "sap.dataset.conf_ba6e9ed4-f600-497c-94ca-e237ceba479c_view"
+    }
+  }
+}

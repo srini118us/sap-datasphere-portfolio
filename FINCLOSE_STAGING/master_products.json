@@ -1,0 +1,43 @@
+{
+  "definitions": {
+    "master_products": {
+      "kind": "entity",
+      "@ObjectModel.supportedCapabilities": [
+        {
+          "#": "DATA_STRUCTURE"
+        }
+      ],
+      "elements": {
+        "ProductID": {
+          "@EndUserText.label": "ProductID",
+          "type": "cds.String",
+          "length": 5000,
+          "key": true,
+          "notNull": true
+        },
+        "ProductName": {
+          "@EndUserText.label": "ProductName",
+          "type": "cds.String",
+          "length": 5000
+        },
+        "Category": {
+          "@EndUserText.label": "Category",
+          "type": "cds.String",
+          "length": 5000
+        },
+        "UnitPrice": {
+          "@EndUserText.label": "UnitPrice",
+          "precision": 38,
+          "scale": 19,
+          "type": "cds.Decimal"
+        }
+      },
+      "@EndUserText.label": "master_products",
+      "@ObjectModel.modelingPattern": {
+        "#": "DATA_STRUCTURE"
+      },
+      "@DataWarehouse.dataSource.schema": "FINCLOSE_STAGING#WRG_HCW9J3V0VNF4Z1SW",
+      "@DataWarehouse.dataSource.entity": "sap.dataset.conf_fbad2f08-eaef-4acb-8c69-20c2eded6e69_view"
+    }
+  }
+}

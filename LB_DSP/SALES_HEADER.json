@@ -1,0 +1,59 @@
+{
+  "definitions": {
+    "SALES_HEADER": {
+      "kind": "entity",
+      "@EndUserText.label": "SALES_HEADER",
+      "@ObjectModel.modelingPattern": {
+        "#": "DATA_STRUCTURE"
+      },
+      "@ObjectModel.supportedCapabilities": [
+        {
+          "#": "DATA_STRUCTURE"
+        }
+      ],
+      "elements": {
+        "ORDER_ID": {
+          "@EndUserText.label": "ORDER_ID",
+          "type": "cds.String",
+          "key": true,
+          "notNull": true,
+          "length": 10
+        },
+        "ORDER_DATE": {
+          "@EndUserText.label": "ORDER_DATE",
+          "type": "cds.Date",
+          "key": false
+        },
+        "CUSTOMER_ID": {
+          "@EndUserText.label": "CUSTOMER_ID",
+          "type": "cds.String",
+          "key": false,
+          "length": 10
+        },
+        "COMPANY_CODE": {
+          "@EndUserText.label": "COMPANY_CODE",
+          "type": "cds.String",
+          "key": false,
+          "length": 4
+        },
+        "CURRENCY": {
+          "@EndUserText.label": "CURRENCY",
+          "type": "cds.String",
+          "key": false,
+          "length": 3
+        },
+        "ORDER_STATUS": {
+          "@EndUserText.label": "ORDER_STATUS",
+          "type": "cds.String",
+          "key": false,
+          "length": 10
+        },
+        "LAST_CHANGED": {
+          "@EndUserText.label": "LAST_CHANGED",
+          "type": "cds.Timestamp",
+          "key": false
+        }
+      }
+    }
+  }
+}

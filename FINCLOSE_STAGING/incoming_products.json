@@ -1,0 +1,36 @@
+{
+  "definitions": {
+    "incoming_products": {
+      "kind": "entity",
+      "@ObjectModel.supportedCapabilities": [
+        {
+          "#": "DATA_STRUCTURE"
+        }
+      ],
+      "elements": {
+        "IncomingID": {
+          "@EndUserText.label": "IncomingID",
+          "type": "cds.String",
+          "length": 5000,
+          "key": true,
+          "notNull": true
+        },
+        "SupplierProductName": {
+          "@EndUserText.label": "SupplierProductName",
+          "type": "cds.String",
+          "length": 5000
+        },
+        "OrderQty": {
+          "@EndUserText.label": "OrderQty",
+          "type": "cds.Integer64"
+        }
+      },
+      "@EndUserText.label": "incoming_products",
+      "@ObjectModel.modelingPattern": {
+        "#": "DATA_STRUCTURE"
+      },
+      "@DataWarehouse.dataSource.schema": "FINCLOSE_STAGING#WRG_HCW9J3V0VNF4Z1SW",
+      "@DataWarehouse.dataSource.entity": "sap.dataset.conf_d4e7d6a4-2530-4296-bf00-f1e5e40120c8_view"
+    }
+  }
+}

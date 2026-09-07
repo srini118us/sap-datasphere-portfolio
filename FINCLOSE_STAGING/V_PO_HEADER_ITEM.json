@@ -1,0 +1,356 @@
+{
+  "definitions": {
+    "V_PO_HEADER_ITEM": {
+      "kind": "entity",
+      "elements": {
+        "PurchaseOrderItemUUID": {
+          "@EndUserText.label": "Epm: generic node key",
+          "type": "cds.Binary",
+          "length": 16,
+          "key": true,
+          "notNull": true
+        },
+        "PurchaseOrderItem": {
+          "@EndUserText.label": "Epm: purchase order item position",
+          "type": "cds.String",
+          "length": 10
+        },
+        "TransactionCurrency": {
+          "@EndUserText.label": "Epm: currency code",
+          "type": "cds.String",
+          "length": 5
+        },
+        "GrossAmountInTransacCurrency": {
+          "@EndUserText.label": "Epm: total gross amount",
+          "type": "cds.DecimalFloat",
+          "@AnalyticsDetails.measureType": {
+            "#": "BASE"
+          },
+          "@Aggregation.default": {
+            "#": "SUM"
+          }
+        },
+        "NetAmountInTransactionCurrency": {
+          "@EndUserText.label": "Epm: total net amount",
+          "type": "cds.DecimalFloat",
+          "@AnalyticsDetails.measureType": {
+            "#": "BASE"
+          },
+          "@Aggregation.default": {
+            "#": "SUM"
+          }
+        },
+        "TaxAmountInTransactionCurrency": {
+          "@EndUserText.label": "Epm: total tax amount",
+          "type": "cds.DecimalFloat",
+          "@AnalyticsDetails.measureType": {
+            "#": "BASE"
+          },
+          "@Aggregation.default": {
+            "#": "SUM"
+          }
+        },
+        "PurchaseOrderUUID": {
+          "@EndUserText.label": "Epm: generic node key",
+          "type": "cds.Binary",
+          "length": 16,
+          "key": true,
+          "notNull": true
+        },
+        "PurchaseOrder": {
+          "@EndUserText.label": "Epm: purchase order number",
+          "type": "cds.String",
+          "length": 10
+        },
+        "PurchaseOrderLifeCycleStatus": {
+          "@EndUserText.label": "Epm: purchase order lifecycle status",
+          "type": "cds.String",
+          "length": 1
+        },
+        "PurchaseOrderApprovalStatus": {
+          "@EndUserText.label": "Epm: purchase order approval status",
+          "type": "cds.String",
+          "length": 1
+        },
+        "PurchaseOrderConfStatus": {
+          "@EndUserText.label": "Epm: purchase order confirmation status",
+          "type": "cds.String",
+          "length": 1
+        },
+        "PurchaseOrderOrderingStatus": {
+          "@EndUserText.label": "Epm: purchase order ordering status",
+          "type": "cds.String",
+          "length": 1
+        },
+        "PurchaseOrderInvoicingStatus": {
+          "@EndUserText.label": "Epm: purchase order invoicing status",
+          "type": "cds.String",
+          "length": 1
+        },
+        "PurchaseOrderOverallStatus": {
+          "@EndUserText.label": "Epm: purchase order overall status",
+          "type": "cds.String",
+          "length": 1
+        },
+        "CreationDateTime": {
+          "@EndUserText.label": "Epm: created at",
+          "precision": 21,
+          "scale": 7,
+          "type": "cds.Decimal"
+        },
+        "LastChangedDateTime": {
+          "@EndUserText.label": "Epm: changed at",
+          "precision": 21,
+          "scale": 7,
+          "type": "cds.Decimal"
+        }
+      },
+      "query": {
+        "SELECT": {
+          "from": {
+            "SELECT": {
+              "from": {
+                "join": "inner",
+                "args": [
+                  {
+                    "ref": [
+                      "SEPM_I_PURCHASEORDERITEM"
+                    ],
+                    "as": "SEPM_I_PURCHASEORDERITEM"
+                  },
+                  {
+                    "ref": [
+                      "SEPM_I_PURCHASEORDER"
+                    ],
+                    "as": "SEPM_I_PURCHASEORDER"
+                  }
+                ],
+                "on": [
+                  {
+                    "ref": [
+                      "SEPM_I_PURCHASEORDERITEM",
+                      "PurchaseOrderUUID"
+                    ]
+                  },
+                  "=",
+                  {
+                    "ref": [
+                      "SEPM_I_PURCHASEORDER",
+                      "PurchaseOrderUUID"
+                    ]
+                  }
+                ]
+              },
+              "columns": [
+                {
+                  "ref": [
+                    "SEPM_I_PURCHASEORDERITEM",
+                    "PurchaseOrderItemUUID"
+                  ],
+                  "key": true
+                },
+                {
+                  "ref": [
+                    "SEPM_I_PURCHASEORDER",
+                    "PurchaseOrderUUID"
+                  ],
+                  "as": "SEPM_I_PURCHASEORDER_PurchaseOrderUUID",
+                  "key": true
+                },
+                {
+                  "ref": [
+                    "SEPM_I_PURCHASEORDER",
+                    "PurchaseOrder"
+                  ]
+                },
+                {
+                  "ref": [
+                    "SEPM_I_PURCHASEORDERITEM",
+                    "PurchaseOrderItem"
+                  ]
+                },
+                {
+                  "ref": [
+                    "SEPM_I_PURCHASEORDERITEM",
+                    "TransactionCurrency"
+                  ]
+                },
+                {
+                  "ref": [
+                    "SEPM_I_PURCHASEORDERITEM",
+                    "GrossAmountInTransacCurrency"
+                  ]
+                },
+                {
+                  "ref": [
+                    "SEPM_I_PURCHASEORDERITEM",
+                    "NetAmountInTransactionCurrency"
+                  ]
+                },
+                {
+                  "ref": [
+                    "SEPM_I_PURCHASEORDERITEM",
+                    "TaxAmountInTransactionCurrency"
+                  ]
+                },
+                {
+                  "ref": [
+                    "SEPM_I_PURCHASEORDER",
+                    "PurchaseOrderLifeCycleStatus"
+                  ]
+                },
+                {
+                  "ref": [
+                    "SEPM_I_PURCHASEORDER",
+                    "PurchaseOrderApprovalStatus"
+                  ]
+                },
+                {
+                  "ref": [
+                    "SEPM_I_PURCHASEORDER",
+                    "PurchaseOrderConfStatus"
+                  ]
+                },
+                {
+                  "ref": [
+                    "SEPM_I_PURCHASEORDER",
+                    "PurchaseOrderOrderingStatus"
+                  ]
+                },
+                {
+                  "ref": [
+                    "SEPM_I_PURCHASEORDER",
+                    "PurchaseOrderInvoicingStatus"
+                  ]
+                },
+                {
+                  "ref": [
+                    "SEPM_I_PURCHASEORDER",
+                    "PurchaseOrderOverallStatus"
+                  ]
+                },
+                {
+                  "ref": [
+                    "SEPM_I_PURCHASEORDER",
+                    "CreationDateTime"
+                  ]
+                },
+                {
+                  "ref": [
+                    "SEPM_I_PURCHASEORDER",
+                    "LastChangedDateTime"
+                  ]
+                }
+              ]
+            },
+            "as": "Join 1"
+          },
+          "columns": [
+            {
+              "ref": [
+                "PurchaseOrderItemUUID"
+              ],
+              "key": true
+            },
+            {
+              "ref": [
+                "PurchaseOrderItem"
+              ]
+            },
+            {
+              "ref": [
+                "TransactionCurrency"
+              ]
+            },
+            {
+              "ref": [
+                "GrossAmountInTransacCurrency"
+              ]
+            },
+            {
+              "ref": [
+                "NetAmountInTransactionCurrency"
+              ]
+            },
+            {
+              "ref": [
+                "TaxAmountInTransactionCurrency"
+              ]
+            },
+            {
+              "ref": [
+                "SEPM_I_PURCHASEORDER_PurchaseOrderUUID"
+              ],
+              "as": "PurchaseOrderUUID",
+              "key": true
+            },
+            {
+              "ref": [
+                "PurchaseOrder"
+              ]
+            },
+            {
+              "ref": [
+                "PurchaseOrderLifeCycleStatus"
+              ]
+            },
+            {
+              "ref": [
+                "PurchaseOrderApprovalStatus"
+              ]
+            },
+            {
+              "ref": [
+                "PurchaseOrderConfStatus"
+              ]
+            },
+            {
+              "ref": [
+                "PurchaseOrderOrderingStatus"
+              ]
+            },
+            {
+              "ref": [
+                "PurchaseOrderInvoicingStatus"
+              ]
+            },
+            {
+              "ref": [
+                "PurchaseOrderOverallStatus"
+              ]
+            },
+            {
+              "ref": [
+                "CreationDateTime"
+              ]
+            },
+            {
+              "ref": [
+                "LastChangedDateTime"
+              ]
+            }
+          ]
+        }
+      },
+      "@ObjectModel.supportedCapabilities": [
+        {
+          "#": "DATA_STRUCTURE"
+        }
+      ],
+      "@EndUserText.label": "Purchase Order Header-Item",
+      "@ObjectModel.modelingPattern": {
+        "#": "ANALYTICAL_FACT"
+      },
+      "@DataWarehouse.consumption.external": false
+    }
+  },
+  "editorSettings": {
+    "V_PO_HEADER_ITEM": {
+      "editor": {
+        "lastModifier": "GRAPHICALVIEWBUILDER",
+        "default": "GRAPHICALVIEWBUILDER"
+      },
+      "uiModel": "{\"contents\":{\"7b71ed14-e40d-410e-820c-bbd839c5b2d9\":{\"classDefinition\":\"sap.cdw.querybuilder.Model\",\"name\":\"V_PO_HEADER_ITEM\",\"label\":\"Purchase Order Header-Item\",\"modificationDate\":1788669353484,\"deploymentDate\":1788668687191,\"#objectStatus\":\"2\",\"output\":\"54dbd9cf-0163-4aff-b3d7-2a4844b1900d\",\"nodes\":{\"54dbd9cf-0163-4aff-b3d7-2a4844b1900d\":{\"name\":\"View_1\"},\"268b86ea-3af5-4c4f-a082-b431c377c240\":{\"name\":\"SEPM_I_PURCHASEORDERITEM\"},\"b479fe79-e957-4b76-aedb-e616ddbe103c\":{\"name\":\"SEPM_I_PURCHASEORDER\"},\"27913345-5caa-449c-b002-0c3529033347\":{\"name\":\"Join 1\"},\"4218d6fd-a61b-4379-a7c4-301289c76c9f\":{\"name\":\"Projection 1\"}},\"diagrams\":{\"d73d97df-6943-4875-936f-550f91cd1007\":{}}},\"54dbd9cf-0163-4aff-b3d7-2a4844b1900d\":{\"classDefinition\":\"sap.cdw.querybuilder.Output\",\"name\":\"View_1\",\"type\":\"graphicView\",\"isDeltaOutboundOn\":false,\"isDeletionVector\":false,\"isPinToMemoryEnabled\":false,\"dataCategory\":\"SQLFACT\",\"isAllowConsumption\":false,\"modificationDate\":1788669353484,\"deploymentDate\":1788668687191,\"#objectStatus\":\"2\",\"elements\":{\"7a1a4ab4-75ac-43a5-91d1-bd384ca553bb\":{\"name\":\"PurchaseOrderItemUUID\"},\"7d03c41b-e94f-444a-a207-1413ee1a70c7\":{\"name\":\"PurchaseOrderItem\"},\"68ac5f7e-670c-49ae-a958-b7019c908df8\":{\"name\":\"TransactionCurrency\"},\"c329de6b-b722-46e7-80e1-df2948d3bac3\":{\"name\":\"GrossAmountInTransacCurrency\"},\"c1fe3e60-dfd2-4f23-99cc-1297e73431f8\":{\"name\":\"NetAmountInTransactionCurrency\"},\"4dc88389-4737-4add-b711-f92b526569ba\":{\"name\":\"TaxAmountInTransactionCurrency\"},\"aefc7df6-7bb4-44a0-a091-d5e9f953bf5b\":{\"name\":\"PurchaseOrderUUID\"},\"fd59e0b7-1a2d-4340-933f-785138a62d84\":{\"name\":\"PurchaseOrder\"},\"a6fe7699-bb6b-4698-9940-c465dcc9b7d2\":{\"name\":\"PurchaseOrderLifeCycleStatus\"},\"d17e238d-d8da-4f8e-89c6-329ebf5a4d6d\":{\"name\":\"PurchaseOrderApprovalStatus\"},\"7a58a17e-c2d1-48c7-a540-e1313a8c3db0\":{\"name\":\"PurchaseOrderConfStatus\"},\"0bab27d3-8b89-456a-a378-457371cb4a44\":{\"name\":\"PurchaseOrderOrderingStatus\"},\"9bd4fea2-4cb3-4381-96e7-ce2304f8526e\":{\"name\":\"PurchaseOrderInvoicingStatus\"},\"22ff4321-7098-45a7-9d55-70f42d31ac0f\":{\"name\":\"PurchaseOrderOverallStatus\"},\"08fa9bef-e23c-4aa6-a15d-cea4cffd4b2d\":{\"name\":\"CreationDateTime\"},\"593a9c42-4668-49cc-81f8-69bd31f3e359\":{\"name\":\"LastChangedDateTime\"}},\"compoundKeySequence\":{\"7a1a4ab4-75ac-43a5-91d1-bd384ca553bb\":{\"name\":\"PurchaseOrderItemUUID\"},\"aefc7df6-7bb4-44a0-a091-d5e9f953bf5b\":{\"name\":\"PurchaseOrderUUID\"}}},\"268b86ea-3af5-4c4f-a082-b431c377c240\":{\"classDefinition\":\"sap.cdw.querybuilder.Entity\",\"name\":\"SEPM_I_PURCHASEORDERITEM\",\"label\":\"Epm demo: purchase order item\",\"type\":9,\"isDeltaOutboundOn\":false,\"isDeletionVector\":false,\"isPinToMemoryEnabled\":false,\"isAllowConsumption\":false,\"isHiddenInUi\":false,\"modificationDate\":1788661727294,\"deploymentDate\":1788661761153,\"#objectStatus\":\"1\",\"elements\":{\"f0650eb3-4fcb-4b61-a345-6998d5999b61\":{\"name\":\"PurchaseOrderItemUUID\"},\"527fd1dd-73b8-401c-9026-19d7c836899f\":{\"name\":\"PurchaseOrderUUID\"},\"b26894e6-640d-4531-9a1b-596c2a1e3b18\":{\"name\":\"PurchaseOrderItem\"},\"7af86dac-3abf-402e-8045-3899c2134be2\":{\"name\":\"ProductUUID\"},\"0ef60eb2-7978-4eb7-93c0-30b732c30a0e\":{\"name\":\"ShortTextGroupUUID\"},\"8dc3b78c-8cbf-46ef-8fde-5a8a3c447dc2\":{\"name\":\"TransactionCurrency\"},\"7e517ebb-171a-4920-9895-df36a38ab78d\":{\"name\":\"GrossAmountInTransacCurrency\"},\"f6e21d2f-f1b5-47fa-81fd-aab35d4f07bc\":{\"name\":\"NetAmountInTransactionCurrency\"},\"cbd60f86-2ed4-47e4-9e0c-aae9479b2eca\":{\"name\":\"TaxAmountInTransactionCurrency\"}},\"successorNode\":\"27913345-5caa-449c-b002-0c3529033347\"},\"b479fe79-e957-4b76-aedb-e616ddbe103c\":{\"classDefinition\":\"sap.cdw.querybuilder.Entity\",\"name\":\"SEPM_I_PURCHASEORDER\",\"label\":\"Epm demo: purchase order\",\"type\":9,\"isDeltaOutboundOn\":false,\"isDeletionVector\":false,\"isPinToMemoryEnabled\":false,\"isAllowConsumption\":false,\"isHiddenInUi\":false,\"modificationDate\":1788661727294,\"deploymentDate\":1788661761153,\"#objectStatus\":\"1\",\"elements\":{\"3dc431d0-c917-462e-a4a1-f5a085c854bf\":{\"name\":\"PurchaseOrderUUID\"},\"9ea5871f-5ef4-4d96-995d-2324eee4788c\":{\"name\":\"PurchaseOrder\"},\"bad30171-26be-4b26-99f5-326d609637b2\":{\"name\":\"ShortTextGroupUUID\"},\"5ea2732c-5841-4eb6-aef9-11ee8127f224\":{\"name\":\"SupplierUUID\"},\"0655a3a4-398e-4ccf-ace6-0d85753179b8\":{\"name\":\"TransactionCurrency\"},\"42ede329-2156-4212-8d95-fce1df9a5925\":{\"name\":\"GrossAmountInTransacCurrency\"},\"ce93c22e-8baa-4ab2-bc1c-b9e85e90d04f\":{\"name\":\"NetAmountInTransactionCurrency\"},\"d24a8de9-1fdc-44ea-80dc-92253ccce42f\":{\"name\":\"TaxAmountInTransactionCurrency\"},\"d3458d6c-2f1c-447e-91d5-8d7fe5d05fef\":{\"name\":\"PurchaseOrderLifeCycleStatus\"},\"322a6e49-aea9-49d2-a878-08a539ecc4c9\":{\"name\":\"PurchaseOrderApprovalStatus\"},\"d699ced7-651b-438a-84e3-e7637b1a527d\":{\"name\":\"PurchaseOrderConfStatus\"},\"9bcf4434-0923-49ec-8124-f000f56fca7f\":{\"name\":\"PurchaseOrderOrderingStatus\"},\"85679dec-84ef-4166-ad92-707ec6dc1406\":{\"name\":\"PurchaseOrderInvoicingStatus\"},\"cacaec5e-a003-404f-988e-1e69a32a9150\":{\"name\":\"PurchaseOrderOverallStatus\"},\"ca4329bb-2a5e-49a1-8456-80f07031ade2\":{\"name\":\"CreatedByUser\"},\"642d6a5c-2aa4-428d-a34f-28e5831bbbde\":{\"name\":\"CreationDateTime\"},\"5458839b-1d71-4d80-ab36-5923d263d9ad\":{\"name\":\"LastChangedByUser\"},\"27dc1877-f480-4005-86f2-526da9a64afa\":{\"name\":\"LastChangedDateTime\"}},\"successorNode\":\"27913345-5caa-449c-b002-0c3529033347\"},\"27913345-5caa-449c-b002-0c3529033347\":{\"classDefinition\":\"sap.cdw.querybuilder.Join\",\"name\":\"Join 1\",\"mappings\":{\"42b03516-376c-4f37-b242-a8fd3470d9f0\":{}},\"leftInput\":\"268b86ea-3af5-4c4f-a082-b431c377c240\",\"rightInput\":\"b479fe79-e957-4b76-aedb-e616ddbe103c\",\"elements\":{\"9ca1ab55-b3d7-464a-990f-29b9d9e1da7f\":{\"name\":\"PurchaseOrderItemUUID\"},\"4862f0d2-73e6-4bbe-b4c9-9349982cceb3\":{\"name\":\"PurchaseOrderUUID\"},\"4a8891bc-14bf-4138-942e-0d4906e33fe2\":{\"name\":\"PurchaseOrderItem\"},\"f4014f88-39a6-49dc-9afc-575a126011e1\":{\"name\":\"ProductUUID\"},\"3349fec9-1b77-4e81-8b7a-a0070a78c1d8\":{\"name\":\"ShortTextGroupUUID\"},\"7cba6672-9ed6-441d-9e3f-4705ddc9b7dd\":{\"name\":\"TransactionCurrency\"},\"d93f84e7-96d5-4423-a351-3a344d891695\":{\"name\":\"GrossAmountInTransacCurrency\"},\"2e1bd04b-969b-4159-902e-e0f4a62fad86\":{\"name\":\"NetAmountInTransactionCurrency\"},\"7ac29fcd-446b-48cb-affd-d394c5457405\":{\"name\":\"TaxAmountInTransactionCurrency\"},\"dea62a40-f53b-4ead-a6cb-5da3c84d7d4b\":{\"name\":\"PurchaseOrderUUID\"},\"c1fad3de-8300-46ba-b987-e28db0c3a685\":{\"name\":\"PurchaseOrder\"},\"5257cb02-1c4e-4820-9169-c262142c4905\":{\"name\":\"ShortTextGroupUUID\"},\"77b05bfe-f01c-450d-9b03-54dababdcc7e\":{\"name\":\"SupplierUUID\"},\"836b8b9d-0178-4ac2-81c0-e5c1eed2b229\":{\"name\":\"TransactionCurrency\"},\"835299e5-0ea5-4f54-8043-3c4df5a35b3b\":{\"name\":\"GrossAmountInTransacCurrency\"},\"d68c3282-95ac-46b6-9933-ec921ee8e919\":{\"name\":\"NetAmountInTransactionCurrency\"},\"3e8b122a-84ff-43c8-a84f-361ee0f59e2b\":{\"name\":\"TaxAmountInTransactionCurrency\"},\"c8e8858d-cd42-47dd-a0ab-6cceaa6745d8\":{\"name\":\"PurchaseOrderLifeCycleStatus\"},\"1c1f08af-125e-43ec-9e21-182953ff6c4c\":{\"name\":\"PurchaseOrderApprovalStatus\"},\"2eeb54c3-e77e-40ac-a1bd-f880a8e802de\":{\"name\":\"PurchaseOrderConfStatus\"},\"8990c704-ab40-4492-ad24-c9d2a0e44a13\":{\"name\":\"PurchaseOrderOrderingStatus\"},\"6473ed2e-fe62-4607-b047-ff858517545b\":{\"name\":\"PurchaseOrderInvoicingStatus\"},\"f21b28ab-1ecb-426d-9768-9b201881c50e\":{\"name\":\"PurchaseOrderOverallStatus\"},\"8847bc4b-4ebe-4d6a-bca6-76295b8f9842\":{\"name\":\"CreatedByUser\"},\"73bee2b2-028d-4a07-9205-d6396a02afb8\":{\"name\":\"CreationDateTime\"},\"36db642f-d25a-4fb3-a301-e1c86e48dc3a\":{\"name\":\"LastChangedByUser\"},\"02024647-ea0b-4899-8bae-08fb81ee59cb\":{\"name\":\"LastChangedDateTime\"}},\"successorNode\":\"4218d6fd-a61b-4379-a7c4-301289c76c9f\"},\"4218d6fd-a61b-4379-a7c4-301289c76c9f\":{\"classDefinition\":\"sap.cdw.querybuilder.RenameElements\",\"_isProjectionNode\":false,\"name\":\"Projection 1\",\"elements\":{\"3631259f-91b7-4230-9619-59715b55b14a\":{\"name\":\"PurchaseOrderItemUUID\"},\"26ead582-61bc-4486-b308-fa6c765aa977\":{\"name\":\"PurchaseOrderUUID\"},\"b7e53b46-158e-4c1a-bb4d-84d8b5290dfb\":{\"name\":\"PurchaseOrderItem\"},\"1cd895d5-f8bd-44fb-8f2b-d4fd1392629a\":{\"name\":\"ProductUUID\"},\"13feb2fb-f10d-4a83-8f87-fa72996f00c7\":{\"name\":\"ShortTextGroupUUID\"},\"8683bec8-4b93-467f-93c0-99d3d6aed01d\":{\"name\":\"TransactionCurrency\"},\"294648d9-c014-4242-a248-5b7cdf8424da\":{\"name\":\"GrossAmountInTransacCurrency\"},\"6dae0384-6c52-4879-83f0-b9ee7355108a\":{\"name\":\"NetAmountInTransactionCurrency\"},\"e9677641-355c-4beb-a340-5179d9a8ce65\":{\"name\":\"TaxAmountInTransactionCurrency\"},\"d1488519-43c3-48ca-adf1-269a61691930\":{\"name\":\"PurchaseOrderUUID\"},\"c719b020-4a72-40cc-b22d-d8f3b713fa94\":{\"name\":\"PurchaseOrder\"},\"99d09bb0-1ed8-4e59-b6d5-70dc5f5336eb\":{\"name\":\"ShortTextGroupUUID\"},\"1dc80d51-b165-43e2-837a-2a714f60ded7\":{\"name\":\"SupplierUUID\"},\"45acdedb-f622-4b74-be23-6c7edc20333f\":{\"name\":\"TransactionCurrency\"},\"08d15a47-1c31-4542-bdb9-3dfdd2672a1e\":{\"name\":\"GrossAmountInTransacCurrency\"},\"e50be984-e65a-4561-b2bc-3b644188cc4f\":{\"name\":\"NetAmountInTransactionCurrency\"},\"80851b72-cc38-451a-bb70-33fc5c5940e6\":{\"name\":\"TaxAmountInTransactionCurrency\"},\"5011466f-05be-459e-a9b1-f64b62769725\":{\"name\":\"PurchaseOrderLifeCycleStatus\"},\"28224231-373a-464d-b2ea-ca470006eeb6\":{\"name\":\"PurchaseOrderApprovalStatus\"},\"dafe9913-ce7f-43b0-ae24-bb28276c4c2a\":{\"name\":\"PurchaseOrderConfStatus\"},\"cb210adf-69a4-484b-be98-d8366b209f15\":{\"name\":\"PurchaseOrderOrderingStatus\"},\"6ebd2f43-49dd-48f0-9171-b216b130f31d\":{\"name\":\"PurchaseOrderInvoicingStatus\"},\"ecefa745-b3dd-4e71-a591-02d882e104d4\":{\"name\":\"PurchaseOrderOverallStatus\"},\"76e7e46e-e3bd-4c77-a118-dd7a97c9957c\":{\"name\":\"CreatedByUser\"},\"f71d0242-83dd-4503-98bf-9f2fe3da73b0\":{\"name\":\"CreationDateTime\"},\"e43e2cf5-b5d5-44e1-ae57-8826eb54f1b8\":{\"name\":\"LastChangedByUser\"},\"56abd0b3-b68f-4380-9f24-758954249616\":{\"name\":\"LastChangedDateTime\"}},\"successorNode\":\"54dbd9cf-0163-4aff-b3d7-2a4844b1900d\"},\"d73d97df-6943-4875-936f-550f91cd1007\":{\"classDefinition\":\"sap.cdw.querybuilder.ui.Diagram\",\"symbols\":{\"6dd81fb2-9c98-462f-9e35-03b23ce40e85\":{},\"a4a0ced5-74f7-47ff-be68-c4fcc2ba108a\":{\"name\":\"Entity Symbol 1\"},\"b7ede012-b792-4107-83c7-5e8218c7f5c6\":{},\"f569aee9-88d9-459f-963b-1b9d3780cb31\":{},\"15ec5ad6-fe60-4bac-89e4-a311febfef15\":{\"name\":\"Entity Symbol 2\"},\"15dac37c-10d4-46e4-9fa9-40784c3df004\":{},\"8de58f20-27d2-461d-b2ea-3fe1db442369\":{},\"e718e1aa-c737-49eb-9c1d-980bf68d9bbb\":{},\"df40269a-7992-44cb-a5e0-ea1d6c86fd26\":{}}},\"7a1a4ab4-75ac-43a5-91d1-bd384ca553bb\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"PurchaseOrderItemUUID\",\"label\":\"Epm: generic node key\",\"newName\":\"PurchaseOrderItemUUID\",\"indexOrder\":0,\"isKey\":true,\"dataType\":\"cds.Binary\",\"length\":16,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"isNotNull\":true},\"7d03c41b-e94f-444a-a207-1413ee1a70c7\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"PurchaseOrderItem\",\"label\":\"Epm: purchase order item position\",\"newName\":\"PurchaseOrderItem\",\"indexOrder\":2,\"length\":10,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false},\"68ac5f7e-670c-49ae-a958-b7019c908df8\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"TransactionCurrency\",\"label\":\"Epm: currency code\",\"newName\":\"TransactionCurrency\",\"indexOrder\":5,\"length\":5,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false},\"c329de6b-b722-46e7-80e1-df2948d3bac3\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"GrossAmountInTransacCurrency\",\"label\":\"Epm: total gross amount\",\"newName\":\"GrossAmountInTransacCurrency\",\"indexOrder\":6,\"defaultAggregation\":\"SUM\",\"dataType\":\"cds.DecimalFloat\",\"length\":0,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"isMeasure\":true},\"c1fe3e60-dfd2-4f23-99cc-1297e73431f8\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"NetAmountInTransactionCurrency\",\"label\":\"Epm: total net amount\",\"newName\":\"NetAmountInTransactionCurrency\",\"indexOrder\":7,\"defaultAggregation\":\"SUM\",\"dataType\":\"cds.DecimalFloat\",\"length\":0,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"isMeasure\":true},\"4dc88389-4737-4add-b711-f92b526569ba\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"TaxAmountInTransactionCurrency\",\"label\":\"Epm: total tax amount\",\"newName\":\"TaxAmountInTransactionCurrency\",\"indexOrder\":8,\"defaultAggregation\":\"SUM\",\"dataType\":\"cds.DecimalFloat\",\"length\":0,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"isMeasure\":true},\"aefc7df6-7bb4-44a0-a091-d5e9f953bf5b\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"PurchaseOrderUUID\",\"label\":\"Epm: generic node key\",\"newName\":\"PurchaseOrderUUID\",\"indexOrder\":9,\"isKey\":true,\"dataType\":\"cds.Binary\",\"length\":16,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"isNotNull\":true},\"fd59e0b7-1a2d-4340-933f-785138a62d84\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"PurchaseOrder\",\"label\":\"Epm: purchase order number\",\"newName\":\"PurchaseOrder\",\"indexOrder\":10,\"length\":10,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false},\"a6fe7699-bb6b-4698-9940-c465dcc9b7d2\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"PurchaseOrderLifeCycleStatus\",\"label\":\"Epm: purchase order lifecycle status\",\"newName\":\"PurchaseOrderLifeCycleStatus\",\"indexOrder\":17,\"length\":1,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false},\"d17e238d-d8da-4f8e-89c6-329ebf5a4d6d\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"PurchaseOrderApprovalStatus\",\"label\":\"Epm: purchase order approval status\",\"newName\":\"PurchaseOrderApprovalStatus\",\"indexOrder\":18,\"length\":1,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false},\"7a58a17e-c2d1-48c7-a540-e1313a8c3db0\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"PurchaseOrderConfStatus\",\"label\":\"Epm: purchase order confirmation status\",\"newName\":\"PurchaseOrderConfStatus\",\"indexOrder\":19,\"length\":1,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false},\"0bab27d3-8b89-456a-a378-457371cb4a44\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"PurchaseOrderOrderingStatus\",\"label\":\"Epm: purchase order ordering status\",\"newName\":\"PurchaseOrderOrderingStatus\",\"indexOrder\":20,\"length\":1,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false},\"9bd4fea2-4cb3-4381-96e7-ce2304f8526e\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"PurchaseOrderInvoicingStatus\",\"label\":\"Epm: purchase order invoicing status\",\"newName\":\"PurchaseOrderInvoicingStatus\",\"indexOrder\":21,\"length\":1,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false},\"22ff4321-7098-45a7-9d55-70f42d31ac0f\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"PurchaseOrderOverallStatus\",\"label\":\"Epm: purchase order overall status\",\"newName\":\"PurchaseOrderOverallStatus\",\"indexOrder\":22,\"length\":1,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false},\"08fa9bef-e23c-4aa6-a15d-cea4cffd4b2d\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"CreationDateTime\",\"label\":\"Epm: created at\",\"newName\":\"CreationDateTime\",\"indexOrder\":24,\"dataType\":\"cds.Decimal\",\"length\":0,\"precision\":21,\"scale\":7,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false},\"593a9c42-4668-49cc-81f8-69bd31f3e359\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"LastChangedDateTime\",\"label\":\"Epm: changed at\",\"newName\":\"LastChangedDateTime\",\"indexOrder\":26,\"dataType\":\"cds.Decimal\",\"length\":0,\"precision\":21,\"scale\":7,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false},\"f0650eb3-4fcb-4b61-a345-6998d5999b61\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"PurchaseOrderItemUUID\",\"label\":\"Epm: generic node key\",\"newName\":\"PurchaseOrderItemUUID\",\"indexOrder\":0,\"isKey\":true,\"dataType\":\"cds.Binary\",\"length\":16,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"isNotNull\":true,\"successorElement\":\"9ca1ab55-b3d7-464a-990f-29b9d9e1da7f\"},\"527fd1dd-73b8-401c-9026-19d7c836899f\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"PurchaseOrderUUID\",\"label\":\"Epm: generic node key\",\"newName\":\"PurchaseOrderUUID\",\"indexOrder\":1,\"dataType\":\"cds.Binary\",\"length\":16,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"4862f0d2-73e6-4bbe-b4c9-9349982cceb3\"},\"b26894e6-640d-4531-9a1b-596c2a1e3b18\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"PurchaseOrderItem\",\"label\":\"Epm: purchase order item position\",\"newName\":\"PurchaseOrderItem\",\"indexOrder\":2,\"length\":10,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"4a8891bc-14bf-4138-942e-0d4906e33fe2\"},\"7af86dac-3abf-402e-8045-3899c2134be2\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"ProductUUID\",\"label\":\"Epm: generic node key\",\"newName\":\"ProductUUID\",\"indexOrder\":3,\"dataType\":\"cds.Binary\",\"length\":16,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"f4014f88-39a6-49dc-9afc-575a126011e1\"},\"0ef60eb2-7978-4eb7-93c0-30b732c30a0e\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"ShortTextGroupUUID\",\"label\":\"Epm: generic node key\",\"newName\":\"ShortTextGroupUUID\",\"indexOrder\":4,\"dataType\":\"cds.Binary\",\"length\":16,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"3349fec9-1b77-4e81-8b7a-a0070a78c1d8\"},\"8dc3b78c-8cbf-46ef-8fde-5a8a3c447dc2\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"TransactionCurrency\",\"label\":\"Epm: currency code\",\"newName\":\"TransactionCurrency\",\"indexOrder\":5,\"length\":5,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"7cba6672-9ed6-441d-9e3f-4705ddc9b7dd\"},\"7e517ebb-171a-4920-9895-df36a38ab78d\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"GrossAmountInTransacCurrency\",\"label\":\"Epm: total gross amount\",\"newName\":\"GrossAmountInTransacCurrency\",\"indexOrder\":6,\"dataType\":\"cds.DecimalFloat\",\"length\":0,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"d93f84e7-96d5-4423-a351-3a344d891695\"},\"f6e21d2f-f1b5-47fa-81fd-aab35d4f07bc\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"NetAmountInTransactionCurrency\",\"label\":\"Epm: total net amount\",\"newName\":\"NetAmountInTransactionCurrency\",\"indexOrder\":7,\"dataType\":\"cds.DecimalFloat\",\"length\":0,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"2e1bd04b-969b-4159-902e-e0f4a62fad86\"},\"cbd60f86-2ed4-47e4-9e0c-aae9479b2eca\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"TaxAmountInTransactionCurrency\",\"label\":\"Epm: total tax amount\",\"newName\":\"TaxAmountInTransactionCurrency\",\"indexOrder\":8,\"dataType\":\"cds.DecimalFloat\",\"length\":0,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"7ac29fcd-446b-48cb-affd-d394c5457405\"},\"3dc431d0-c917-462e-a4a1-f5a085c854bf\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"PurchaseOrderUUID\",\"label\":\"Epm: generic node key\",\"newName\":\"PurchaseOrderUUID\",\"indexOrder\":0,\"isKey\":true,\"dataType\":\"cds.Binary\",\"length\":16,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"isNotNull\":true,\"successorElement\":\"dea62a40-f53b-4ead-a6cb-5da3c84d7d4b\"},\"9ea5871f-5ef4-4d96-995d-2324eee4788c\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"PurchaseOrder\",\"label\":\"Epm: purchase order number\",\"newName\":\"PurchaseOrder\",\"indexOrder\":1,\"length\":10,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"c1fad3de-8300-46ba-b987-e28db0c3a685\"},\"bad30171-26be-4b26-99f5-326d609637b2\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"ShortTextGroupUUID\",\"label\":\"Epm: generic node key\",\"newName\":\"ShortTextGroupUUID\",\"indexOrder\":2,\"dataType\":\"cds.Binary\",\"length\":16,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"5257cb02-1c4e-4820-9169-c262142c4905\"},\"5ea2732c-5841-4eb6-aef9-11ee8127f224\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"SupplierUUID\",\"label\":\"Epm: generic node key\",\"newName\":\"SupplierUUID\",\"indexOrder\":3,\"dataType\":\"cds.Binary\",\"length\":16,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"77b05bfe-f01c-450d-9b03-54dababdcc7e\"},\"0655a3a4-398e-4ccf-ace6-0d85753179b8\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"TransactionCurrency\",\"label\":\"Epm: currency code\",\"newName\":\"TransactionCurrency\",\"indexOrder\":4,\"length\":5,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"836b8b9d-0178-4ac2-81c0-e5c1eed2b229\"},\"42ede329-2156-4212-8d95-fce1df9a5925\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"GrossAmountInTransacCurrency\",\"label\":\"Epm: total gross amount\",\"newName\":\"GrossAmountInTransacCurrency\",\"indexOrder\":5,\"dataType\":\"cds.DecimalFloat\",\"length\":0,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"835299e5-0ea5-4f54-8043-3c4df5a35b3b\"},\"ce93c22e-8baa-4ab2-bc1c-b9e85e90d04f\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"NetAmountInTransactionCurrency\",\"label\":\"Epm: total net amount\",\"newName\":\"NetAmountInTransactionCurrency\",\"indexOrder\":6,\"dataType\":\"cds.DecimalFloat\",\"length\":0,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"d68c3282-95ac-46b6-9933-ec921ee8e919\"},\"d24a8de9-1fdc-44ea-80dc-92253ccce42f\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"TaxAmountInTransactionCurrency\",\"label\":\"Epm: total tax amount\",\"newName\":\"TaxAmountInTransactionCurrency\",\"indexOrder\":7,\"dataType\":\"cds.DecimalFloat\",\"length\":0,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"3e8b122a-84ff-43c8-a84f-361ee0f59e2b\"},\"d3458d6c-2f1c-447e-91d5-8d7fe5d05fef\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"PurchaseOrderLifeCycleStatus\",\"label\":\"Epm: purchase order lifecycle status\",\"newName\":\"PurchaseOrderLifeCycleStatus\",\"indexOrder\":8,\"length\":1,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"c8e8858d-cd42-47dd-a0ab-6cceaa6745d8\"},\"322a6e49-aea9-49d2-a878-08a539ecc4c9\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"PurchaseOrderApprovalStatus\",\"label\":\"Epm: purchase order approval status\",\"newName\":\"PurchaseOrderApprovalStatus\",\"indexOrder\":9,\"length\":1,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"1c1f08af-125e-43ec-9e21-182953ff6c4c\"},\"d699ced7-651b-438a-84e3-e7637b1a527d\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"PurchaseOrderConfStatus\",\"label\":\"Epm: purchase order confirmation status\",\"newName\":\"PurchaseOrderConfStatus\",\"indexOrder\":10,\"length\":1,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"2eeb54c3-e77e-40ac-a1bd-f880a8e802de\"},\"9bcf4434-0923-49ec-8124-f000f56fca7f\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"PurchaseOrderOrderingStatus\",\"label\":\"Epm: purchase order ordering status\",\"newName\":\"PurchaseOrderOrderingStatus\",\"indexOrder\":11,\"length\":1,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"8990c704-ab40-4492-ad24-c9d2a0e44a13\"},\"85679dec-84ef-4166-ad92-707ec6dc1406\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"PurchaseOrderInvoicingStatus\",\"label\":\"Epm: purchase order invoicing status\",\"newName\":\"PurchaseOrderInvoicingStatus\",\"indexOrder\":12,\"length\":1,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"6473ed2e-fe62-4607-b047-ff858517545b\"},\"cacaec5e-a003-404f-988e-1e69a32a9150\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"PurchaseOrderOverallStatus\",\"label\":\"Epm: purchase order overall status\",\"newName\":\"PurchaseOrderOverallStatus\",\"indexOrder\":13,\"length\":1,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"f21b28ab-1ecb-426d-9768-9b201881c50e\"},\"ca4329bb-2a5e-49a1-8456-80f07031ade2\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"CreatedByUser\",\"label\":\"Epm: generic node key\",\"newName\":\"CreatedByUser\",\"indexOrder\":14,\"dataType\":\"cds.Binary\",\"length\":16,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"8847bc4b-4ebe-4d6a-bca6-76295b8f9842\"},\"642d6a5c-2aa4-428d-a34f-28e5831bbbde\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"CreationDateTime\",\"label\":\"Epm: created at\",\"newName\":\"CreationDateTime\",\"indexOrder\":15,\"dataType\":\"cds.Decimal\",\"length\":0,\"precision\":21,\"scale\":7,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"73bee2b2-028d-4a07-9205-d6396a02afb8\"},\"5458839b-1d71-4d80-ab36-5923d263d9ad\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"LastChangedByUser\",\"label\":\"Epm: generic node key\",\"newName\":\"LastChangedByUser\",\"indexOrder\":16,\"dataType\":\"cds.Binary\",\"length\":16,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"36db642f-d25a-4fb3-a301-e1c86e48dc3a\"},\"27dc1877-f480-4005-86f2-526da9a64afa\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"LastChangedDateTime\",\"label\":\"Epm: changed at\",\"newName\":\"LastChangedDateTime\",\"indexOrder\":17,\"dataType\":\"cds.Decimal\",\"length\":0,\"precision\":21,\"scale\":7,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"02024647-ea0b-4899-8bae-08fb81ee59cb\"},\"42b03516-376c-4f37-b242-a8fd3470d9f0\":{\"classDefinition\":\"sap.cdw.commonmodel.ElementMapping\",\"source\":\"527fd1dd-73b8-401c-9026-19d7c836899f\",\"target\":\"3dc431d0-c917-462e-a4a1-f5a085c854bf\"},\"9ca1ab55-b3d7-464a-990f-29b9d9e1da7f\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"PurchaseOrderItemUUID\",\"label\":\"Epm: generic node key\",\"newName\":\"PurchaseOrderItemUUID\",\"indexOrder\":0,\"isKey\":true,\"dataType\":\"cds.Binary\",\"length\":16,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"isNotNull\":true,\"successorElement\":\"3631259f-91b7-4230-9619-59715b55b14a\"},\"4862f0d2-73e6-4bbe-b4c9-9349982cceb3\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"PurchaseOrderUUID\",\"label\":\"Epm: generic node key\",\"newName\":\"PurchaseOrderUUID\",\"indexOrder\":2,\"dataType\":\"cds.Binary\",\"length\":16,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"26ead582-61bc-4486-b308-fa6c765aa977\"},\"4a8891bc-14bf-4138-942e-0d4906e33fe2\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"PurchaseOrderItem\",\"label\":\"Epm: purchase order item position\",\"newName\":\"PurchaseOrderItem\",\"indexOrder\":4,\"length\":10,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"b7e53b46-158e-4c1a-bb4d-84d8b5290dfb\"},\"f4014f88-39a6-49dc-9afc-575a126011e1\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"ProductUUID\",\"label\":\"Epm: generic node key\",\"newName\":\"ProductUUID\",\"indexOrder\":6,\"dataType\":\"cds.Binary\",\"length\":16,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"1cd895d5-f8bd-44fb-8f2b-d4fd1392629a\"},\"3349fec9-1b77-4e81-8b7a-a0070a78c1d8\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"ShortTextGroupUUID\",\"label\":\"Epm: generic node key\",\"newName\":\"ShortTextGroupUUID\",\"indexOrder\":8,\"dataType\":\"cds.Binary\",\"length\":16,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"13feb2fb-f10d-4a83-8f87-fa72996f00c7\"},\"7cba6672-9ed6-441d-9e3f-4705ddc9b7dd\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"TransactionCurrency\",\"label\":\"Epm: currency code\",\"newName\":\"TransactionCurrency\",\"indexOrder\":10,\"length\":5,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"8683bec8-4b93-467f-93c0-99d3d6aed01d\"},\"d93f84e7-96d5-4423-a351-3a344d891695\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"GrossAmountInTransacCurrency\",\"label\":\"Epm: total gross amount\",\"newName\":\"GrossAmountInTransacCurrency\",\"indexOrder\":12,\"dataType\":\"cds.DecimalFloat\",\"length\":0,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"294648d9-c014-4242-a248-5b7cdf8424da\"},\"2e1bd04b-969b-4159-902e-e0f4a62fad86\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"NetAmountInTransactionCurrency\",\"label\":\"Epm: total net amount\",\"newName\":\"NetAmountInTransactionCurrency\",\"indexOrder\":14,\"dataType\":\"cds.DecimalFloat\",\"length\":0,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"6dae0384-6c52-4879-83f0-b9ee7355108a\"},\"7ac29fcd-446b-48cb-affd-d394c5457405\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"TaxAmountInTransactionCurrency\",\"label\":\"Epm: total tax amount\",\"newName\":\"TaxAmountInTransactionCurrency\",\"indexOrder\":16,\"dataType\":\"cds.DecimalFloat\",\"length\":0,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"e9677641-355c-4beb-a340-5179d9a8ce65\"},\"dea62a40-f53b-4ead-a6cb-5da3c84d7d4b\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"PurchaseOrderUUID\",\"label\":\"Epm: generic node key\",\"newName\":\"PurchaseOrderUUID\",\"indexOrder\":1,\"isKey\":true,\"dataType\":\"cds.Binary\",\"length\":16,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"isNotNull\":true,\"successorElement\":\"d1488519-43c3-48ca-adf1-269a61691930\"},\"c1fad3de-8300-46ba-b987-e28db0c3a685\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"PurchaseOrder\",\"label\":\"Epm: purchase order number\",\"newName\":\"PurchaseOrder\",\"indexOrder\":3,\"length\":10,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"c719b020-4a72-40cc-b22d-d8f3b713fa94\"},\"5257cb02-1c4e-4820-9169-c262142c4905\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"ShortTextGroupUUID\",\"label\":\"Epm: generic node key\",\"newName\":\"ShortTextGroupUUID\",\"indexOrder\":5,\"dataType\":\"cds.Binary\",\"length\":16,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"99d09bb0-1ed8-4e59-b6d5-70dc5f5336eb\"},\"77b05bfe-f01c-450d-9b03-54dababdcc7e\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"SupplierUUID\",\"label\":\"Epm: generic node key\",\"newName\":\"SupplierUUID\",\"indexOrder\":7,\"dataType\":\"cds.Binary\",\"length\":16,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"1dc80d51-b165-43e2-837a-2a714f60ded7\"},\"836b8b9d-0178-4ac2-81c0-e5c1eed2b229\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"TransactionCurrency\",\"label\":\"Epm: currency code\",\"newName\":\"TransactionCurrency\",\"indexOrder\":9,\"length\":5,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"45acdedb-f622-4b74-be23-6c7edc20333f\"},\"835299e5-0ea5-4f54-8043-3c4df5a35b3b\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"GrossAmountInTransacCurrency\",\"label\":\"Epm: total gross amount\",\"newName\":\"GrossAmountInTransacCurrency\",\"indexOrder\":11,\"dataType\":\"cds.DecimalFloat\",\"length\":0,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"08d15a47-1c31-4542-bdb9-3dfdd2672a1e\"},\"d68c3282-95ac-46b6-9933-ec921ee8e919\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"NetAmountInTransactionCurrency\",\"label\":\"Epm: total net amount\",\"newName\":\"NetAmountInTransactionCurrency\",\"indexOrder\":13,\"dataType\":\"cds.DecimalFloat\",\"length\":0,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"e50be984-e65a-4561-b2bc-3b644188cc4f\"},\"3e8b122a-84ff-43c8-a84f-361ee0f59e2b\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"TaxAmountInTransactionCurrency\",\"label\":\"Epm: total tax amount\",\"newName\":\"TaxAmountInTransactionCurrency\",\"indexOrder\":15,\"dataType\":\"cds.DecimalFloat\",\"length\":0,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"80851b72-cc38-451a-bb70-33fc5c5940e6\"},\"c8e8858d-cd42-47dd-a0ab-6cceaa6745d8\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"PurchaseOrderLifeCycleStatus\",\"label\":\"Epm: purchase order lifecycle status\",\"newName\":\"PurchaseOrderLifeCycleStatus\",\"indexOrder\":17,\"length\":1,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"5011466f-05be-459e-a9b1-f64b62769725\"},\"1c1f08af-125e-43ec-9e21-182953ff6c4c\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"PurchaseOrderApprovalStatus\",\"label\":\"Epm: purchase order approval status\",\"newName\":\"PurchaseOrderApprovalStatus\",\"indexOrder\":18,\"length\":1,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"28224231-373a-464d-b2ea-ca470006eeb6\"},\"2eeb54c3-e77e-40ac-a1bd-f880a8e802de\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"PurchaseOrderConfStatus\",\"label\":\"Epm: purchase order confirmation status\",\"newName\":\"PurchaseOrderConfStatus\",\"indexOrder\":19,\"length\":1,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"dafe9913-ce7f-43b0-ae24-bb28276c4c2a\"},\"8990c704-ab40-4492-ad24-c9d2a0e44a13\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"PurchaseOrderOrderingStatus\",\"label\":\"Epm: purchase order ordering status\",\"newName\":\"PurchaseOrderOrderingStatus\",\"indexOrder\":20,\"length\":1,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"cb210adf-69a4-484b-be98-d8366b209f15\"},\"6473ed2e-fe62-4607-b047-ff858517545b\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"PurchaseOrderInvoicingStatus\",\"label\":\"Epm: purchase order invoicing status\",\"newName\":\"PurchaseOrderInvoicingStatus\",\"indexOrder\":21,\"length\":1,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"6ebd2f43-49dd-48f0-9171-b216b130f31d\"},\"f21b28ab-1ecb-426d-9768-9b201881c50e\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"PurchaseOrderOverallStatus\",\"label\":\"Epm: purchase order overall status\",\"newName\":\"PurchaseOrderOverallStatus\",\"indexOrder\":22,\"length\":1,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"ecefa745-b3dd-4e71-a591-02d882e104d4\"},\"8847bc4b-4ebe-4d6a-bca6-76295b8f9842\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"CreatedByUser\",\"label\":\"Epm: generic node key\",\"newName\":\"CreatedByUser\",\"indexOrder\":23,\"dataType\":\"cds.Binary\",\"length\":16,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"76e7e46e-e3bd-4c77-a118-dd7a97c9957c\"},\"73bee2b2-028d-4a07-9205-d6396a02afb8\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"CreationDateTime\",\"label\":\"Epm: created at\",\"newName\":\"CreationDateTime\",\"indexOrder\":24,\"dataType\":\"cds.Decimal\",\"length\":0,\"precision\":21,\"scale\":7,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"f71d0242-83dd-4503-98bf-9f2fe3da73b0\"},\"36db642f-d25a-4fb3-a301-e1c86e48dc3a\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"LastChangedByUser\",\"label\":\"Epm: generic node key\",\"newName\":\"LastChangedByUser\",\"indexOrder\":25,\"dataType\":\"cds.Binary\",\"length\":16,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"e43e2cf5-b5d5-44e1-ae57-8826eb54f1b8\"},\"02024647-ea0b-4899-8bae-08fb81ee59cb\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"LastChangedDateTime\",\"label\":\"Epm: changed at\",\"newName\":\"LastChangedDateTime\",\"indexOrder\":26,\"dataType\":\"cds.Decimal\",\"length\":0,\"precision\":21,\"scale\":7,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"56abd0b3-b68f-4380-9f24-758954249616\"},\"3631259f-91b7-4230-9619-59715b55b14a\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"PurchaseOrderItemUUID\",\"label\":\"Epm: generic node key\",\"newName\":\"PurchaseOrderItemUUID\",\"indexOrder\":0,\"isKey\":true,\"dataType\":\"cds.Binary\",\"length\":16,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"isNotNull\":true,\"successorElement\":\"7a1a4ab4-75ac-43a5-91d1-bd384ca553bb\"},\"26ead582-61bc-4486-b308-fa6c765aa977\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"PurchaseOrderUUID\",\"label\":\"Epm: generic node key\",\"newName\":\"PurchaseOrderUUID\",\"isRemoved\":true,\"indexOrder\":2,\"dataType\":\"cds.Binary\",\"length\":16,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false},\"b7e53b46-158e-4c1a-bb4d-84d8b5290dfb\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"PurchaseOrderItem\",\"label\":\"Epm: purchase order item position\",\"newName\":\"PurchaseOrderItem\",\"indexOrder\":4,\"length\":10,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"7d03c41b-e94f-444a-a207-1413ee1a70c7\"},\"1cd895d5-f8bd-44fb-8f2b-d4fd1392629a\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"ProductUUID\",\"label\":\"Epm: generic node key\",\"newName\":\"ProductUUID\",\"isRemoved\":true,\"indexOrder\":6,\"dataType\":\"cds.Binary\",\"length\":16,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false},\"13feb2fb-f10d-4a83-8f87-fa72996f00c7\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"ShortTextGroupUUID\",\"label\":\"Epm: generic node key\",\"newName\":\"ShortTextGroupUUID\",\"isRemoved\":true,\"indexOrder\":8,\"dataType\":\"cds.Binary\",\"length\":16,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false},\"8683bec8-4b93-467f-93c0-99d3d6aed01d\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"TransactionCurrency\",\"label\":\"Epm: currency code\",\"newName\":\"TransactionCurrency\",\"indexOrder\":10,\"length\":5,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"68ac5f7e-670c-49ae-a958-b7019c908df8\"},\"294648d9-c014-4242-a248-5b7cdf8424da\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"GrossAmountInTransacCurrency\",\"label\":\"Epm: total gross amount\",\"newName\":\"GrossAmountInTransacCurrency\",\"indexOrder\":12,\"dataType\":\"cds.DecimalFloat\",\"length\":0,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"c329de6b-b722-46e7-80e1-df2948d3bac3\"},\"6dae0384-6c52-4879-83f0-b9ee7355108a\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"NetAmountInTransactionCurrency\",\"label\":\"Epm: total net amount\",\"newName\":\"NetAmountInTransactionCurrency\",\"indexOrder\":14,\"dataType\":\"cds.DecimalFloat\",\"length\":0,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"c1fe3e60-dfd2-4f23-99cc-1297e73431f8\"},\"e9677641-355c-4beb-a340-5179d9a8ce65\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"TaxAmountInTransactionCurrency\",\"label\":\"Epm: total tax amount\",\"newName\":\"TaxAmountInTransactionCurrency\",\"indexOrder\":16,\"dataType\":\"cds.DecimalFloat\",\"length\":0,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"4dc88389-4737-4add-b711-f92b526569ba\"},\"d1488519-43c3-48ca-adf1-269a61691930\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"PurchaseOrderUUID\",\"label\":\"Epm: generic node key\",\"newName\":\"PurchaseOrderUUID\",\"indexOrder\":1,\"isKey\":true,\"dataType\":\"cds.Binary\",\"length\":16,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"isNotNull\":true,\"successorElement\":\"aefc7df6-7bb4-44a0-a091-d5e9f953bf5b\"},\"c719b020-4a72-40cc-b22d-d8f3b713fa94\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"PurchaseOrder\",\"label\":\"Epm: purchase order number\",\"newName\":\"PurchaseOrder\",\"indexOrder\":3,\"length\":10,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"fd59e0b7-1a2d-4340-933f-785138a62d84\"},\"99d09bb0-1ed8-4e59-b6d5-70dc5f5336eb\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"ShortTextGroupUUID\",\"label\":\"Epm: generic node key\",\"newName\":\"ShortTextGroupUUID\",\"isRemoved\":true,\"indexOrder\":5,\"dataType\":\"cds.Binary\",\"length\":16,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false},\"1dc80d51-b165-43e2-837a-2a714f60ded7\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"SupplierUUID\",\"label\":\"Epm: generic node key\",\"newName\":\"SupplierUUID\",\"isRemoved\":true,\"indexOrder\":7,\"dataType\":\"cds.Binary\",\"length\":16,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false},\"45acdedb-f622-4b74-be23-6c7edc20333f\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"TransactionCurrency\",\"label\":\"Epm: currency code\",\"newName\":\"TransactionCurrency\",\"isRemoved\":true,\"indexOrder\":9,\"length\":5,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false},\"08d15a47-1c31-4542-bdb9-3dfdd2672a1e\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"GrossAmountInTransacCurrency\",\"label\":\"Epm: total gross amount\",\"newName\":\"GrossAmountInTransacCurrency\",\"isRemoved\":true,\"indexOrder\":11,\"dataType\":\"cds.DecimalFloat\",\"length\":0,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false},\"e50be984-e65a-4561-b2bc-3b644188cc4f\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"NetAmountInTransactionCurrency\",\"label\":\"Epm: total net amount\",\"newName\":\"NetAmountInTransactionCurrency\",\"isRemoved\":true,\"indexOrder\":13,\"dataType\":\"cds.DecimalFloat\",\"length\":0,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false},\"80851b72-cc38-451a-bb70-33fc5c5940e6\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"TaxAmountInTransactionCurrency\",\"label\":\"Epm: total tax amount\",\"newName\":\"TaxAmountInTransactionCurrency\",\"isRemoved\":true,\"indexOrder\":15,\"dataType\":\"cds.DecimalFloat\",\"length\":0,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false},\"5011466f-05be-459e-a9b1-f64b62769725\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"PurchaseOrderLifeCycleStatus\",\"label\":\"Epm: purchase order lifecycle status\",\"newName\":\"PurchaseOrderLifeCycleStatus\",\"indexOrder\":17,\"length\":1,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"a6fe7699-bb6b-4698-9940-c465dcc9b7d2\"},\"28224231-373a-464d-b2ea-ca470006eeb6\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"PurchaseOrderApprovalStatus\",\"label\":\"Epm: purchase order approval status\",\"newName\":\"PurchaseOrderApprovalStatus\",\"indexOrder\":18,\"length\":1,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"d17e238d-d8da-4f8e-89c6-329ebf5a4d6d\"},\"dafe9913-ce7f-43b0-ae24-bb28276c4c2a\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"PurchaseOrderConfStatus\",\"label\":\"Epm: purchase order confirmation status\",\"newName\":\"PurchaseOrderConfStatus\",\"indexOrder\":19,\"length\":1,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"7a58a17e-c2d1-48c7-a540-e1313a8c3db0\"},\"cb210adf-69a4-484b-be98-d8366b209f15\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"PurchaseOrderOrderingStatus\",\"label\":\"Epm: purchase order ordering status\",\"newName\":\"PurchaseOrderOrderingStatus\",\"indexOrder\":20,\"length\":1,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"0bab27d3-8b89-456a-a378-457371cb4a44\"},\"6ebd2f43-49dd-48f0-9171-b216b130f31d\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"PurchaseOrderInvoicingStatus\",\"label\":\"Epm: purchase order invoicing status\",\"newName\":\"PurchaseOrderInvoicingStatus\",\"indexOrder\":21,\"length\":1,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"9bd4fea2-4cb3-4381-96e7-ce2304f8526e\"},\"ecefa745-b3dd-4e71-a591-02d882e104d4\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"PurchaseOrderOverallStatus\",\"label\":\"Epm: purchase order overall status\",\"newName\":\"PurchaseOrderOverallStatus\",\"indexOrder\":22,\"length\":1,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"22ff4321-7098-45a7-9d55-70f42d31ac0f\"},\"76e7e46e-e3bd-4c77-a118-dd7a97c9957c\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"CreatedByUser\",\"label\":\"Epm: generic node key\",\"newName\":\"CreatedByUser\",\"isRemoved\":true,\"indexOrder\":23,\"dataType\":\"cds.Binary\",\"length\":16,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false},\"f71d0242-83dd-4503-98bf-9f2fe3da73b0\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"CreationDateTime\",\"label\":\"Epm: created at\",\"newName\":\"CreationDateTime\",\"indexOrder\":24,\"dataType\":\"cds.Decimal\",\"length\":0,\"precision\":21,\"scale\":7,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"08fa9bef-e23c-4aa6-a15d-cea4cffd4b2d\"},\"e43e2cf5-b5d5-44e1-ae57-8826eb54f1b8\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"LastChangedByUser\",\"label\":\"Epm: generic node key\",\"newName\":\"LastChangedByUser\",\"isRemoved\":true,\"indexOrder\":25,\"dataType\":\"cds.Binary\",\"length\":16,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false},\"56abd0b3-b68f-4380-9f24-758954249616\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"LastChangedDateTime\",\"label\":\"Epm: changed at\",\"newName\":\"LastChangedDateTime\",\"indexOrder\":26,\"dataType\":\"cds.Decimal\",\"length\":0,\"precision\":21,\"scale\":7,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"593a9c42-4668-49cc-81f8-69bd31f3e359\"},\"6dd81fb2-9c98-462f-9e35-03b23ce40e85\":{\"classDefinition\":\"sap.cdw.querybuilder.ui.OutputSymbol\",\"x\":154.99999940395355,\"y\":-32.40040876787516,\"width\":140,\"height\":40,\"object\":\"54dbd9cf-0163-4aff-b3d7-2a4844b1900d\"},\"a4a0ced5-74f7-47ff-be68-c4fcc2ba108a\":{\"classDefinition\":\"sap.cdw.querybuilder.ui.EntitySymbol\",\"name\":\"Entity Symbol 1\",\"x\":-270.99999940395355,\"y\":25,\"width\":160,\"displayName\":\"Entity Symbol 1\",\"object\":\"268b86ea-3af5-4c4f-a082-b431c377c240\"},\"b7ede012-b792-4107-83c7-5e8218c7f5c6\":{\"classDefinition\":\"sap.cdw.querybuilder.ui.JoinSymbol\",\"font\":\"bold 11px \\\"72\\\",\\\"72full\\\",Arial,Helvetica,sans-serif\",\"x\":-41.00000059604645,\"y\":-28.400408767875163,\"object\":\"27913345-5caa-449c-b002-0c3529033347\"},\"f569aee9-88d9-459f-963b-1b9d3780cb31\":{\"classDefinition\":\"sap.cdw.querybuilder.ui.AssociationSymbol\",\"points\":\"-110.99999940395355,45.000000000000014 -76,45.000000000000014 -76,-7.0670754345418345 -41.00000059604645,-7.0670754345418345\",\"contentOffsetX\":5,\"contentOffsetY\":5,\"sourceSymbol\":\"a4a0ced5-74f7-47ff-be68-c4fcc2ba108a\",\"targetSymbol\":\"b7ede012-b792-4107-83c7-5e8218c7f5c6\",\"object\":\"27913345-5caa-449c-b002-0c3529033347\"},\"15ec5ad6-fe60-4bac-89e4-a311febfef15\":{\"classDefinition\":\"sap.cdw.querybuilder.ui.EntitySymbol\",\"name\":\"Entity Symbol 2\",\"x\":-270.99999940395355,\"y\":-65,\"width\":160,\"displayName\":\"Entity Symbol 2\",\"object\":\"b479fe79-e957-4b76-aedb-e616ddbe103c\"},\"15dac37c-10d4-46e4-9fa9-40784c3df004\":{\"classDefinition\":\"sap.cdw.querybuilder.ui.AssociationSymbol\",\"isLeftInput\":false,\"points\":\"-110.99999940395355,-45 -76,-45 -76,-17.73374210120849 -41.00000059604645,-17.73374210120849\",\"contentOffsetX\":5,\"contentOffsetY\":5,\"sourceSymbol\":\"15ec5ad6-fe60-4bac-89e4-a311febfef15\",\"targetSymbol\":\"b7ede012-b792-4107-83c7-5e8218c7f5c6\",\"object\":\"27913345-5caa-449c-b002-0c3529033347\"},\"8de58f20-27d2-461d-b2ea-3fe1db442369\":{\"classDefinition\":\"sap.cdw.querybuilder.ui.RenameSymbol\",\"font\":\"bold 11px \\\"72\\\",\\\"72full\\\",Arial,Helvetica,sans-serif\",\"x\":56.99999940395355,\"y\":-28.400408767875163,\"object\":\"4218d6fd-a61b-4379-a7c4-301289c76c9f\"},\"e718e1aa-c737-49eb-9c1d-980bf68d9bbb\":{\"classDefinition\":\"sap.cdw.querybuilder.ui.AssociationSymbol\",\"points\":\"6.999999403953552,-12.400408767875163 56.99999940395355,-12.400408767875163\",\"contentOffsetX\":5,\"contentOffsetY\":5,\"sourceSymbol\":\"b7ede012-b792-4107-83c7-5e8218c7f5c6\",\"targetSymbol\":\"8de58f20-27d2-461d-b2ea-3fe1db442369\"},\"df40269a-7992-44cb-a5e0-ea1d6c86fd26\":{\"classDefinition\":\"sap.cdw.querybuilder.ui.AssociationSymbol\",\"points\":\"104.99999940395355,-12.400408767875163 154.99999940395355,-12.400408767875163\",\"contentOffsetX\":5,\"contentOffsetY\":5,\"sourceSymbol\":\"8de58f20-27d2-461d-b2ea-3fe1db442369\",\"targetSymbol\":\"6dd81fb2-9c98-462f-9e35-03b23ce40e85\"}}}"
+    }
+  }
+}

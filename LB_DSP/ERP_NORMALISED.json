@@ -1,0 +1,78 @@
+{
+  "definitions": {
+    "ERP_NORMALISED": {
+      "kind": "entity",
+      "@EndUserText.label": "ERP_NORMALISED",
+      "@ObjectModel.modelingPattern": {
+        "#": "DATA_STRUCTURE"
+      },
+      "@ObjectModel.supportedCapabilities": [
+        {
+          "#": "DATA_STRUCTURE"
+        }
+      ],
+      "elements": {
+        "ERP_ID": {
+          "@EndUserText.label": "ERP_ID",
+          "type": "cds.String",
+          "key": false,
+          "length": 10
+        },
+        "BUSINESS_PARTNER": {
+          "@EndUserText.label": "BUSINESS_PARTNER",
+          "type": "cds.String",
+          "key": false,
+          "length": 10
+        },
+        "LOCATION": {
+          "@EndUserText.label": "LOCATION",
+          "type": "cds.String",
+          "key": false,
+          "length": 10
+        },
+        "CTRY": {
+          "@EndUserText.label": "CTRY",
+          "type": "cds.String",
+          "key": false,
+          "length": 10
+        },
+        "REVENUE": {
+          "@EndUserText.label": "REVENUE",
+          "type": "cds.String",
+          "key": false,
+          "length": 10
+        },
+        "ERP_ID1": {
+          "@EndUserText.label": "ERP_ID1",
+          "type": "cds.String",
+          "key": true,
+          "notNull": true,
+          "length": 5000
+        },
+        "BUSINESS_PARTNER1": {
+          "@EndUserText.label": "BUSINESS_PARTNER1",
+          "type": "cds.String",
+          "key": false,
+          "length": 5000
+        },
+        "LOCATION1": {
+          "@EndUserText.label": "LOCATION1",
+          "type": "cds.String",
+          "key": false,
+          "length": 5000
+        },
+        "CTRY1": {
+          "@EndUserText.label": "CTRY1",
+          "type": "cds.String",
+          "key": false,
+          "length": 5000
+        },
+        "REVENUE1": {
+          "@EndUserText.label": "REVENUE1",
+          "type": "cds.Integer64",
+          "key": false
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,371 @@
+{
+  "replicationflows": {
+    "RF_SALES_INBOUND": {
+      "kind": "sap.dis.replicationflow",
+      "@EndUserText.label": "RF_SALES_INBOUND",
+      "contents": {
+        "description": "RF_SALES_INBOUND",
+        "sourceSystem": [
+          {
+            "connectionId": "HANA_CLOUD_BTP",
+            "connectionType": "HANA",
+            "container": "/DSP_SRC",
+            "maxConnections": 10,
+            "isGeneric": false,
+            "metadata": {}
+          }
+        ],
+        "targetSystem": [
+          {
+            "connectionId": "$DWC",
+            "connectionType": "HANA",
+            "container": "",
+            "maxConnections": 10,
+            "isGeneric": false,
+            "metadata": {
+              "connectionMetaschema": {
+                "sources": [
+                  "SAP"
+                ]
+              }
+            }
+          }
+        ],
+        "vTypes": {
+          "scalar": {
+            "string_10": {
+              "name": "string_10",
+              "description": "String(10)",
+              "vflow.type": "scalar",
+              "template": "string",
+              "value.length": 10
+            },
+            "string_4": {
+              "name": "string_4",
+              "description": "String(4)",
+              "vflow.type": "scalar",
+              "template": "string",
+              "value.length": 4
+            },
+            "string_3": {
+              "name": "string_3",
+              "description": "String(3)",
+              "vflow.type": "scalar",
+              "template": "string",
+              "value.length": 3
+            },
+            "string_20": {
+              "name": "string_20",
+              "description": "String(20)",
+              "vflow.type": "scalar",
+              "template": "string",
+              "value.length": 20
+            },
+            "decimal_13_3": {
+              "name": "decimal_13_3",
+              "description": "Decimal(13,3)",
+              "vflow.type": "scalar",
+              "template": "decimal",
+              "value.precision": 13,
+              "value.scale": 3
+            },
+            "decimal_15_2": {
+              "name": "decimal_15_2",
+              "description": "Decimal(15,2)",
+              "vflow.type": "scalar",
+              "template": "decimal",
+              "value.precision": 15,
+              "value.scale": 2
+            }
+          }
+        },
+        "replicationTasks": [
+          {
+            "name": "replicationtask1",
+            "loadType": "REPLICATE",
+            "priority": 50,
+            "truncate": false,
+            "sourceObject": {
+              "name": "SALES_HEADER",
+              "definition": {
+                "columns": [
+                  {
+                    "name": "ORDER_ID",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "$DYNAMIC.string_10",
+                    "key": true,
+                    "metadata": {}
+                  },
+                  {
+                    "name": "ORDER_DATE",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "com.sap.core.date",
+                    "metadata": {}
+                  },
+                  {
+                    "name": "CUSTOMER_ID",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "$DYNAMIC.string_10",
+                    "metadata": {}
+                  },
+                  {
+                    "name": "COMPANY_CODE",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "$DYNAMIC.string_4",
+                    "metadata": {}
+                  },
+                  {
+                    "name": "CURRENCY",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "$DYNAMIC.string_3",
+                    "metadata": {}
+                  },
+                  {
+                    "name": "ORDER_STATUS",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "$DYNAMIC.string_10",
+                    "metadata": {}
+                  },
+                  {
+                    "name": "LAST_CHANGED",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "com.sap.core.timestamp",
+                    "metadata": {}
+                  }
+                ],
+                "keys": [
+                  "ORDER_ID"
+                ]
+              },
+              "metadata": {
+                "type": "TABLE"
+              }
+            },
+            "targetObject": {
+              "name": "SALES_HEADER",
+              "definition": {
+                "columns": [
+                  {
+                    "name": "ORDER_ID",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "$DYNAMIC.string_10",
+                    "key": true,
+                    "businessName": "ORDER_ID",
+                    "metadata": {}
+                  },
+                  {
+                    "name": "ORDER_DATE",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "com.sap.core.date",
+                    "businessName": "ORDER_DATE",
+                    "metadata": {}
+                  },
+                  {
+                    "name": "CUSTOMER_ID",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "$DYNAMIC.string_10",
+                    "businessName": "CUSTOMER_ID",
+                    "metadata": {}
+                  },
+                  {
+                    "name": "COMPANY_CODE",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "$DYNAMIC.string_4",
+                    "businessName": "COMPANY_CODE",
+                    "metadata": {}
+                  },
+                  {
+                    "name": "CURRENCY",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "$DYNAMIC.string_3",
+                    "businessName": "CURRENCY",
+                    "metadata": {}
+                  },
+                  {
+                    "name": "ORDER_STATUS",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "$DYNAMIC.string_10",
+                    "businessName": "ORDER_STATUS",
+                    "metadata": {}
+                  },
+                  {
+                    "name": "LAST_CHANGED",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "com.sap.core.timestamp",
+                    "businessName": "LAST_CHANGED",
+                    "metadata": {}
+                  }
+                ]
+              },
+              "metadata": {
+                "isNew": false
+              },
+              "businessName": "SALES_HEADER"
+            },
+            "deltaCheckInterval": 3600
+          },
+          {
+            "name": "replicationtask11",
+            "loadType": "REPLICATE",
+            "priority": 50,
+            "truncate": false,
+            "sourceObject": {
+              "name": "SALES_ITEM",
+              "definition": {
+                "columns": [
+                  {
+                    "name": "ORDER_ID",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "$DYNAMIC.string_10",
+                    "key": true,
+                    "metadata": {}
+                  },
+                  {
+                    "name": "ITEM_NO",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "com.sap.core.int32",
+                    "key": true,
+                    "metadata": {}
+                  },
+                  {
+                    "name": "MATERIAL",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "$DYNAMIC.string_20",
+                    "metadata": {}
+                  },
+                  {
+                    "name": "QUANTITY",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "$DYNAMIC.decimal_13_3",
+                    "metadata": {}
+                  },
+                  {
+                    "name": "UNIT",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "$DYNAMIC.string_3",
+                    "metadata": {}
+                  },
+                  {
+                    "name": "NET_AMOUNT",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "$DYNAMIC.decimal_15_2",
+                    "metadata": {}
+                  },
+                  {
+                    "name": "LAST_CHANGED",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "com.sap.core.timestamp",
+                    "metadata": {}
+                  }
+                ],
+                "keys": [
+                  "ORDER_ID",
+                  "ITEM_NO"
+                ]
+              },
+              "metadata": {
+                "type": "TABLE"
+              }
+            },
+            "targetObject": {
+              "name": "SALES_ITEM",
+              "definition": {
+                "columns": [
+                  {
+                    "name": "ORDER_ID",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "$DYNAMIC.string_10",
+                    "key": true,
+                    "businessName": "ORDER_ID",
+                    "metadata": {}
+                  },
+                  {
+                    "name": "ITEM_NO",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "com.sap.core.int32",
+                    "key": true,
+                    "businessName": "ITEM_NO",
+                    "metadata": {}
+                  },
+                  {
+                    "name": "MATERIAL",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "$DYNAMIC.string_20",
+                    "businessName": "MATERIAL",
+                    "metadata": {}
+                  },
+                  {
+                    "name": "QUANTITY",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "$DYNAMIC.decimal_13_3",
+                    "businessName": "QUANTITY",
+                    "metadata": {}
+                  },
+                  {
+                    "name": "UNIT",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "$DYNAMIC.string_3",
+                    "businessName": "UNIT",
+                    "metadata": {}
+                  },
+                  {
+                    "name": "NET_AMOUNT",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "$DYNAMIC.decimal_15_2",
+                    "businessName": "NET_AMOUNT",
+                    "metadata": {}
+                  },
+                  {
+                    "name": "LAST_CHANGED",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "com.sap.core.timestamp",
+                    "businessName": "LAST_CHANGED",
+                    "metadata": {}
+                  }
+                ]
+              },
+              "metadata": {
+                "isNew": false
+              },
+              "businessName": "SALES_ITEM"
+            },
+            "deltaCheckInterval": 3600
+          }
+        ],
+        "replicationTaskSetting": {
+          "hasSkipMappingCapability": true
+        },
+        "replicationFlowSetting": {},
+        "deltaLoadTrigger": "ON_DELTA_INTERVAL"
+      },
+      "sources": {},
+      "targets": {
+        "SALES_HEADER": {
+          "elements": {
+            "ORDER_ID": {},
+            "ORDER_DATE": {},
+            "CUSTOMER_ID": {},
+            "COMPANY_CODE": {},
+            "CURRENCY": {},
+            "ORDER_STATUS": {},
+            "LAST_CHANGED": {}
+          }
+        },
+        "SALES_ITEM": {
+          "elements": {
+            "ORDER_ID": {},
+            "ITEM_NO": {},
+            "MATERIAL": {},
+            "QUANTITY": {},
+            "UNIT": {},
+            "NET_AMOUNT": {},
+            "LAST_CHANGED": {}
+          }
+        }
+      },
+      "connections": {
+        "HANA_CLOUD_BTP": {}
+      }
+    }
+  }
+}

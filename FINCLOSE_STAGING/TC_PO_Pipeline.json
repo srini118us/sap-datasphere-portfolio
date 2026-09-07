@@ -1,0 +1,40 @@
+{
+  "taskchains": {
+    "TC_PO_Pipeline": {
+      "kind": "sap.dwc.taskChain",
+      "@EndUserText.label": "TC_PO_Pipeline",
+      "nodes": [
+        {
+          "id": 0,
+          "type": "START"
+        },
+        {
+          "id": 1,
+          "type": "TASK",
+          "taskIdentifier": {
+            "applicationId": "REPLICATION_FLOWS",
+            "activity": "EXECUTE",
+            "objectId": "RF_SEPM_PurchaseOrder"
+          },
+          "ignoreError": false
+        }
+      ],
+      "links": [
+        {
+          "startNode": {
+            "nodeId": 0,
+            "statusRequired": "ANY"
+          },
+          "endNode": {
+            "nodeId": 1
+          },
+          "id": 0
+        }
+      ],
+      "options": {
+        "layout": "VERTICAL"
+      },
+      "schemaVersion": 2
+    }
+  }
+}

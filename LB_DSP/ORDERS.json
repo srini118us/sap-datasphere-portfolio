@@ -1,0 +1,34 @@
+{
+  "definitions": {
+    "ORDERS": {
+      "kind": "entity",
+      "@ObjectModel.modelingPattern": {
+        "#": "DATA_STRUCTURE"
+      },
+      "@ObjectModel.supportedCapabilities": [
+        {
+          "#": "DATA_STRUCTURE"
+        }
+      ],
+      "@DataWarehouse.dataSource.schema": "LB_DSP#WRG_LEALHEANZDRJ3TG6",
+      "@DataWarehouse.dataSource.entity": "sap.dataset.conf_0331b33f-f5e9-4e12-b676-fa8da5c54386_view",
+      "@EndUserText.label": "ORDERS",
+      "elements": {
+        "ORDER_ID": {
+          "type": "cds.String",
+          "length": 5000,
+          "@EndUserText.label": "ORDER_ID"
+        },
+        "CUSTOMER_ID": {
+          "type": "cds.String",
+          "length": 5000,
+          "@EndUserText.label": "CUSTOMER_ID"
+        },
+        "ORDER_VALUE": {
+          "type": "cds.Integer64",
+          "@EndUserText.label": "ORDER_VALUE"
+        }
+      }
+    }
+  }
+}

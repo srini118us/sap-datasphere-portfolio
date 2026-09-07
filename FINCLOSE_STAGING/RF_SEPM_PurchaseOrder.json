@@ -1,0 +1,685 @@
+{
+  "replicationflows": {
+    "RF_SEPM_PurchaseOrder": {
+      "kind": "sap.dis.replicationflow",
+      "@EndUserText.label": "Purchase Order Replication",
+      "contents": {
+        "description": "RF_SEPM_PurchaseOrder",
+        "sourceSystem": [
+          {
+            "connectionId": "S4H_ABAP",
+            "connectionType": "SAPS4HANAOP",
+            "container": "/CDS_EXTRACTION",
+            "maxConnections": 10,
+            "isGeneric": false,
+            "metadata": {}
+          }
+        ],
+        "targetSystem": [
+          {
+            "connectionId": "$DWC",
+            "connectionType": "HANA",
+            "container": "",
+            "maxConnections": 10,
+            "isGeneric": false,
+            "metadata": {
+              "connectionMetaschema": {
+                "sources": [
+                  "SAP"
+                ]
+              }
+            }
+          }
+        ],
+        "vTypes": {
+          "scalar": {
+            "binary_16": {
+              "name": "binary_16",
+              "description": "Binary(16)",
+              "vflow.type": "scalar",
+              "template": "binary",
+              "value.length": 16
+            },
+            "string_10": {
+              "name": "string_10",
+              "description": "String(10)",
+              "vflow.type": "scalar",
+              "template": "string",
+              "value.length": 10
+            },
+            "string_5": {
+              "name": "string_5",
+              "description": "String(5)",
+              "vflow.type": "scalar",
+              "template": "string",
+              "value.length": 5
+            },
+            "string_1": {
+              "name": "string_1",
+              "description": "String(1)",
+              "vflow.type": "scalar",
+              "template": "string",
+              "value.length": 1
+            },
+            "decimal_21_7": {
+              "name": "decimal_21_7",
+              "description": "Decimal(21,7)",
+              "vflow.type": "scalar",
+              "template": "decimal",
+              "value.precision": 21,
+              "value.scale": 7
+            }
+          }
+        },
+        "replicationTasks": [
+          {
+            "name": "replicationtask1",
+            "loadType": "INITIAL",
+            "priority": 50,
+            "truncate": false,
+            "sourceObject": {
+              "name": "SEPM_I_PURCHASEORDER",
+              "definition": {
+                "columns": [
+                  {
+                    "name": "PurchaseOrderUUID",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "$DYNAMIC.binary_16",
+                    "key": true,
+                    "businessName": "Epm: generic node key",
+                    "metadata": {
+                      "nativeType": {
+                        "datatype": "binary",
+                        "length": 16
+                      },
+                      "TemplateType": {
+                        "datatype": "string",
+                        "length": 36
+                      }
+                    }
+                  },
+                  {
+                    "name": "PurchaseOrder",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "$DYNAMIC.string_10",
+                    "businessName": "Epm: purchase order number",
+                    "metadata": {}
+                  },
+                  {
+                    "name": "ShortTextGroupUUID",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "$DYNAMIC.binary_16",
+                    "businessName": "Epm: generic node key",
+                    "metadata": {
+                      "nativeType": {
+                        "datatype": "binary",
+                        "length": 16
+                      },
+                      "TemplateType": {
+                        "datatype": "string",
+                        "length": 36
+                      }
+                    }
+                  },
+                  {
+                    "name": "SupplierUUID",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "$DYNAMIC.binary_16",
+                    "businessName": "Epm: generic node key",
+                    "metadata": {
+                      "nativeType": {
+                        "datatype": "binary",
+                        "length": 16
+                      },
+                      "TemplateType": {
+                        "datatype": "string",
+                        "length": 36
+                      }
+                    }
+                  },
+                  {
+                    "name": "TransactionCurrency",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "$DYNAMIC.string_5",
+                    "businessName": "Epm: currency code",
+                    "metadata": {}
+                  },
+                  {
+                    "name": "GrossAmountInTransacCurrency",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "com.sap.core.decfloat34",
+                    "businessName": "Epm: total gross amount",
+                    "metadata": {}
+                  },
+                  {
+                    "name": "NetAmountInTransactionCurrency",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "com.sap.core.decfloat34",
+                    "businessName": "Epm: total net amount",
+                    "metadata": {}
+                  },
+                  {
+                    "name": "TaxAmountInTransactionCurrency",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "com.sap.core.decfloat34",
+                    "businessName": "Epm: total tax amount",
+                    "metadata": {}
+                  },
+                  {
+                    "name": "PurchaseOrderLifeCycleStatus",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "$DYNAMIC.string_1",
+                    "businessName": "Epm: purchase order lifecycle status",
+                    "metadata": {}
+                  },
+                  {
+                    "name": "PurchaseOrderApprovalStatus",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "$DYNAMIC.string_1",
+                    "businessName": "Epm: purchase order approval status",
+                    "metadata": {}
+                  },
+                  {
+                    "name": "PurchaseOrderConfStatus",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "$DYNAMIC.string_1",
+                    "businessName": "Epm: purchase order confirmation status",
+                    "metadata": {}
+                  },
+                  {
+                    "name": "PurchaseOrderOrderingStatus",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "$DYNAMIC.string_1",
+                    "businessName": "Epm: purchase order ordering status",
+                    "metadata": {}
+                  },
+                  {
+                    "name": "PurchaseOrderInvoicingStatus",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "$DYNAMIC.string_1",
+                    "businessName": "Epm: purchase order invoicing status",
+                    "metadata": {}
+                  },
+                  {
+                    "name": "PurchaseOrderOverallStatus",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "$DYNAMIC.string_1",
+                    "businessName": "Epm: purchase order overall status",
+                    "metadata": {}
+                  },
+                  {
+                    "name": "CreatedByUser",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "$DYNAMIC.binary_16",
+                    "businessName": "Epm: generic node key",
+                    "metadata": {
+                      "nativeType": {
+                        "datatype": "binary",
+                        "length": 16
+                      },
+                      "TemplateType": {
+                        "datatype": "string",
+                        "length": 36
+                      }
+                    }
+                  },
+                  {
+                    "name": "CreationDateTime",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "$DYNAMIC.decimal_21_7",
+                    "businessName": "Epm: created at",
+                    "metadata": {
+                      "nativeType": {
+                        "datatype": "decimal",
+                        "precision": 21,
+                        "scale": 7
+                      },
+                      "TemplateType": {
+                        "datatype": "timestamp"
+                      }
+                    }
+                  },
+                  {
+                    "name": "LastChangedByUser",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "$DYNAMIC.binary_16",
+                    "businessName": "Epm: generic node key",
+                    "metadata": {
+                      "nativeType": {
+                        "datatype": "binary",
+                        "length": 16
+                      },
+                      "TemplateType": {
+                        "datatype": "string",
+                        "length": 36
+                      }
+                    }
+                  },
+                  {
+                    "name": "LastChangedDateTime",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "$DYNAMIC.decimal_21_7",
+                    "businessName": "Epm: changed at",
+                    "metadata": {
+                      "nativeType": {
+                        "datatype": "decimal",
+                        "precision": 21,
+                        "scale": 7
+                      },
+                      "TemplateType": {
+                        "datatype": "timestamp"
+                      }
+                    }
+                  }
+                ],
+                "keys": [
+                  "PurchaseOrderUUID"
+                ]
+              },
+              "metadata": {
+                "type": "tabular",
+                "isDeltaDisabled": true,
+                "invalidColumns": [
+                  "/1DH/OPERATION"
+                ]
+              },
+              "businessName": "Epm demo: purchase order"
+            },
+            "targetObject": {
+              "name": "SEPM_I_PURCHASEORDER",
+              "definition": {
+                "columns": [
+                  {
+                    "name": "PurchaseOrderUUID",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "$DYNAMIC.binary_16",
+                    "key": true,
+                    "businessName": "Epm: generic node key",
+                    "metadata": {}
+                  },
+                  {
+                    "name": "PurchaseOrder",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "$DYNAMIC.string_10",
+                    "businessName": "Epm: purchase order number",
+                    "metadata": {}
+                  },
+                  {
+                    "name": "ShortTextGroupUUID",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "$DYNAMIC.binary_16",
+                    "businessName": "Epm: generic node key",
+                    "metadata": {}
+                  },
+                  {
+                    "name": "SupplierUUID",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "$DYNAMIC.binary_16",
+                    "businessName": "Epm: generic node key",
+                    "metadata": {}
+                  },
+                  {
+                    "name": "TransactionCurrency",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "$DYNAMIC.string_5",
+                    "businessName": "Epm: currency code",
+                    "metadata": {}
+                  },
+                  {
+                    "name": "GrossAmountInTransacCurrency",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "com.sap.core.decfloat34",
+                    "businessName": "Epm: total gross amount",
+                    "metadata": {}
+                  },
+                  {
+                    "name": "NetAmountInTransactionCurrency",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "com.sap.core.decfloat34",
+                    "businessName": "Epm: total net amount",
+                    "metadata": {}
+                  },
+                  {
+                    "name": "TaxAmountInTransactionCurrency",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "com.sap.core.decfloat34",
+                    "businessName": "Epm: total tax amount",
+                    "metadata": {}
+                  },
+                  {
+                    "name": "PurchaseOrderLifeCycleStatus",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "$DYNAMIC.string_1",
+                    "businessName": "Epm: purchase order lifecycle status",
+                    "metadata": {}
+                  },
+                  {
+                    "name": "PurchaseOrderApprovalStatus",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "$DYNAMIC.string_1",
+                    "businessName": "Epm: purchase order approval status",
+                    "metadata": {}
+                  },
+                  {
+                    "name": "PurchaseOrderConfStatus",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "$DYNAMIC.string_1",
+                    "businessName": "Epm: purchase order confirmation status",
+                    "metadata": {}
+                  },
+                  {
+                    "name": "PurchaseOrderOrderingStatus",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "$DYNAMIC.string_1",
+                    "businessName": "Epm: purchase order ordering status",
+                    "metadata": {}
+                  },
+                  {
+                    "name": "PurchaseOrderInvoicingStatus",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "$DYNAMIC.string_1",
+                    "businessName": "Epm: purchase order invoicing status",
+                    "metadata": {}
+                  },
+                  {
+                    "name": "PurchaseOrderOverallStatus",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "$DYNAMIC.string_1",
+                    "businessName": "Epm: purchase order overall status",
+                    "metadata": {}
+                  },
+                  {
+                    "name": "CreatedByUser",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "$DYNAMIC.binary_16",
+                    "businessName": "Epm: generic node key",
+                    "metadata": {}
+                  },
+                  {
+                    "name": "CreationDateTime",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "$DYNAMIC.decimal_21_7",
+                    "businessName": "Epm: created at",
+                    "metadata": {}
+                  },
+                  {
+                    "name": "LastChangedByUser",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "$DYNAMIC.binary_16",
+                    "businessName": "Epm: generic node key",
+                    "metadata": {}
+                  },
+                  {
+                    "name": "LastChangedDateTime",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "$DYNAMIC.decimal_21_7",
+                    "businessName": "Epm: changed at",
+                    "metadata": {}
+                  }
+                ],
+                "keys": [
+                  "PurchaseOrderUUID"
+                ]
+              },
+              "metadata": {
+                "isNew": false
+              },
+              "businessName": "Epm demo: purchase order"
+            }
+          },
+          {
+            "name": "replicationtask11",
+            "loadType": "INITIAL",
+            "priority": 50,
+            "truncate": false,
+            "sourceObject": {
+              "name": "SEPM_I_PURCHASEORDERITEM",
+              "definition": {
+                "columns": [
+                  {
+                    "name": "PurchaseOrderItemUUID",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "$DYNAMIC.binary_16",
+                    "key": true,
+                    "businessName": "Epm: generic node key",
+                    "metadata": {
+                      "nativeType": {
+                        "datatype": "binary",
+                        "length": 16
+                      },
+                      "TemplateType": {
+                        "datatype": "string",
+                        "length": 36
+                      }
+                    }
+                  },
+                  {
+                    "name": "PurchaseOrderUUID",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "$DYNAMIC.binary_16",
+                    "businessName": "Epm: generic node key",
+                    "metadata": {
+                      "nativeType": {
+                        "datatype": "binary",
+                        "length": 16
+                      },
+                      "TemplateType": {
+                        "datatype": "string",
+                        "length": 36
+                      }
+                    }
+                  },
+                  {
+                    "name": "PurchaseOrderItem",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "$DYNAMIC.string_10",
+                    "businessName": "Epm: purchase order item position",
+                    "metadata": {}
+                  },
+                  {
+                    "name": "ProductUUID",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "$DYNAMIC.binary_16",
+                    "businessName": "Epm: generic node key",
+                    "metadata": {
+                      "nativeType": {
+                        "datatype": "binary",
+                        "length": 16
+                      },
+                      "TemplateType": {
+                        "datatype": "string",
+                        "length": 36
+                      }
+                    }
+                  },
+                  {
+                    "name": "ShortTextGroupUUID",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "$DYNAMIC.binary_16",
+                    "businessName": "Epm: generic node key",
+                    "metadata": {
+                      "nativeType": {
+                        "datatype": "binary",
+                        "length": 16
+                      },
+                      "TemplateType": {
+                        "datatype": "string",
+                        "length": 36
+                      }
+                    }
+                  },
+                  {
+                    "name": "TransactionCurrency",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "$DYNAMIC.string_5",
+                    "businessName": "Epm: currency code",
+                    "metadata": {}
+                  },
+                  {
+                    "name": "GrossAmountInTransacCurrency",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "com.sap.core.decfloat34",
+                    "businessName": "Epm: total gross amount",
+                    "metadata": {}
+                  },
+                  {
+                    "name": "NetAmountInTransactionCurrency",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "com.sap.core.decfloat34",
+                    "businessName": "Epm: total net amount",
+                    "metadata": {}
+                  },
+                  {
+                    "name": "TaxAmountInTransactionCurrency",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "com.sap.core.decfloat34",
+                    "businessName": "Epm: total tax amount",
+                    "metadata": {}
+                  }
+                ],
+                "keys": [
+                  "PurchaseOrderItemUUID"
+                ]
+              },
+              "metadata": {
+                "type": "tabular",
+                "isDeltaDisabled": true,
+                "invalidColumns": [
+                  "/1DH/OPERATION"
+                ]
+              },
+              "businessName": "Epm demo: purchase order item"
+            },
+            "targetObject": {
+              "name": "SEPM_I_PURCHASEORDERITEM",
+              "definition": {
+                "columns": [
+                  {
+                    "name": "PurchaseOrderItemUUID",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "$DYNAMIC.binary_16",
+                    "key": true,
+                    "businessName": "Epm: generic node key",
+                    "metadata": {}
+                  },
+                  {
+                    "name": "PurchaseOrderUUID",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "$DYNAMIC.binary_16",
+                    "businessName": "Epm: generic node key",
+                    "metadata": {}
+                  },
+                  {
+                    "name": "PurchaseOrderItem",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "$DYNAMIC.string_10",
+                    "businessName": "Epm: purchase order item position",
+                    "metadata": {}
+                  },
+                  {
+                    "name": "ProductUUID",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "$DYNAMIC.binary_16",
+                    "businessName": "Epm: generic node key",
+                    "metadata": {}
+                  },
+                  {
+                    "name": "ShortTextGroupUUID",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "$DYNAMIC.binary_16",
+                    "businessName": "Epm: generic node key",
+                    "metadata": {}
+                  },
+                  {
+                    "name": "TransactionCurrency",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "$DYNAMIC.string_5",
+                    "businessName": "Epm: currency code",
+                    "metadata": {}
+                  },
+                  {
+                    "name": "GrossAmountInTransacCurrency",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "com.sap.core.decfloat34",
+                    "businessName": "Epm: total gross amount",
+                    "metadata": {}
+                  },
+                  {
+                    "name": "NetAmountInTransactionCurrency",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "com.sap.core.decfloat34",
+                    "businessName": "Epm: total net amount",
+                    "metadata": {}
+                  },
+                  {
+                    "name": "TaxAmountInTransactionCurrency",
+                    "vflow.type": "scalar",
+                    "vtype-ID": "com.sap.core.decfloat34",
+                    "businessName": "Epm: total tax amount",
+                    "metadata": {}
+                  }
+                ],
+                "keys": [
+                  "PurchaseOrderItemUUID"
+                ]
+              },
+              "metadata": {
+                "isNew": false
+              },
+              "businessName": "Epm demo: purchase order item"
+            }
+          }
+        ],
+        "replicationTaskSetting": {
+          "hasSkipMappingCapability": true
+        },
+        "replicationFlowSetting": {
+          "ABAPcontentTypeDisabled": false,
+          "ABAPcontentType": "Native Type"
+        },
+        "deltaLoadTrigger": "ON_DELTA_INTERVAL"
+      },
+      "sources": {},
+      "targets": {
+        "SEPM_I_PURCHASEORDER": {
+          "elements": {
+            "PurchaseOrderUUID": {},
+            "PurchaseOrder": {},
+            "ShortTextGroupUUID": {},
+            "SupplierUUID": {},
+            "TransactionCurrency": {},
+            "GrossAmountInTransacCurrency": {},
+            "NetAmountInTransactionCurrency": {},
+            "TaxAmountInTransactionCurrency": {},
+            "PurchaseOrderLifeCycleStatus": {},
+            "PurchaseOrderApprovalStatus": {},
+            "PurchaseOrderConfStatus": {},
+            "PurchaseOrderOrderingStatus": {},
+            "PurchaseOrderInvoicingStatus": {},
+            "PurchaseOrderOverallStatus": {},
+            "CreatedByUser": {},
+            "CreationDateTime": {},
+            "LastChangedByUser": {},
+            "LastChangedDateTime": {}
+          }
+        },
+        "SEPM_I_PURCHASEORDERITEM": {
+          "elements": {
+            "PurchaseOrderItemUUID": {},
+            "PurchaseOrderUUID": {},
+            "PurchaseOrderItem": {},
+            "ProductUUID": {},
+            "ShortTextGroupUUID": {},
+            "TransactionCurrency": {},
+            "GrossAmountInTransacCurrency": {},
+            "NetAmountInTransactionCurrency": {},
+            "TaxAmountInTransactionCurrency": {}
+          }
+        }
+      },
+      "connections": {
+        "S4H_ABAP": {}
+      }
+    }
+  }
+}

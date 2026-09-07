@@ -1,0 +1,775 @@
+{
+  "definitions": {
+    "IL_PRODUCT_MATCH": {
+      "kind": "entity",
+      "@EndUserText.label": "Product Matching",
+      "@ObjectModel.modelingPattern": {
+        "#": "DATA_STRUCTURE"
+      },
+      "@ObjectModel.supportedCapabilities": [
+        {
+          "#": "DATA_STRUCTURE"
+        },
+        {
+          "#": "SQL_DATA_SOURCE"
+        }
+      ],
+      "elements": {
+        "IncomingID": {
+          "@EndUserText.label": "IncomingID",
+          "type": "cds.String",
+          "length": 5000,
+          "key": true,
+          "notNull": true
+        },
+        "SupplierProductName": {
+          "@EndUserText.label": "SupplierProductName",
+          "type": "cds.String",
+          "length": 5000
+        },
+        "OrderQty": {
+          "@EndUserText.label": "OrderQty",
+          "type": "cds.Integer64"
+        },
+        "ProductName": {
+          "@EndUserText.label": "ProductName",
+          "type": "cds.String",
+          "length": 5000
+        }
+      },
+      "@DataWarehouse.intelligentDataTransform": true,
+      "@cds.persistence.exists": true
+    }
+  },
+  "intelligentLookups": {
+    "IL_PRODUCT_MATCH": {
+      "version": "1.2.0",
+      "@EndUserText.label": "Product Matching",
+      "contents": {
+        "properties": {},
+        "description": "Product Matching",
+        "processes": {
+          "input1": {
+            "component": "com.sap.database.table.consumer",
+            "metadata": {
+              "label": "incoming_products",
+              "x": 12,
+              "y": 12,
+              "height": 64,
+              "width": 128,
+              "displayLabel": "incoming_products",
+              "displayName": "incoming_products",
+              "name": "incoming_products",
+              "isNew": true,
+              "isExecutebuttonClicked": true,
+              "rowsCount": "20",
+              "config": {
+                "service": "HANA",
+                "hanaConnection": {
+                  "configurationType": "Configuration Manager",
+                  "connectionID": "$DWC"
+                },
+                "qualifiedName": "incoming_products",
+                "dwcEntity": "incoming_products",
+                "mode": "append",
+                "remoteObjectType": "TABLE",
+                "idtConfig": {
+                  "idtSourceType": "Input",
+                  "keyColumns": [
+                    "IncomingID"
+                  ],
+                  "pairingColumns": [
+                    "SupplierProductName"
+                  ]
+                }
+              },
+              "outports": [
+                {
+                  "name": "outTable",
+                  "type": "table",
+                  "vtype-ID": "$INLINE.input1_outTable"
+                }
+              ]
+            }
+          },
+          "lookup1": {
+            "component": "com.sap.database.table.consumer",
+            "metadata": {
+              "label": "master_products",
+              "x": 12,
+              "y": 116,
+              "height": 64,
+              "width": 128,
+              "displayLabel": "master_products",
+              "displayName": "master_products",
+              "name": "master_products",
+              "isNew": true,
+              "isExecutebuttonClicked": true,
+              "rowsCount": "10",
+              "config": {
+                "service": "HANA",
+                "hanaConnection": {
+                  "configurationType": "Configuration Manager",
+                  "connectionID": "$DWC"
+                },
+                "qualifiedName": "master_products",
+                "dwcEntity": "master_products",
+                "mode": "append",
+                "remoteObjectType": "TABLE",
+                "idtConfig": {
+                  "idtSourceType": "Lookup",
+                  "keyColumns": [
+                    "ProductID"
+                  ],
+                  "pairingColumns": [
+                    "ProductID"
+                  ],
+                  "returnColumns": [
+                    "ProductName"
+                  ]
+                }
+              },
+              "outports": [
+                {
+                  "name": "outTable",
+                  "type": "table",
+                  "vtype-ID": "$INLINE.lookup1_outTable"
+                }
+              ]
+            }
+          },
+          "outputview1": {
+            "component": "com.sap.intelligentlookup.outputview",
+            "metadata": {
+              "label": "Product Matching",
+              "x": 665.499997138977,
+              "y": 64,
+              "height": 64,
+              "width": 128,
+              "displayLabel": "Product Matching",
+              "displayName": "IL_PRODUCT_MATCH",
+              "name": "IL_PRODUCT_MATCH",
+              "isNew": true,
+              "isExecutebuttonClicked": true,
+              "rowsCount": "20",
+              "config": {
+                "service": "HANA",
+                "hanaConnection": {
+                  "configurationType": "Configuration Manager",
+                  "connectionID": "$DWC"
+                },
+                "qualifiedName": "IL_PRODUCT_MATCH",
+                "dwcEntity": "IL_PRODUCT_MATCH",
+                "mode": "append",
+                "remoteObjectType": "VIEW"
+              },
+              "inports": [
+                {
+                  "name": "inTable",
+                  "type": "table",
+                  "vtype-ID": "$INLINE.outputview1_inTable"
+                }
+              ]
+            }
+          },
+          "rule1": {
+            "component": "com.sap.intelligentlookup.rule",
+            "metadata": {
+              "label": "Rule",
+              "x": 208.49999904632568,
+              "y": 52,
+              "height": 88,
+              "width": 160,
+              "isNew": true,
+              "nodeType": "Rule",
+              "config": {
+                "matchDefinitions": {
+                  "strategy": {
+                    "type": "Exact"
+                  },
+                  "matchColumns": [
+                    {
+                      "inputColumn": {
+                        "name": "SupplierProductName",
+                        "calculated": false
+                      },
+                      "lookupColumn": {
+                        "name": "ProductName",
+                        "calculated": false
+                      }
+                    }
+                  ],
+                  "caseSensitive": true,
+                  "trimSpaces": true
+                },
+                "filters": {
+                  "input": {
+                    "expr": "",
+                    "invalidExpr": false,
+                    "errorExpr": ""
+                  },
+                  "lookup": {
+                    "expr": "",
+                    "invalidExpr": false,
+                    "errorExpr": ""
+                  }
+                }
+              },
+              "inports": [
+                {
+                  "name": "inTable1",
+                  "type": "table",
+                  "vtype-ID": "$INLINE.input1_outTable"
+                },
+                {
+                  "name": "inTable2",
+                  "type": "table",
+                  "vtype-ID": "$INLINE.lookup1_outTable"
+                }
+              ]
+            }
+          },
+          "rule2": {
+            "component": "com.sap.intelligentlookup.rule",
+            "metadata": {
+              "label": "Rule",
+              "x": 436.99999809265137,
+              "y": 52,
+              "height": 88,
+              "width": 160,
+              "isNew": true,
+              "config": {
+                "matchDefinitions": {
+                  "strategy": {
+                    "type": "Fuzzy"
+                  },
+                  "searchOptions": {
+                    "fuzzyThreshold": {
+                      "trustedMatch": 1,
+                      "reviewMatch": 0.8
+                    },
+                    "similarCalculationMode": "symmetricsearch"
+                  },
+                  "searchColumns": {
+                    "inputColumns": [
+                      {
+                        "name": "SupplierProductName",
+                        "position": 1,
+                        "calculated": false
+                      }
+                    ],
+                    "lookupColumns": [
+                      {
+                        "name": "ProductName",
+                        "position": 1,
+                        "calculated": false
+                      }
+                    ]
+                  },
+                  "fuzzyMultipleMatchProcessingMode": "autoSelect"
+                },
+                "filters": {
+                  "input": {
+                    "expr": "",
+                    "invalidExpr": false,
+                    "errorExpr": ""
+                  },
+                  "lookup": {
+                    "expr": "",
+                    "invalidExpr": false,
+                    "errorExpr": ""
+                  }
+                }
+              }
+            },
+            "sourceRuleId": "rule1",
+            "sourceBucket": "noMatch",
+            "lookupScope": "allRecords"
+          }
+        },
+        "groups": [],
+        "connections": [
+          {
+            "metadata": {
+              "points": "142.5,44 175.49999952316284,44 175.49999952316284,87 204.99999904632568,87"
+            },
+            "src": {
+              "port": "outTable",
+              "process": "input1"
+            },
+            "tgt": {
+              "port": "inTable1",
+              "process": "rule1"
+            }
+          },
+          {
+            "metadata": {
+              "points": "142.5,148 175.49999952316284,148 175.49999952316284,105 204.99999904632568,105"
+            },
+            "src": {
+              "port": "outTable",
+              "process": "lookup1"
+            },
+            "tgt": {
+              "port": "inTable2",
+              "process": "rule1"
+            }
+          },
+          {
+            "metadata": {
+              "points": "371.9999990463257,69 403.9999985694885,69 403.9999985694885,23.000000476837158 632.4999976158142,23.000000476837158 632.4999976158142,96 661.999997138977,96"
+            },
+            "src": {
+              "port": "outTable0",
+              "process": "rule1"
+            },
+            "tgt": {
+              "port": "inTable",
+              "process": "outputview1"
+            }
+          },
+          {
+            "metadata": {
+              "points": "371.9999990463257,87 403.9999985694885,87 403.9999985694885,23.000000476837158 632.4999976158142,23.000000476837158 632.4999976158142,96 661.999997138977,96"
+            },
+            "src": {
+              "port": "outTable1",
+              "process": "rule1"
+            },
+            "tgt": {
+              "port": "inTable",
+              "process": "outputview1"
+            }
+          },
+          {
+            "metadata": {
+              "points": "371.9999990463257,123 403.9999985694885,123 403.9999985694885,167.99999952316284 632.4999976158142,167.99999952316284 632.4999976158142,96 661.999997138977,96"
+            },
+            "src": {
+              "port": "outTable3",
+              "process": "rule1"
+            },
+            "tgt": {
+              "port": "inTable",
+              "process": "outputview1"
+            }
+          },
+          {
+            "metadata": {
+              "points": "371.9999990463257,105 403.9999985694885,105 403.9999985694885,96 433.49999809265137,96"
+            },
+            "src": {
+              "port": "outTable2",
+              "process": "rule1"
+            },
+            "tgt": {
+              "port": "inTable1",
+              "process": "rule2"
+            }
+          },
+          {
+            "metadata": {
+              "points": "600.4999980926514,78 632.4999976158142,78 632.4999976158142,96 661.999997138977,96"
+            },
+            "src": {
+              "port": "outTable0",
+              "process": "rule2"
+            },
+            "tgt": {
+              "port": "inTable",
+              "process": "outputview1"
+            }
+          },
+          {
+            "metadata": {
+              "points": "600.4999980926514,96 661.999997138977,96"
+            },
+            "src": {
+              "port": "outTable1",
+              "process": "rule2"
+            },
+            "tgt": {
+              "port": "inTable",
+              "process": "outputview1"
+            }
+          },
+          {
+            "metadata": {
+              "points": "600.4999980926514,114 632.4999976158142,114 632.4999976158142,96 661.999997138977,96"
+            },
+            "src": {
+              "port": "outTable2",
+              "process": "rule2"
+            },
+            "tgt": {
+              "port": "inTable",
+              "process": "outputview1"
+            }
+          }
+        ],
+        "inports": {},
+        "outports": {},
+        "vTypes": {
+          "scalar": {
+            "string_5000": {
+              "name": "string_5000",
+              "description": "String(5000)",
+              "vflow.type": "scalar",
+              "template": "string",
+              "value.length": 5000
+            },
+            "decimal_38_19": {
+              "name": "decimal_38_19",
+              "description": "Decimal(38,19)",
+              "vflow.type": "scalar",
+              "template": "decimal",
+              "value.precision": 38,
+              "value.scale": 19
+            }
+          },
+          "structure": {},
+          "table": {
+            "input1_outTable": {
+              "name": "input1_outTable",
+              "vflow.type": "table",
+              "rows": {
+                "components": [
+                  {
+                    "IncomingID": {
+                      "vflow.type": "scalar",
+                      "vtype-ID": "$INLINE.string_5000"
+                    }
+                  },
+                  {
+                    "SupplierProductName": {
+                      "vflow.type": "scalar",
+                      "vtype-ID": "$INLINE.string_5000"
+                    }
+                  },
+                  {
+                    "OrderQty": {
+                      "vflow.type": "scalar",
+                      "vtype-ID": "com.sap.core.int64"
+                    }
+                  }
+                ]
+              }
+            },
+            "lookup1_outTable": {
+              "name": "lookup1_outTable",
+              "vflow.type": "table",
+              "rows": {
+                "components": [
+                  {
+                    "ProductID": {
+                      "vflow.type": "scalar",
+                      "vtype-ID": "$INLINE.string_5000"
+                    }
+                  },
+                  {
+                    "ProductName": {
+                      "vflow.type": "scalar",
+                      "vtype-ID": "$INLINE.string_5000"
+                    }
+                  },
+                  {
+                    "Category": {
+                      "vflow.type": "scalar",
+                      "vtype-ID": "$INLINE.string_5000"
+                    }
+                  },
+                  {
+                    "UnitPrice": {
+                      "vflow.type": "scalar",
+                      "vtype-ID": "$INLINE.decimal_38_19"
+                    }
+                  }
+                ]
+              }
+            },
+            "rule1_outTable0": {
+              "name": "rule1_outTable0",
+              "vflow.type": "table",
+              "rows": {
+                "components": []
+              }
+            },
+            "rule1_outTable2": {
+              "name": "rule1_outTable2",
+              "vflow.type": "table",
+              "rows": {
+                "components": []
+              }
+            },
+            "outputview1_inTable": {
+              "name": "outputview1_inTable",
+              "vflow.type": "table",
+              "rows": {
+                "components": [
+                  {
+                    "IncomingID": {
+                      "vflow.type": "scalar",
+                      "vtype-ID": "$INLINE.string_5000"
+                    }
+                  },
+                  {
+                    "SupplierProductName": {
+                      "vflow.type": "scalar",
+                      "vtype-ID": "$INLINE.string_5000"
+                    }
+                  },
+                  {
+                    "OrderQty": {
+                      "vflow.type": "scalar",
+                      "vtype-ID": "com.sap.core.int64"
+                    }
+                  },
+                  {
+                    "ProductName": {
+                      "vflow.type": "scalar",
+                      "vtype-ID": "$INLINE.string_5000"
+                    }
+                  }
+                ]
+              }
+            },
+            "$INLINE.rule1_outTable0": {
+              "name": "$INLINE.rule1_outTable0",
+              "vflow.type": "table",
+              "rows": {
+                "components": []
+              }
+            },
+            "$INLINE.rule1_outTable1": {
+              "name": "$INLINE.rule1_outTable1",
+              "vflow.type": "table",
+              "rows": {
+                "components": []
+              }
+            },
+            "$INLINE.rule1_outTable2": {
+              "name": "$INLINE.rule1_outTable2",
+              "vflow.type": "table",
+              "rows": {
+                "components": []
+              }
+            },
+            "$INLINE.rule1_outTable3": {
+              "name": "$INLINE.rule1_outTable3",
+              "vflow.type": "table",
+              "rows": {
+                "components": []
+              }
+            }
+          }
+        }
+      },
+      "artifacts": {
+        "inputEntity": "incoming_products",
+        "lookupEntity": "master_products",
+        "returnColumns": [
+          "ProductName"
+        ],
+        "pairingColumns": {
+          "inputEntity": [
+            "SupplierProductName"
+          ],
+          "lookupEntity": [
+            "ProductID"
+          ]
+        },
+        "keyColumns": {
+          "inputEntity": [
+            "IncomingID"
+          ],
+          "lookupEntity": [
+            "ProductID"
+          ]
+        },
+        "definitions": {
+          "incoming_products": {
+            "kind": "entity",
+            "@ObjectModel.supportedCapabilities": [
+              {
+                "#": "DATA_STRUCTURE"
+              }
+            ],
+            "elements": {
+              "IncomingID": {
+                "@EndUserText.label": "IncomingID",
+                "type": "cds.String",
+                "length": 5000,
+                "key": true,
+                "notNull": true
+              },
+              "SupplierProductName": {
+                "@EndUserText.label": "SupplierProductName",
+                "type": "cds.String",
+                "length": 5000
+              },
+              "OrderQty": {
+                "@EndUserText.label": "OrderQty",
+                "type": "cds.Integer64"
+              }
+            },
+            "@EndUserText.label": "incoming_products",
+            "@ObjectModel.modelingPattern": {
+              "#": "DATA_STRUCTURE"
+            },
+            "@DataWarehouse.dataSource.schema": "FINCLOSE_STAGING#WRG_HCW9J3V0VNF4Z1SW",
+            "@DataWarehouse.dataSource.entity": "sap.dataset.conf_d4e7d6a4-2530-4296-bf00-f1e5e40120c8_view",
+            "_meta": {
+              "dependencies": {
+                "folderAssignment": null
+              }
+            }
+          },
+          "master_products": {
+            "kind": "entity",
+            "@ObjectModel.supportedCapabilities": [
+              {
+                "#": "DATA_STRUCTURE"
+              }
+            ],
+            "elements": {
+              "ProductID": {
+                "@EndUserText.label": "ProductID",
+                "type": "cds.String",
+                "length": 5000,
+                "key": true,
+                "notNull": true
+              },
+              "ProductName": {
+                "@EndUserText.label": "ProductName",
+                "type": "cds.String",
+                "length": 5000
+              },
+              "Category": {
+                "@EndUserText.label": "Category",
+                "type": "cds.String",
+                "length": 5000
+              },
+              "UnitPrice": {
+                "@EndUserText.label": "UnitPrice",
+                "precision": 38,
+                "scale": 19,
+                "type": "cds.Decimal"
+              }
+            },
+            "@EndUserText.label": "master_products",
+            "@ObjectModel.modelingPattern": {
+              "#": "DATA_STRUCTURE"
+            },
+            "@DataWarehouse.dataSource.schema": "FINCLOSE_STAGING#WRG_HCW9J3V0VNF4Z1SW",
+            "@DataWarehouse.dataSource.entity": "sap.dataset.conf_fbad2f08-eaef-4acb-8c69-20c2eded6e69_view",
+            "_meta": {
+              "dependencies": {
+                "folderAssignment": null
+              }
+            }
+          }
+        },
+        "columnAliases": {
+          "inputEntity": {},
+          "lookupEntity": {}
+        },
+        "rules": {
+          "rule1": {
+            "ruleSource": {
+              "sourceType": "Table"
+            },
+            "ruleConfig": {
+              "matchDefinitions": {
+                "strategy": {
+                  "type": "Exact"
+                },
+                "matchColumns": [
+                  {
+                    "inputColumn": {
+                      "name": "SupplierProductName",
+                      "calculated": false
+                    },
+                    "lookupColumn": {
+                      "name": "ProductName",
+                      "calculated": false
+                    }
+                  }
+                ],
+                "caseSensitive": true,
+                "trimSpaces": true
+              },
+              "filters": {
+                "input": {
+                  "expr": "",
+                  "invalidExpr": false,
+                  "errorExpr": ""
+                },
+                "lookup": {
+                  "expr": "",
+                  "invalidExpr": false,
+                  "errorExpr": ""
+                }
+              }
+            }
+          },
+          "rule2": {
+            "ruleSource": {
+              "sourceType": "Rule",
+              "sourceRuleId": "rule1",
+              "sourceBucket": "noMatch",
+              "lookupScope": "allRecords"
+            },
+            "ruleConfig": {
+              "matchDefinitions": {
+                "strategy": {
+                  "type": "Fuzzy"
+                },
+                "searchOptions": {
+                  "fuzzyThreshold": {
+                    "trustedMatch": 1,
+                    "reviewMatch": 0.8
+                  },
+                  "similarCalculationMode": "symmetricsearch"
+                },
+                "searchColumns": {
+                  "inputColumns": [
+                    {
+                      "name": "SupplierProductName",
+                      "position": 1,
+                      "calculated": false
+                    }
+                  ],
+                  "lookupColumns": [
+                    {
+                      "name": "ProductName",
+                      "position": 1,
+                      "calculated": false
+                    }
+                  ]
+                },
+                "fuzzyMultipleMatchProcessingMode": "autoSelect"
+              },
+              "filters": {
+                "input": {
+                  "expr": "",
+                  "invalidExpr": false,
+                  "errorExpr": ""
+                },
+                "lookup": {
+                  "expr": "",
+                  "invalidExpr": false,
+                  "errorExpr": ""
+                }
+              }
+            }
+          }
+        },
+        "outputViewProperties": {
+          "includeUnmatchedRecords": true,
+          "includeUnmatchedRecordColumn": false,
+          "includeReviewMatches": true
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "definitions": {
+    "SALES_CDC_DEMO": {
+      "kind": "entity",
+      "@EndUserText.label": "SALES_CDC_DEMO",
+      "@ObjectModel.modelingPattern": {
+        "#": "DATA_STRUCTURE"
+      },
+      "@ObjectModel.supportedCapabilities": [
+        {
+          "#": "DATA_STRUCTURE"
+        }
+      ],
+      "@DataWarehouse.delta": {
+        "type": {
+          "#": "ACTIVE"
+        },
+        "deltaFromEntities": [
+          "SALES_CDC_DEMO_Delta"
+        ]
+      },
+      "elements": {
+        "AMOUNT": {
+          "@EndUserText.label": "AMOUNT",
+          "type": "cds.Integer"
+        },
+        "TXN_ID": {
+          "@EndUserText.label": "TXN_ID",
+          "type": "cds.String",
+          "length": 20,
+          "key": true,
+          "notNull": true
+        },
+        "MATERIAL_CODE": {
+          "@EndUserText.label": "MATERIAL_CODE",
+          "type": "cds.String",
+          "length": 40
+        },
+        "AMOUNT_VALUE": {
+          "@EndUserText.label": "AMOUNT_VALUE",
+          "type": "cds.Integer"
+        }
+      },
+      "@DataWarehouse.consumption.external": false,
+      "query": {
+        "SELECT": {
+          "from": {
+            "ref": [
+              "SALES_CDC_DEMO_Delta"
+            ]
+          },
+          "columns": [
+            {
+              "ref": [
+                "AMOUNT"
+              ]
+            },
+            {
+              "ref": [
+                "TXN_ID"
+              ]
+            },
+            {
+              "ref": [
+                "MATERIAL_CODE"
+              ]
+            },
+            {
+              "ref": [
+                "AMOUNT_VALUE"
+              ]
+            }
+          ],
+          "where": [
+            {
+              "ref": [
+                "TRANSACTION_ID"
+              ]
+            },
+            "not",
+            "in",
+            {
+              "list": [
+                {
+                  "val": "D"
+                },
+                {
+                  "val": "M"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "@DataWarehouse.repository.technicalType": {
+        "#": "DWC_LOCAL_TABLE"
+      }
+    }
+  }
+}

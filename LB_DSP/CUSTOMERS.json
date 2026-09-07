@@ -1,0 +1,35 @@
+{
+  "definitions": {
+    "CUSTOMERS": {
+      "kind": "entity",
+      "@ObjectModel.modelingPattern": {
+        "#": "DATA_STRUCTURE"
+      },
+      "@ObjectModel.supportedCapabilities": [
+        {
+          "#": "DATA_STRUCTURE"
+        }
+      ],
+      "@DataWarehouse.dataSource.schema": "LB_DSP#WRG_LEALHEANZDRJ3TG6",
+      "@DataWarehouse.dataSource.entity": "sap.dataset.conf_b66f8326-1c56-4f24-894b-fcc1436d2b1b_view",
+      "@EndUserText.label": "CUSTOMERS",
+      "elements": {
+        "CUSTOMER_ID": {
+          "type": "cds.String",
+          "length": 5000,
+          "@EndUserText.label": "CUSTOMER_ID"
+        },
+        "CUSTOMER_NAME": {
+          "type": "cds.String",
+          "length": 5000,
+          "@EndUserText.label": "CUSTOMER_NAME"
+        },
+        "REGION": {
+          "type": "cds.String",
+          "length": 5000,
+          "@EndUserText.label": "REGION"
+        }
+      }
+    }
+  }
+}

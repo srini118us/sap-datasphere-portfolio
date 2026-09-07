@@ -1,0 +1,137 @@
+{
+  "definitions": {
+    "TF_PO_HEADER_ITEM": {
+      "elements": {
+        "PurchaseOrderItemUUID": {
+          "@EndUserText.label": "Epm: generic node key",
+          "type": "cds.Binary",
+          "key": true,
+          "length": 16,
+          "notNull": true
+        },
+        "PurchaseOrderItem": {
+          "@EndUserText.label": "Epm: purchase order item position",
+          "type": "cds.String",
+          "key": false,
+          "length": 10
+        },
+        "ProductUUID": {
+          "@EndUserText.label": "Epm: generic node key",
+          "type": "cds.Binary",
+          "key": false,
+          "length": 16
+        },
+        "ShortTextGroupUUID": {
+          "@EndUserText.label": "Epm: generic node key",
+          "type": "cds.Binary",
+          "key": false,
+          "length": 16
+        },
+        "TransactionCurrency": {
+          "@EndUserText.label": "Epm: currency code",
+          "type": "cds.String",
+          "key": false,
+          "length": 5
+        },
+        "GrossAmountInTransacCurrency": {
+          "@EndUserText.label": "Epm: total gross amount",
+          "type": "cds.DecimalFloat",
+          "key": false
+        },
+        "NetAmountInTransactionCurrency": {
+          "@EndUserText.label": "Epm: total net amount",
+          "type": "cds.DecimalFloat",
+          "key": false
+        },
+        "TaxAmountInTransactionCurrency": {
+          "@EndUserText.label": "Epm: total tax amount",
+          "type": "cds.DecimalFloat",
+          "key": false
+        },
+        "PurchaseOrderUUID": {
+          "@EndUserText.label": "Epm: generic node key",
+          "type": "cds.Binary",
+          "key": true,
+          "length": 16,
+          "notNull": true
+        },
+        "PurchaseOrder": {
+          "@EndUserText.label": "Epm: purchase order number",
+          "type": "cds.String",
+          "key": false,
+          "length": 10
+        },
+        "SupplierUUID": {
+          "@EndUserText.label": "Epm: generic node key",
+          "type": "cds.Binary",
+          "key": false,
+          "length": 16
+        },
+        "PurchaseOrderLifeCycleStatus": {
+          "@EndUserText.label": "Epm: purchase order lifecycle status",
+          "type": "cds.String",
+          "key": false,
+          "length": 1
+        },
+        "PurchaseOrderApprovalStatus": {
+          "@EndUserText.label": "Epm: purchase order approval status",
+          "type": "cds.String",
+          "key": false,
+          "length": 1
+        },
+        "PurchaseOrderConfStatus": {
+          "@EndUserText.label": "Epm: purchase order confirmation status",
+          "type": "cds.String",
+          "key": false,
+          "length": 1
+        },
+        "PurchaseOrderOrderingStatus": {
+          "@EndUserText.label": "Epm: purchase order ordering status",
+          "type": "cds.String",
+          "key": false,
+          "length": 1
+        },
+        "PurchaseOrderInvoicingStatus": {
+          "@EndUserText.label": "Epm: purchase order invoicing status",
+          "type": "cds.String",
+          "key": false,
+          "length": 1
+        },
+        "PurchaseOrderOverallStatus": {
+          "@EndUserText.label": "Epm: purchase order overall status",
+          "type": "cds.String",
+          "key": false,
+          "length": 1
+        },
+        "CreatedByUser": {
+          "@EndUserText.label": "Epm: generic node key",
+          "type": "cds.Binary",
+          "key": false,
+          "length": 16
+        },
+        "CreationDateTime": {
+          "@EndUserText.label": "Epm: created at",
+          "type": "cds.Decimal",
+          "key": false,
+          "precision": 21,
+          "scale": 7
+        },
+        "LastChangedByUser": {
+          "@EndUserText.label": "Epm: generic node key",
+          "type": "cds.Binary",
+          "key": false,
+          "length": 16
+        },
+        "LastChangedDateTime": {
+          "@EndUserText.label": "Epm: changed at",
+          "type": "cds.Decimal",
+          "key": false,
+          "precision": 21,
+          "scale": 7
+        }
+      },
+      "kind": "entity",
+      "@EndUserText.label": "TF_PO_HEADER_ITEM"
+    }
+  }
+}

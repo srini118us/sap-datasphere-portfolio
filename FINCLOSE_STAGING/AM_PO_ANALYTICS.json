@@ -1,0 +1,397 @@
+{
+  "definitions": {
+    "AM_PO_ANALYTICS": {
+      "kind": "entity",
+      "@EndUserText.label": "Purchase Order Analytics",
+      "elements": {
+        "PurchaseOrderItemUUID": {
+          "@EndUserText.label": "Epm: generic node key"
+        },
+        "PurchaseOrderItem": {
+          "@EndUserText.label": "Epm: purchase order item position"
+        },
+        "TransactionCurrency": {
+          "@EndUserText.label": "Epm: currency code"
+        },
+        "PurchaseOrderUUID": {
+          "@EndUserText.label": "Epm: generic node key"
+        },
+        "PurchaseOrder": {
+          "@EndUserText.label": "Epm: purchase order number"
+        },
+        "PurchaseOrderLifeCycleStatus": {
+          "@EndUserText.label": "Epm: purchase order lifecycle status"
+        },
+        "PurchaseOrderApprovalStatus": {
+          "@EndUserText.label": "Epm: purchase order approval status"
+        },
+        "PurchaseOrderConfStatus": {
+          "@EndUserText.label": "Epm: purchase order confirmation status"
+        },
+        "PurchaseOrderOrderingStatus": {
+          "@EndUserText.label": "Epm: purchase order ordering status"
+        },
+        "PurchaseOrderInvoicingStatus": {
+          "@EndUserText.label": "Epm: purchase order invoicing status"
+        },
+        "PurchaseOrderOverallStatus": {
+          "@EndUserText.label": "Epm: purchase order overall status"
+        },
+        "CreationDateTime": {
+          "@EndUserText.label": "Epm: created at"
+        },
+        "LastChangedDateTime": {
+          "@EndUserText.label": "Epm: changed at"
+        },
+        "GrossAmountInTransacCurrency": {
+          "@EndUserText.label": "Epm: total gross amount",
+          "@AnalyticsDetails.measureType": {
+            "#": "BASE"
+          }
+        },
+        "NetAmountInTransactionCurrency": {
+          "@EndUserText.label": "Epm: total net amount",
+          "@AnalyticsDetails.measureType": {
+            "#": "BASE"
+          }
+        },
+        "TaxAmountInTransactionCurrency": {
+          "@EndUserText.label": "Epm: total tax amount",
+          "@AnalyticsDetails.measureType": {
+            "#": "BASE"
+          }
+        }
+      },
+      "@ObjectModel.modelingPattern": {
+        "#": "ANALYTICAL_CUBE"
+      },
+      "@ObjectModel.supportedCapabilities": [
+        {
+          "#": "ANALYTICAL_PROVIDER"
+        },
+        {
+          "#": "_DWC_AM_EDITABLE_DIMENSION_NAMES"
+        }
+      ],
+      "@DataWarehouse.editorType": {
+        "#": "DWCQueryModelEditor"
+      },
+      "@DataWarehouse.hanaCatalog.viewType": {
+        "#": "CALCULATION_VIEW"
+      },
+      "query": {
+        "SELECT": {
+          "from": {
+            "ref": [
+              "V_PO_HEADER_ITEM"
+            ],
+            "as": "V_PO_HEADER_ITEM"
+          },
+          "columns": [
+            {
+              "ref": [
+                "V_PO_HEADER_ITEM",
+                "PurchaseOrderItemUUID"
+              ],
+              "as": "PurchaseOrderItemUUID"
+            },
+            {
+              "ref": [
+                "V_PO_HEADER_ITEM",
+                "PurchaseOrderItem"
+              ],
+              "as": "PurchaseOrderItem"
+            },
+            {
+              "ref": [
+                "V_PO_HEADER_ITEM",
+                "TransactionCurrency"
+              ],
+              "as": "TransactionCurrency"
+            },
+            {
+              "ref": [
+                "V_PO_HEADER_ITEM",
+                "PurchaseOrderUUID"
+              ],
+              "as": "PurchaseOrderUUID"
+            },
+            {
+              "ref": [
+                "V_PO_HEADER_ITEM",
+                "PurchaseOrder"
+              ],
+              "as": "PurchaseOrder"
+            },
+            {
+              "ref": [
+                "V_PO_HEADER_ITEM",
+                "PurchaseOrderLifeCycleStatus"
+              ],
+              "as": "PurchaseOrderLifeCycleStatus"
+            },
+            {
+              "ref": [
+                "V_PO_HEADER_ITEM",
+                "PurchaseOrderApprovalStatus"
+              ],
+              "as": "PurchaseOrderApprovalStatus"
+            },
+            {
+              "ref": [
+                "V_PO_HEADER_ITEM",
+                "PurchaseOrderConfStatus"
+              ],
+              "as": "PurchaseOrderConfStatus"
+            },
+            {
+              "ref": [
+                "V_PO_HEADER_ITEM",
+                "PurchaseOrderOrderingStatus"
+              ],
+              "as": "PurchaseOrderOrderingStatus"
+            },
+            {
+              "ref": [
+                "V_PO_HEADER_ITEM",
+                "PurchaseOrderInvoicingStatus"
+              ],
+              "as": "PurchaseOrderInvoicingStatus"
+            },
+            {
+              "ref": [
+                "V_PO_HEADER_ITEM",
+                "PurchaseOrderOverallStatus"
+              ],
+              "as": "PurchaseOrderOverallStatus"
+            },
+            {
+              "ref": [
+                "V_PO_HEADER_ITEM",
+                "CreationDateTime"
+              ],
+              "as": "CreationDateTime"
+            },
+            {
+              "ref": [
+                "V_PO_HEADER_ITEM",
+                "LastChangedDateTime"
+              ],
+              "as": "LastChangedDateTime"
+            },
+            {
+              "ref": [
+                "V_PO_HEADER_ITEM",
+                "GrossAmountInTransacCurrency"
+              ],
+              "as": "GrossAmountInTransacCurrency"
+            },
+            {
+              "ref": [
+                "V_PO_HEADER_ITEM",
+                "NetAmountInTransactionCurrency"
+              ],
+              "as": "NetAmountInTransactionCurrency"
+            },
+            {
+              "ref": [
+                "V_PO_HEADER_ITEM",
+                "TaxAmountInTransactionCurrency"
+              ],
+              "as": "TaxAmountInTransactionCurrency"
+            }
+          ],
+          "mixin": {}
+        }
+      }
+    }
+  },
+  "businessLayerDefinitions": {
+    "AM_PO_ANALYTICS": {
+      "identifier": {
+        "key": "AM_PO_ANALYTICS"
+      },
+      "text": "Purchase Order Analytics",
+      "sourceModel": {
+        "factSources": {
+          "V_PO_HEADER_ITEM": {
+            "text": "Purchase Order Header-Item",
+            "dataEntity": {
+              "key": "V_PO_HEADER_ITEM"
+            }
+          }
+        },
+        "dimensionSources": {}
+      },
+      "exposedAssociations": {},
+      "attributes": {
+        "PurchaseOrderItemUUID": {
+          "attributeType": "AnalyticModelAttributeType.FactSourceAttribute",
+          "attributeMapping": {
+            "V_PO_HEADER_ITEM": {
+              "key": "PurchaseOrderItemUUID"
+            }
+          },
+          "text": "Epm: generic node key",
+          "duplicated": false
+        },
+        "PurchaseOrderItem": {
+          "attributeType": "AnalyticModelAttributeType.FactSourceAttribute",
+          "attributeMapping": {
+            "V_PO_HEADER_ITEM": {
+              "key": "PurchaseOrderItem"
+            }
+          },
+          "text": "Epm: purchase order item position",
+          "duplicated": false
+        },
+        "TransactionCurrency": {
+          "attributeType": "AnalyticModelAttributeType.FactSourceAttribute",
+          "attributeMapping": {
+            "V_PO_HEADER_ITEM": {
+              "key": "TransactionCurrency"
+            }
+          },
+          "text": "Epm: currency code",
+          "duplicated": false
+        },
+        "PurchaseOrderUUID": {
+          "attributeType": "AnalyticModelAttributeType.FactSourceAttribute",
+          "attributeMapping": {
+            "V_PO_HEADER_ITEM": {
+              "key": "PurchaseOrderUUID"
+            }
+          },
+          "text": "Epm: generic node key",
+          "duplicated": false
+        },
+        "PurchaseOrder": {
+          "attributeType": "AnalyticModelAttributeType.FactSourceAttribute",
+          "attributeMapping": {
+            "V_PO_HEADER_ITEM": {
+              "key": "PurchaseOrder"
+            }
+          },
+          "text": "Epm: purchase order number",
+          "duplicated": false
+        },
+        "PurchaseOrderLifeCycleStatus": {
+          "attributeType": "AnalyticModelAttributeType.FactSourceAttribute",
+          "attributeMapping": {
+            "V_PO_HEADER_ITEM": {
+              "key": "PurchaseOrderLifeCycleStatus"
+            }
+          },
+          "text": "Epm: purchase order lifecycle status",
+          "duplicated": false
+        },
+        "PurchaseOrderApprovalStatus": {
+          "attributeType": "AnalyticModelAttributeType.FactSourceAttribute",
+          "attributeMapping": {
+            "V_PO_HEADER_ITEM": {
+              "key": "PurchaseOrderApprovalStatus"
+            }
+          },
+          "text": "Epm: purchase order approval status",
+          "duplicated": false
+        },
+        "PurchaseOrderConfStatus": {
+          "attributeType": "AnalyticModelAttributeType.FactSourceAttribute",
+          "attributeMapping": {
+            "V_PO_HEADER_ITEM": {
+              "key": "PurchaseOrderConfStatus"
+            }
+          },
+          "text": "Epm: purchase order confirmation status",
+          "duplicated": false
+        },
+        "PurchaseOrderOrderingStatus": {
+          "attributeType": "AnalyticModelAttributeType.FactSourceAttribute",
+          "attributeMapping": {
+            "V_PO_HEADER_ITEM": {
+              "key": "PurchaseOrderOrderingStatus"
+            }
+          },
+          "text": "Epm: purchase order ordering status",
+          "duplicated": false
+        },
+        "PurchaseOrderInvoicingStatus": {
+          "attributeType": "AnalyticModelAttributeType.FactSourceAttribute",
+          "attributeMapping": {
+            "V_PO_HEADER_ITEM": {
+              "key": "PurchaseOrderInvoicingStatus"
+            }
+          },
+          "text": "Epm: purchase order invoicing status",
+          "duplicated": false
+        },
+        "PurchaseOrderOverallStatus": {
+          "attributeType": "AnalyticModelAttributeType.FactSourceAttribute",
+          "attributeMapping": {
+            "V_PO_HEADER_ITEM": {
+              "key": "PurchaseOrderOverallStatus"
+            }
+          },
+          "text": "Epm: purchase order overall status",
+          "duplicated": false
+        },
+        "CreationDateTime": {
+          "attributeType": "AnalyticModelAttributeType.FactSourceAttribute",
+          "attributeMapping": {
+            "V_PO_HEADER_ITEM": {
+              "key": "CreationDateTime"
+            }
+          },
+          "text": "Epm: created at",
+          "duplicated": false
+        },
+        "LastChangedDateTime": {
+          "attributeType": "AnalyticModelAttributeType.FactSourceAttribute",
+          "attributeMapping": {
+            "V_PO_HEADER_ITEM": {
+              "key": "LastChangedDateTime"
+            }
+          },
+          "text": "Epm: changed at",
+          "duplicated": false
+        }
+      },
+      "measures": {
+        "GrossAmountInTransacCurrency": {
+          "measureType": "AnalyticModelMeasureType.FactSourceMeasure",
+          "measureMapping": {
+            "V_PO_HEADER_ITEM": {
+              "key": "GrossAmountInTransacCurrency"
+            }
+          },
+          "text": "Epm: total gross amount",
+          "isAuxiliary": false
+        },
+        "NetAmountInTransactionCurrency": {
+          "measureType": "AnalyticModelMeasureType.FactSourceMeasure",
+          "measureMapping": {
+            "V_PO_HEADER_ITEM": {
+              "key": "NetAmountInTransactionCurrency"
+            }
+          },
+          "text": "Epm: total net amount",
+          "isAuxiliary": false
+        },
+        "TaxAmountInTransactionCurrency": {
+          "measureType": "AnalyticModelMeasureType.FactSourceMeasure",
+          "measureMapping": {
+            "V_PO_HEADER_ITEM": {
+              "key": "TaxAmountInTransactionCurrency"
+            }
+          },
+          "text": "Epm: total tax amount",
+          "isAuxiliary": false
+        }
+      },
+      "crossCalculations": {},
+      "version": "1.7.3",
+      "supportedCapabilities": {},
+      "variables": {}
+    }
+  }
+}

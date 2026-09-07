@@ -1,0 +1,62 @@
+{
+  "definitions": {
+    "SALES_ITEM": {
+      "kind": "entity",
+      "@EndUserText.label": "SALES_ITEM",
+      "@ObjectModel.modelingPattern": {
+        "#": "DATA_STRUCTURE"
+      },
+      "@ObjectModel.supportedCapabilities": [
+        {
+          "#": "DATA_STRUCTURE"
+        }
+      ],
+      "elements": {
+        "ORDER_ID": {
+          "@EndUserText.label": "ORDER_ID",
+          "type": "cds.String",
+          "key": true,
+          "notNull": true,
+          "length": 10
+        },
+        "ITEM_NO": {
+          "@EndUserText.label": "ITEM_NO",
+          "type": "cds.Integer",
+          "key": true,
+          "notNull": true
+        },
+        "MATERIAL": {
+          "@EndUserText.label": "MATERIAL",
+          "type": "cds.String",
+          "key": false,
+          "length": 20
+        },
+        "QUANTITY": {
+          "@EndUserText.label": "QUANTITY",
+          "type": "cds.Decimal",
+          "key": false,
+          "precision": 13,
+          "scale": 3
+        },
+        "UNIT": {
+          "@EndUserText.label": "UNIT",
+          "type": "cds.String",
+          "key": false,
+          "length": 3
+        },
+        "NET_AMOUNT": {
+          "@EndUserText.label": "NET_AMOUNT",
+          "type": "cds.Decimal",
+          "key": false,
+          "precision": 15,
+          "scale": 2
+        },
+        "LAST_CHANGED": {
+          "@EndUserText.label": "LAST_CHANGED",
+          "type": "cds.Timestamp",
+          "key": false
+        }
+      }
+    }
+  }
+}

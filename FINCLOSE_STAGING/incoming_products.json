@@ -32,5 +32,12 @@
       "@DataWarehouse.dataSource.schema": "FINCLOSE_STAGING#WRG_HCW9J3V0VNF4Z1SW",
       "@DataWarehouse.dataSource.entity": "sap.dataset.conf_d4e7d6a4-2530-4296-bf00-f1e5e40120c8_view"
     }
+  },
+  "sharing": {
+    "incoming_products": {
+      "targetSpaces": [
+        "FIN_LAB_FILES"
+      ]
+    }
   }
 }

@@ -133,5 +133,12 @@
       "kind": "entity",
       "@EndUserText.label": "TF_PO_HEADER_ITEM"
     }
+  },
+  "sharing": {
+    "TF_PO_HEADER_ITEM": {
+      "targetSpaces": [
+        "FIN_LAB_FILES"
+      ]
+    }
   }
 }

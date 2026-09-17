@@ -1,0 +1,92 @@
+{
+  "definitions": {
+    "V_PROD_LANDING": {
+      "kind": "entity",
+      "elements": {
+        "IncomingID": {
+          "@EndUserText.label": "IncomingID",
+          "type": "cds.String",
+          "length": 5000,
+          "key": true,
+          "notNull": true
+        },
+        "SupplierProductName": {
+          "@EndUserText.label": "SupplierProductName",
+          "type": "cds.String",
+          "length": 5000
+        },
+        "OrderQty": {
+          "@EndUserText.label": "OrderQty",
+          "type": "cds.Integer64",
+          "@AnalyticsDetails.measureType": {
+            "#": "BASE"
+          },
+          "@Aggregation.default": {
+            "#": "SUM"
+          }
+        }
+      },
+      "query": {
+        "SELECT": {
+          "from": {
+            "ref": [
+              "SAPMTDS7.saceu10.Product_Master_Landing.DELTA_SHARING:v1.PROD_LANDING"
+            ],
+            "as": "PROD_LANDING"
+          },
+          "columns": [
+            {
+              "key": true,
+              "ref": [
+                "IncomingID"
+              ]
+            },
+            {
+              "ref": [
+                "SupplierProductName"
+              ]
+            },
+            {
+              "ref": [
+                "OrderQty"
+              ]
+            }
+          ]
+        }
+      },
+      "@ObjectModel.supportedCapabilities": [
+        {
+          "#": "DATA_STRUCTURE"
+        }
+      ],
+      "@EndUserText.label": "V_PROD_LANDING",
+      "@ObjectModel.modelingPattern": {
+        "#": "ANALYTICAL_FACT"
+      },
+      "@DataWarehouse.consumption.external": false
+    },
+    "SAPMTDS7": {
+      "kind": "context",
+      "@EndUserText.label": "SAPMTDS7 (SAP-Managed)",
+      "@DataWarehouse.space.schema": "SAPMTDS7",
+      "@DataWarehouse.space.name": "SAPMTDS7"
+    }
+  },
+  "editorSettings": {
+    "V_PROD_LANDING": {
+      "editor": {
+        "lastModifier": "GRAPHICALVIEWBUILDER",
+        "default": "GRAPHICALVIEWBUILDER"
+      },
+      "uiModel": "{\"contents\":{\"3e89ab86-b04e-4209-9d9e-3668ac99c925\":{\"classDefinition\":\"sap.cdw.querybuilder.Model\",\"name\":\"V_PROD_LANDING\",\"label\":\"V_PROD_LANDING\",\"modificationDate\":1789591836086,\"deploymentDate\":1789591829542,\"#objectStatus\":\"2\",\"output\":\"da3c821f-2f32-4a62-8c46-c10584304393\",\"nodes\":{\"da3c821f-2f32-4a62-8c46-c10584304393\":{\"name\":\"V_PROD_LANDING\"},\"c449429d-3dff-41f5-a2b9-8a7e59c0ca19\":{\"name\":\"SAPMTDS7.saceu10.Product_Master_Landing.DELTA_SHARING:v1.PROD_LANDING\"}},\"contexts\":{\"f987e828-38c1-47e9-979e-d12108be8405\":{\"name\":\"SAPMTDS7\"}},\"diagrams\":{\"83e99c6e-7d5c-441b-bcae-ebb094bd58ae\":{}}},\"da3c821f-2f32-4a62-8c46-c10584304393\":{\"classDefinition\":\"sap.cdw.querybuilder.Output\",\"name\":\"V_PROD_LANDING\",\"type\":\"graphicView\",\"isDeltaOutboundOn\":false,\"isDeletionVector\":false,\"isPinToMemoryEnabled\":false,\"dataCategory\":\"SQLFACT\",\"isAllowConsumption\":false,\"modificationDate\":1789591836086,\"deploymentDate\":1789591829542,\"#objectStatus\":\"2\",\"elements\":{\"b10be3eb-17b5-4533-b3db-d76ef1fb62a7\":{\"name\":\"IncomingID\"},\"abba7282-b470-4a98-8379-4d42171c8f11\":{\"name\":\"SupplierProductName\"},\"e09d1252-dccc-4f3d-b5d7-b9f4827d0f77\":{\"name\":\"OrderQty\"}}},\"c449429d-3dff-41f5-a2b9-8a7e59c0ca19\":{\"classDefinition\":\"sap.cdw.querybuilder.Entity\",\"name\":\"SAPMTDS7.saceu10.Product_Master_Landing.DELTA_SHARING:v1.PROD_LANDING\",\"label\":\"PROD_LANDING\",\"type\":3,\"isDeltaOutboundOn\":false,\"isDeletionVector\":false,\"isPersistenceExists\":true,\"isPinToMemoryEnabled\":false,\"isHiddenInUi\":false,\"modificationDate\":1789579135735,\"deploymentDate\":1789579147126,\"#objectStatus\":\"1\",\"alias\":\"PROD_LANDING\",\"context\":\"f987e828-38c1-47e9-979e-d12108be8405\",\"elements\":{\"5a431760-ea3b-43cc-89b7-0afe7d4ac1a9\":{\"name\":\"IncomingID\"},\"8788f772-56d9-41b0-bd3c-034a8a264477\":{\"name\":\"SupplierProductName\"},\"f1e31a97-58af-4b62-94cd-1d21dbd0586a\":{\"name\":\"OrderQty\"}},\"successorNode\":\"da3c821f-2f32-4a62-8c46-c10584304393\"},\"f987e828-38c1-47e9-979e-d12108be8405\":{\"classDefinition\":\"sap.cdw.commonmodel.Context\",\"name\":\"SAPMTDS7\",\"label\":\"SAPMTDS7 (SAP-Managed)\",\"crossSpace\":{\"schema\":\"SAPMTDS7\",\"space\":\"SAPMTDS7\"}},\"83e99c6e-7d5c-441b-bcae-ebb094bd58ae\":{\"classDefinition\":\"sap.cdw.querybuilder.ui.Diagram\",\"symbols\":{\"fdbe2453-b843-40df-99bd-f6f015c0ad3e\":{},\"68352ca8-7f5e-40c8-a5e7-5a4f9a3d335f\":{\"name\":\"Entity Symbol 1\"},\"f6abbc0d-965f-4362-be67-40f7a5c01d57\":{}}},\"b10be3eb-17b5-4533-b3db-d76ef1fb62a7\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"IncomingID\",\"label\":\"IncomingID\",\"newName\":\"IncomingID\",\"indexOrder\":0,\"isKey\":true,\"length\":5000,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"isNotNull\":true},\"abba7282-b470-4a98-8379-4d42171c8f11\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"SupplierProductName\",\"label\":\"SupplierProductName\",\"newName\":\"SupplierProductName\",\"indexOrder\":1,\"length\":5000,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false},\"e09d1252-dccc-4f3d-b5d7-b9f4827d0f77\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"OrderQty\",\"label\":\"OrderQty\",\"newName\":\"OrderQty\",\"indexOrder\":2,\"defaultAggregation\":\"SUM\",\"dataType\":\"cds.Integer64\",\"length\":0,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"isMeasure\":true},\"fdbe2453-b843-40df-99bd-f6f015c0ad3e\":{\"classDefinition\":\"sap.cdw.querybuilder.ui.OutputSymbol\",\"x\":47,\"y\":-20,\"width\":140,\"height\":40,\"object\":\"da3c821f-2f32-4a62-8c46-c10584304393\"},\"68352ca8-7f5e-40c8-a5e7-5a4f9a3d335f\":{\"classDefinition\":\"sap.cdw.querybuilder.ui.EntitySymbol\",\"name\":\"Entity Symbol 1\",\"x\":-163,\"y\":-20,\"width\":160,\"displayName\":\"Entity Symbol 1\",\"object\":\"c449429d-3dff-41f5-a2b9-8a7e59c0ca19\"},\"f6abbc0d-965f-4362-be67-40f7a5c01d57\":{\"classDefinition\":\"sap.cdw.querybuilder.ui.AssociationSymbol\",\"points\":\"-3,0 47,0\",\"contentOffsetX\":5,\"contentOffsetY\":5,\"sourceSymbol\":\"68352ca8-7f5e-40c8-a5e7-5a4f9a3d335f\",\"targetSymbol\":\"fdbe2453-b843-40df-99bd-f6f015c0ad3e\"},\"5a431760-ea3b-43cc-89b7-0afe7d4ac1a9\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"IncomingID\",\"label\":\"IncomingID\",\"newName\":\"IncomingID\",\"indexOrder\":0,\"isKey\":true,\"length\":5000,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"isNotNull\":true,\"successorElement\":\"b10be3eb-17b5-4533-b3db-d76ef1fb62a7\"},\"8788f772-56d9-41b0-bd3c-034a8a264477\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"SupplierProductName\",\"label\":\"SupplierProductName\",\"newName\":\"SupplierProductName\",\"indexOrder\":1,\"length\":5000,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"abba7282-b470-4a98-8379-4d42171c8f11\"},\"f1e31a97-58af-4b62-94cd-1d21dbd0586a\":{\"classDefinition\":\"sap.cdw.querybuilder.Element\",\"name\":\"OrderQty\",\"label\":\"OrderQty\",\"newName\":\"OrderQty\",\"indexOrder\":2,\"dataType\":\"cds.Integer64\",\"length\":0,\"precision\":0,\"scale\":0,\"isMeasureBeforeAI\":false,\"isMeasureAI\":false,\"isNotNullBeforeAI\":false,\"isKeyBeforeAI\":false,\"isKeyAI\":false,\"successorElement\":\"e09d1252-dccc-4f3d-b5d7-b9f4827d0f77\"}}}"
+    }
+  },
+  "sourceSystems": {
+    "SAPMTDS7": {
+      "@DataWarehouse.systemTenantId": "62a720d0-8528-4f92-868d-bbcf271bcd81",
+      "@DataWarehouse.listOfApiOrdIds": [
+        "sap.dpm.saceu10.finailabform:apiResource:Product_Master_Landing.DELTA_SHARING:v1"
+      ]
+    }
+  }
+}

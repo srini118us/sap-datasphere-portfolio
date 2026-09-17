@@ -1,0 +1,131 @@
+{
+  "definitions": {
+    "AM_PROD_CONSUMED": {
+      "kind": "entity",
+      "@EndUserText.label": "Product Consumed Analytics",
+      "elements": {
+        "IncomingID": {
+          "@EndUserText.label": "IncomingID"
+        },
+        "SupplierProductName": {
+          "@EndUserText.label": "SupplierProductName"
+        },
+        "OrderQty": {
+          "@EndUserText.label": "OrderQty",
+          "@AnalyticsDetails.measureType": {
+            "#": "BASE"
+          }
+        }
+      },
+      "@ObjectModel.modelingPattern": {
+        "#": "ANALYTICAL_CUBE"
+      },
+      "@ObjectModel.supportedCapabilities": [
+        {
+          "#": "ANALYTICAL_PROVIDER"
+        },
+        {
+          "#": "_DWC_AM_EDITABLE_DIMENSION_NAMES"
+        }
+      ],
+      "@DataWarehouse.editorType": {
+        "#": "DWCQueryModelEditor"
+      },
+      "@DataWarehouse.hanaCatalog.viewType": {
+        "#": "CALCULATION_VIEW"
+      },
+      "query": {
+        "SELECT": {
+          "from": {
+            "ref": [
+              "V_PROD_LANDING"
+            ],
+            "as": "V_PROD_LANDING"
+          },
+          "columns": [
+            {
+              "ref": [
+                "V_PROD_LANDING",
+                "IncomingID"
+              ],
+              "as": "IncomingID"
+            },
+            {
+              "ref": [
+                "V_PROD_LANDING",
+                "SupplierProductName"
+              ],
+              "as": "SupplierProductName"
+            },
+            {
+              "ref": [
+                "V_PROD_LANDING",
+                "OrderQty"
+              ],
+              "as": "OrderQty"
+            }
+          ],
+          "mixin": {}
+        }
+      }
+    }
+  },
+  "businessLayerDefinitions": {
+    "AM_PROD_CONSUMED": {
+      "identifier": {
+        "key": "AM_PROD_CONSUMED"
+      },
+      "text": "Product Consumed Analytics",
+      "sourceModel": {
+        "factSources": {
+          "V_PROD_LANDING": {
+            "text": "V_PROD_LANDING",
+            "dataEntity": {
+              "key": "V_PROD_LANDING"
+            }
+          }
+        },
+        "dimensionSources": {}
+      },
+      "exposedAssociations": {},
+      "attributes": {
+        "IncomingID": {
+          "attributeType": "AnalyticModelAttributeType.FactSourceAttribute",
+          "attributeMapping": {
+            "V_PROD_LANDING": {
+              "key": "IncomingID"
+            }
+          },
+          "text": "IncomingID",
+          "duplicated": false
+        },
+        "SupplierProductName": {
+          "attributeType": "AnalyticModelAttributeType.FactSourceAttribute",
+          "attributeMapping": {
+            "V_PROD_LANDING": {
+              "key": "SupplierProductName"
+            }
+          },
+          "text": "SupplierProductName",
+          "duplicated": false
+        }
+      },
+      "measures": {
+        "OrderQty": {
+          "measureType": "AnalyticModelMeasureType.FactSourceMeasure",
+          "measureMapping": {
+            "V_PROD_LANDING": {
+              "key": "OrderQty"
+            }
+          },
+          "text": "OrderQty",
+          "isAuxiliary": false
+        }
+      },
+      "crossCalculations": {},
+      "version": "1.7.3",
+      "supportedCapabilities": {},
+      "variables": {}
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "definitions": {
+    "PROD_LANDING": {
+      "elements": {
+        "IncomingID": {
+          "@EndUserText.label": "IncomingID",
+          "type": "cds.String",
+          "key": true,
+          "length": 5000,
+          "notNull": true
+        },
+        "SupplierProductName": {
+          "@EndUserText.label": "SupplierProductName",
+          "type": "cds.String",
+          "key": false,
+          "length": 5000
+        },
+        "OrderQty": {
+          "@EndUserText.label": "OrderQty",
+          "type": "cds.Integer64",
+          "key": false
+        }
+      },
+      "kind": "entity",
+      "@EndUserText.label": "PROD_LANDING",
+      "@DataWarehouse.persistence.hdlf.tableFormat": {
+        "#": "DELTA_LAKE"
+      }
+    }
+  },
+  "sharing": {
+    "PROD_LANDING": {
+      "targetSpaces": [
+        "SAPMTDS7"
+      ]
+    }
+  }
+}

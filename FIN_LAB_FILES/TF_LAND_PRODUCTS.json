@@ -1,0 +1,150 @@
+{
+  "transformationflows": {
+    "TF_LAND_PRODUCTS": {
+      "kind": "sap.dis.transformationflow",
+      "@EndUserText.label": "TF_LAND_PRODUCTS.",
+      "contents": {
+        "properties": {},
+        "metadata": {
+          "loadType": "INITIAL_ONLY",
+          "runtime": "SPARK"
+        },
+        "parameters": {},
+        "description": "Transformation Flow 1",
+        "processes": {
+          "sourcetable1": {
+            "component": "com.sap.dwc.source.table",
+            "metadata": {
+              "label": "incoming_products",
+              "x": 0,
+              "y": 12,
+              "height": 40,
+              "width": 120,
+              "config": {
+                "crossSpaceName": "FINCLOSE_STAGING",
+                "name": "FINCLOSE_STAGING.incoming_products",
+                "sourceTableName": "incoming_products",
+                "definition": {
+                  "kind": "entity",
+                  "@ObjectModel.supportedCapabilities": [
+                    {
+                      "#": "DATA_STRUCTURE"
+                    }
+                  ],
+                  "elements": {
+                    "IncomingID": {
+                      "@EndUserText.label": "IncomingID",
+                      "type": "cds.String",
+                      "length": 5000,
+                      "key": true,
+                      "notNull": true
+                    },
+                    "SupplierProductName": {
+                      "@EndUserText.label": "SupplierProductName",
+                      "type": "cds.String",
+                      "length": 5000
+                    },
+                    "OrderQty": {
+                      "@EndUserText.label": "OrderQty",
+                      "type": "cds.Integer64"
+                    }
+                  },
+                  "@EndUserText.label": "incoming_products",
+                  "@ObjectModel.modelingPattern": {
+                    "#": "DATA_STRUCTURE"
+                  },
+                  "@DataWarehouse.dataSource.schema": "FINCLOSE_STAGING#WRG_HCW9J3V0VNF4Z1SW",
+                  "@DataWarehouse.dataSource.entity": "sap.dataset.conf_d4e7d6a4-2530-4296-bf00-f1e5e40120c8_view",
+                  "_meta": {
+                    "dependencies": {
+                      "folderAssignment": null
+                    }
+                  },
+                  "@cds.persistence.exists": true
+                }
+              }
+            }
+          },
+          "target1": {
+            "component": "com.sap.dwc.target",
+            "metadata": {
+              "label": "PROD_LANDING",
+              "x": 200,
+              "y": 12,
+              "height": 40,
+              "width": 120,
+              "config": {
+                "attributeMappings": [
+                  {
+                    "source": "IncomingID",
+                    "target": "IncomingID"
+                  },
+                  {
+                    "source": "SupplierProductName",
+                    "target": "SupplierProductName"
+                  },
+                  {
+                    "source": "OrderQty",
+                    "target": "OrderQty"
+                  }
+                ],
+                "definition": {
+                  "elements": {
+                    "IncomingID": {
+                      "@EndUserText.label": "IncomingID",
+                      "type": "cds.String",
+                      "key": true,
+                      "length": 5000,
+                      "notNull": true
+                    },
+                    "SupplierProductName": {
+                      "@EndUserText.label": "SupplierProductName",
+                      "type": "cds.String",
+                      "key": false,
+                      "length": 5000
+                    },
+                    "OrderQty": {
+                      "@EndUserText.label": "OrderQty",
+                      "type": "cds.Integer64",
+                      "key": false
+                    }
+                  },
+                  "kind": "entity",
+                  "@EndUserText.label": "PROD_LANDING",
+                  "@DataWarehouse.persistence.hdlf.tableFormat": {
+                    "#": "DELTA_LAKE"
+                  },
+                  "_meta": {
+                    "dependencies": {
+                      "folderAssignment": null
+                    }
+                  }
+                },
+                "name": "PROD_LANDING",
+                "truncate": false
+              }
+            }
+          }
+        },
+        "groups": [],
+        "connections": [
+          {
+            "metadata": {
+              "points": "125,32 195,32"
+            },
+            "src": {
+              "port": "outTable",
+              "process": "sourcetable1"
+            },
+            "tgt": {
+              "port": "inTable",
+              "process": "target1"
+            }
+          }
+        ],
+        "inports": {},
+        "outports": {}
+      }
+    }
+  }
+}

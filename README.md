@@ -1,40 +1,31 @@
 # SAP Datasphere Portfolio
 
-Object-level exports from three SAP Datasphere spaces, extracted via the official @sap/datasphere-cli. Demonstrates the CI/CD pattern SAP data architects use: export from source tenant, version in Git, import to target tenant. SaaS environments cannot be mirrored to Git wholesale, but object definitions (views, analytic models, replication flows, task chains, intelligent lookups) can and this repo is the working proof.
+CSN/JSON exports of Datasphere objects across 5 lab spaces via @sap/datasphere-cli. Demonstrates CI/CD pattern: export from source tenant, version in Git, import to target.
 
-## Structure
+## Spaces
 
-| Folder | Type | Objects | Details |
-|---|---|---|---|
-| FINCLOSE_STAGING | Project Financial Close Copilot | 11 | Full data layer, medallion architecture, SAC dashboard. See folder README. |
-| UC4_PROC | Project Intelligent Procurement Agent | 10 | Joule agent + XGBoost via AI Core. See folder README. |
-| LB_DSP | Exploratory labs, customer + sales harmonization | 19 | Object exports only |
+### FINCLOSE_STAGING
+Procurement analytics on SEPM demo data. Bronze/Silver/Gold layers, intelligent lookup for product matching. Now shares TF_PO_HEADER_ITEM and incoming_products to FIN_LAB_FILES for cross space data product flow.
 
-## Why CSN/JSON matters
+### FIN_LAB_FILES
+BDC Object Store custom data product lab. PROD_LANDING product master and PO_SILVER_UC4_DELTA procurement Delta table, landed via transformation flows from FINCLOSE_STAGING and UC4_PROC.
 
-Every JSON file in this repo is a runnable definition. Re-import to any Datasphere tenant with one command:
+### BDC_SPACE
+Consumption layer over the Object Store data product. V_PROD_LANDING view and AM_PROD_CONSUMED analytic model prove read path back into Datasphere semantic modeling.
 
-    datasphere objects analytic-models create -y TARGET_SPACE -F AM_PO_ANALYTICS.json
+### LB_DSP
+Sales analytics lab. Customer master harmonization from CRM/ERP, sales silver, customer match via intelligent lookup.
 
-This is the DevOps pattern for SaaS analytics platforms, the same idea behind Databricks Asset Bundles, dbt manifests, Terraform state.
+### UC4_PROC
+Supplier risk analytics. S/4HANA purchasing replication, delayed schedule line views, XGBoost risk scoring integrated with SAP AI Core.
 
-## Extract command
+## Commands
 
-    datasphere objects <object-type> read -y <SPACE_ID> -f <OBJECT_ID> > <OBJECT_ID>.json
+Export: datasphere objects TYPE read -y SPACE_ID -f OBJECT_ID > OBJECT_ID.json
 
-Object types: analytic-models, views, local-tables, replication-flows, task-chains, transformation-flows, intelligent-lookups, data-access-controls.
+Import: datasphere objects TYPE create -y TARGET_SPACE -F OBJECT_ID.json
 
 ## Prerequisites
-
-- @sap/datasphere-cli (Node.js 18+)
-- OAuth Client in Datasphere App Integration with Purpose: Interactive Usage (browser-based authorization_code flow)
+- @sap/datasphere-cli
+- OAuth Client with Interactive Usage purpose (App Integration)
 - User with Space Administrator or DW Integrator role
-
-## Related repos
-
-- srini118us/sap-ai-journey, SAP AI Core, Joule, GenAI Hub work
-- srini118us/databricks-journey, Databricks companion work
-
-## Author
-
-Srinivasa, SAP Solution Architect transitioning toward AI Architect roles. LinkedIn article on the UC4 architecture: "Your AI Agent Isn't Wrong. It's Bounded." (Medium, Aug 2026).

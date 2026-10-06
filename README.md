@@ -17,7 +17,10 @@ Consumption layer over the Object Store data product. V_PROD_LANDING view and AM
 Sales analytics lab. Customer master harmonization from CRM/ERP, sales silver, customer match via intelligent lookup.
 
 ### UC4_PROC
-Supplier risk analytics. S/4HANA purchasing replication, delayed schedule line views, XGBoost risk scoring integrated with SAP AI Core.
+Supplier risk analytics. S/4HANA purchasing replication, delayed schedule line views, XGBoost risk scoring integrated with SAP AI Core, derived features (V_SUPPLIER_FEATURES), decision log, and the curated BDC data product source (V_SDR_PRODUCT, DF_SDR_PRODUCT, T_SDR_PRODUCT). Full scenario: https://github.com/srini118us/sap-ai-journey/tree/master/joule-joule-studio/uc4-procurement-agent
+
+### UC4_CONSUMER
+Consumer domain for the BDC data product Supplier Delivery Risk: V_SDR_CONSUMED (fact) and AM_SDR_CONSUMED feeding SAC and Just Ask.
 
 ## Commands
 

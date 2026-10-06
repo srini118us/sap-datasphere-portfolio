@@ -1,0 +1,49 @@
+# Datasphere automation config: trial environment
+# Copy this file to <env>.yaml for real environments (dev, qa, prod)
+# and adjust values. Scripts read one file per invocation via the CONFIG env var.
+
+env_name: trial
+
+tenant:
+  # Datasphere tenant host (no https:// prefix, no trailing slash)
+  host: sapmtds-7.eu10.hcs.cloud.sap
+  # OAuth path: interactive (browser) or technical_user (client credentials)
+  # Trial uses interactive; real env may support technical_user
+  auth_mode: interactive
+
+# Spaces in scope for reporting and automation
+# Comment out or remove spaces that should not be touched by scripts
+spaces:
+  - FINCLOSE_STAGING
+  - LB_DSP
+  - UC4_PROC
+  - TRANSPORT_TEST
+
+# Object types to inventory in space snapshot
+object_types:
+  - views
+  - local-tables
+  - analytic-models
+  - replication-flows
+  - transformation-flows
+  - task-chains
+  - intelligent-lookups
+
+# Task chain status windows in hours
+# Script emits both windows in one report
+taskchain_windows_hours:
+  - 24
+  - 168   # 7 days
+
+# Thresholds drive exit code
+# Exit 0 if failures below warn, exit 1 if between warn and crit, exit 2 if at or above crit
+thresholds:
+  taskchain_failures_warn: 1
+  taskchain_failures_crit: 5
+
+# Output directory relative to repo root
+# JSON output goes here per run; logs go here too
+output_dir: samples
+
+# Log verbosity: quiet, info, debug
+log_level: info

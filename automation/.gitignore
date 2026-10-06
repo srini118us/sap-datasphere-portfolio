@@ -1,0 +1,12 @@
+# Never commit secrets
+*.secret.yaml
+*.secret.json
+.env
+.env.*
+
+# Ignore run output
+samples/*.json
+!samples/.gitkeep
+
+# CLI local cache
+.datasphere/
